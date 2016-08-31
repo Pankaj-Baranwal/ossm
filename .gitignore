@@ -61,10 +61,6 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
-# Scraped Output
-scrape-dump-*.json
-
-quickstart.py
 
 #Frontend Stuff
 node_modules/
@@ -72,16 +68,7 @@ bower_components/
 public/
 .sass-cache/
 
-_models/
-_dataset/
 
-# Scraper debugger
-tests/debugger.py
-*.nover.*
+# Django Stuff
+*.sqlite3
 .env
-
-
-# Assets
-aphrodite/_venus/**/*.png
-_sprites.styl
-iconsprite.png
