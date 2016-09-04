@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>{{ pageTitle }}</title>
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        {% load account %}
+        <h1>Namaste, {% user_display user %}</h1>
+        <a href="{% url 'account_logout' %}">Logout</a>
+
+        <ul>
+            <li>
+                <a href="{% url 'socialaccount_connections' %}">Connected Accounts</a>
+            </li>
+        </ul>
+        <script>
+            console.log('init.');
+        </script>
+    </body>
+</html>
