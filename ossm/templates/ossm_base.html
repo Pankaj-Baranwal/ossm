@@ -26,10 +26,16 @@
                         <a href="{% url 'home' %}">Home</a>
                     </li>
                     <li>
+                        <a href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li>
                         <a href="{% url 'socialaccount_connections' %}">Connected Accounts</a>
                     </li>
                     <li>
-                        <a href="{% url 'profile' %}">Profile</a>
+                        <a href="{% url 'account_email' %}">Emails</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_set_password' %}">Set a Password</a>
                     </li>
                 </ul>
             {% endif %}

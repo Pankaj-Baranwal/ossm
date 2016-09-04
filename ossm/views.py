@@ -18,4 +18,6 @@ def home(request):
 
 @login_required
 def profile(request):
-    raise Http404("Not implemented yet!!!")
+    return render(request, 'profile.html', {
+        'user': request.user
+    })
