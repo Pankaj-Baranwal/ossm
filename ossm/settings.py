@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'landing',
     'ossm',
+    'people',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.windowslive',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 AUTHENTICATION_BACKENDS = (

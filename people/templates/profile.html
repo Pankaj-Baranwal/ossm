@@ -1,12 +1,12 @@
 {% extends 'ossm_base.html' %}
 {% load socialaccount %}
-{% block title %}{{ user.get_full_name }} | Profile{% endblock %}
+{% block title %}{{ user.username }} | Profile{% endblock %}
 
 {% block content %}
     <table>
         <tr>
             <td>Name:</td>
-            <td>{{ user.get_full_name }}</td>
+            <td>{{ user.username }}</td>
         </tr>
         <tr>
             <td>Username:</td>

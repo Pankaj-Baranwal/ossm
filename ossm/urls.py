@@ -20,8 +20,7 @@ from ossm import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^dashboard/profile/$', views.profile, name='profile'),
-    url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^$', views.home, name='home'),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^dashboard/', include('people.urls'))
 ]
