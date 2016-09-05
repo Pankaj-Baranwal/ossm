@@ -140,6 +140,10 @@ SOCIALACCOUNT_PROVIDERS = {
   }
 }
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
