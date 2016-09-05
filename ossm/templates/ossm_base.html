@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+{% load account %}
+{% load staticfiles %}
+    <head>
+        <title>{% block title %}OSSM{% endblock %}</title>
+        {% block head %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.css' %}">
+        {% endblock %}
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+            <h1>Namaste, {{ user.get_full_name }}</h1>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'account_logout' %}">Logout</a>
+        {% else %}
+            <h1>Namaste!</h1>
+            <a href="{% url 'account_login' %}">Login</a>
+        {% endif %}
+
+        {% block account_nav %}
+            {% if user.is_authenticated %}
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'socialaccount_connections' %}">Connected Accounts</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_email' %}">Emails</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_set_password' %}">Set a Password</a>
+                    </li>
+                </ul>
+            {% endif %}
+        {% endblock %}
+
+        {% block content %}
+            <h1>Welcome to JigglyPuff.</h1>
+        {% endblock %}
+
+        {% block load_scripts %}
+            <script src="{% static 'js/jquery.js' %}" type="text/javascript"/>
+            <script src="{% static 'js/bootstrap.js' %}" type="text/javascript"/>
+        {% endblock %}
+        <script>
+            {% block script %}
+                console.log('init.');
+            {% endblock %}
+        </script>
+    </body>
+</html>
