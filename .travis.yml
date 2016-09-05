@@ -1,0 +1,8 @@
+language: python
+os:
+  - linux
+python:
+  - "3.4"
+  - "3.5"
+scripts:
+  - echo "No test!"

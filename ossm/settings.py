@@ -44,10 +44,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
-    'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.windowslive'
+    'allauth.socialaccount.providers.windowslive',
+    # 'allauth.socialaccount.providers.facebook',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -105,8 +105,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
+if not DEBUG:
+  AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
+  ]
 
 # Debug only options
 
@@ -132,7 +132,12 @@ if DEBUG:
 SITE_ID = 1
 
 SOCIALACCOUNT_QUERY_EMAIL = True
-
+SOCIALACCOUNT_PROVIDERS = {
+  'facebook': {
+    'METHOD': 'oauth2',
+    'SCOPE': ['email', 'public_profile'],
+  }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
