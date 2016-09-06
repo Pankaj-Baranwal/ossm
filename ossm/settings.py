@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'landing',
     'ossm',
     'people',
+    'events',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.windowslive',
-    'allauth.socialaccount.providers.facebook',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -131,6 +131,8 @@ if DEBUG:
 
 
 SITE_ID = 1
+
+AUTH_USER_MODEL = 'people.User'
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
