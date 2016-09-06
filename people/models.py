@@ -17,3 +17,6 @@ class User(models.AbstractUser):
     city = db_models.CharField(max_length=50, null=True)
     state = db_models.CharField(max_length=2, choices=STATES, null=True)
     verified = db_models.BooleanField(default=False)
+
+    def is_registered_event(self, event_id):
+        return self.teams.filter(event=event_id).exists()
