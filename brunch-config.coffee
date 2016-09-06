@@ -1,10 +1,24 @@
 # Agora NHS
 fs = require 'fs'
 glob = require 'glob'
+_ = require 'lodash'
+
+# [@prashnts] This bit here is used to generate the watched folders
+MODULE_PATH = '**/frontend/**/@(index|main).@(coffee|cjsx|jsx|js|styl)'
+watched = _
+  .chain(glob.sync MODULE_PATH)
+  .map (filename) ->
+    [_, dirname] = /^(.+)\/(index|main).\w+$/.exec filename
+    dirname
+  .uniq()
+  .value()
+
+console.log "---> Discovered #{watched.length} components"
+
 
 module.exports = config:
   paths:
-    watched: ['frontend']
+    watched: watched
 
   plugins:
     autoReload:
@@ -13,9 +27,6 @@ module.exports = config:
       processors: [
         require('autoprefixer')(['last 8 versions'])
       ]
-    coffeelint:
-      pattern: /^frontend\/.*\.(coffee|cjsx)$/
-      useCoffeelintJson: yes
     stylus:
       plugins: [
         'jeet'
@@ -37,13 +48,12 @@ module.exports = config:
       path
         .replace /\.cjsx/, ''
         .replace /\.coffee/, ''
+        .replace /\.js/, ''
+        .replace /\.jsx/, ''
+        .replace /\.styl/, ''
 
   files:
     javascripts:
-      joinTo:
-        'js/libraries.js': /^(?!frontend\/)/
-        'js/frontend.js': /^frontend\//
+      joinTo: 'js/app.js'
     stylesheets:
-      joinTo:
-        'css/libraries.css': /^(?!frontend\/)/
-        'css/frontend.css': /^frontend\//
+      joinTo: 'css/app.css'
