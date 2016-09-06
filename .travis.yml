@@ -1,8 +1,14 @@
 language: python
 os:
   - linux
+before_install:
+  - nvm install 6.3
+  - nvm use 6.3
 python:
-  - "3.4"
   - "3.5"
-scripts:
-  - echo "No test!"
+install:
+  - pip install -r requirements.txt
+  - npm install
+script:
+  - python manage.py test
+  - npm test

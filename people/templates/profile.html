@@ -17,8 +17,12 @@
             <td>{{ user.email }}</td>
         </tr>
         <tr>
+            <td>Contact:</td>
+            <td>{{ user.contact }}</td>
+        </tr>
+        <tr>
             <td>Events:</td>
-            <td>{{ user.events|default:"None" }}</td>
+            <td>{{ user.teams|default:"None" }}</td>
         </tr>
         <tr>
             <td>Social Connections:</td>
