@@ -7,8 +7,9 @@ before_install:
 python:
   - "3.4"
   - "3.5"
+install:
+  - pip install -r requirements.txt
+  - npm install
 script:
-  - echo "==> Running Python Tests"
   - python manage.py test
-  - echo "==> Running Frontend Tests"
   - npm test
