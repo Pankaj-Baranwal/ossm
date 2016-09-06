@@ -5,8 +5,6 @@
     <head>
         <title>{% block title %}OSSM{% endblock %}</title>
         {% block head %}
-            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.css' %}">
         {% endblock %}
     </head>
     <body>
@@ -44,15 +42,5 @@
         {% block content %}
             <h1>Welcome to JigglyPuff.</h1>
         {% endblock %}
-
-        {% block load_scripts %}
-            <script src="{% static 'js/jquery.js' %}" type="text/javascript"/>
-            <script src="{% static 'js/bootstrap.js' %}" type="text/javascript"/>
-        {% endblock %}
-        <script>
-            {% block script %}
-                console.log('init.');
-            {% endblock %}
-        </script>
     </body>
 </html>
