@@ -4,7 +4,7 @@
   "description": "OSSM Dev Repo",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --opts frontend/test/mocha.opts frontend"
   },
   "repository": {
     "type": "git",
