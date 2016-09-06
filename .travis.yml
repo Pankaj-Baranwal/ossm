@@ -12,3 +12,7 @@ install:
 script:
   - python manage.py test
   - npm test
+notifications:
+  slack: ducic:crtpi7vLCyQjZc1DL6kRN6Ys
+  email: false
+
