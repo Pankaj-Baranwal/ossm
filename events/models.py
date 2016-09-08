@@ -28,5 +28,5 @@ class Team(models.Model):
     nickname = models.CharField(max_length=20, null=True, validators=[alphanumeric])
     name = models.CharField(max_length=30, null=False)
     event = models.ForeignKey(to=Event)
-    members = models.ManyToManyField(to=people_models.User, related_name='teams')
+    members = models.ManyToManyField('people.User', related_name='teams')
 

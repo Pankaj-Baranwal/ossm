@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from credentials import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'ossm',
     'people',
     'events',
+    'anymail',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.windowslive',
+    'django_extensions',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -59,6 +62,14 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    'MAILGUN_API_KEY': config['mail']['mailgun_api_key'],
+    'MAILGUN_SENDER_DOMAIN': config['mail']['mailgun_server_domain'],  # your Mailgun domain, if needed
+}
+
+EMAIL_BACKEND = 'anymail.backends.mailgun.MailgunBackend'  # or sendgrid.SendGridBackend, or...
+DEFAULT_FROM_EMAIL = 'postmaster@mail.convoke.io'  # if you don't already have this in settings
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
