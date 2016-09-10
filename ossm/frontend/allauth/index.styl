@@ -1,6 +1,10 @@
 @require 'frontend'
 
 div.allauth
+  margin-left auto
+  > div
+    max-width 350px
+    margin-bottom 40px
   ul.socialaccount_providers
     reset-ul()
     li > a
@@ -13,3 +17,23 @@ div.allauth
       &.windowslive
         background #00aced
 
+  .login-or
+    font-family $type-mono
+    margin-top 20px
+    text-align center
+    position relative
+    &:before, &:after
+      content ''
+      position absolute
+      width 40%
+      top 10px
+      left 0
+      height 1px
+      background $lavender-gray
+    &:after
+      right 0
+      left auto
+
+  .reset
+    float right
+    font-size 14px

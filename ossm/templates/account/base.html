@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load brunch %}
 
+{% block title %}{% block head_title %}{% endblock %}{% endblock %}
+
+
 {% block main-content %}
   <div class='allauth'>
-  {% block content %}
-  {% endblock %}
+    <div>
+    {% block content %}
+    {% endblock %}
+    </div>
   </div>
 {% endblock %}
 
