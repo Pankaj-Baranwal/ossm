@@ -23,7 +23,7 @@
       {% if user.is_authenticated %}
         <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
         <li>
-          <a href='#'>{{ user.username }}</a>
+          <a href='#' data-toggle>{{ user.username }} <i class='arrow down'></i></a>
           <ul>
             <li><a href='{% url "profile" %}'>Profile</a></li>
             <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
@@ -38,6 +38,7 @@
     </nav>
   </header>
   <main>
+    <section>
     <h2>Across the sea of space, the stars are other suns.</h2>
 
     <p>Astronomy compels the soul to look upward, and leads us from this world
@@ -50,14 +51,15 @@
 
     <p>Buy why, some say, the moon? Why choose this as our goal? And they may
     as well ask why climb the highest mountain?</p>
+    </section>
   </main>
   <footer>
-    <section>
+    <section class='opensource'>
       <div>
         <span>GitHub</span> We love open source.
       </div>
     </section>
-    <section>
+    <section class='contact'>
       <div>
         <h3>Contact us</h3>
         <p>Houston, Tranquillity Base here. The Eagle has landed.</p>
@@ -66,11 +68,14 @@
         before being allowed in the spacecraft cabin.</p>
       </div>
     </section>
-    <section>
+    <section class='copyright'>
       <small>Copyright &copy; <a href='/'>convoke.io</a>.
       Content released under CC-BY.</small>
     </section>
   </footer>
   <script type='text/javascript' src='{% static "js/app.js" %}'></script>
+  <script type='text/javascript'>
+    var app = require('index');
+  </script>
 </body>
 </html>
