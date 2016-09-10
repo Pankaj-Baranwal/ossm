@@ -24,7 +24,6 @@
     "axis": "^0.6.1",
     "babel-brunch": "^6.0.6",
     "brunch": "^2.8.2",
-    "cjsx-brunch": "^0.13.0",
     "coffee-react-transform": "^4.0.0",
     "coffee-script-brunch": "^2.0.0",
     "css-brunch": "^2.6.1",
