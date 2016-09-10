@@ -1,32 +1,32 @@
-{% extends 'ossm_base.html' %}
+{% extends 'base.html' %}
 {% load socialaccount %}
-{% block title %}{{ user.username }} | Profile{% endblock %}
+{% block title %}{{ user.username }} // profile{% endblock %}
 
 {% block content %}
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td>{{ user.username }}</td>
-        </tr>
-        <tr>
-            <td>Username:</td>
-            <td>{{ user.username }}</td>
-        </tr>
-        <tr>
-            <td>E-Mail(s):</td>
-            <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-            <td>Contact:</td>
-            <td>{{ user.contact }}</td>
-        </tr>
-        <tr>
-            <td>Events:</td>
-            <td>{{ user.teams|default:"None" }}</td>
-        </tr>
-        <tr>
-            <td>Social Connections:</td>
-            <td>{% get_providers as socialaccount_providers %}</td>
-        </tr>
-    </table>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td>{{ user.username }}</td>
+  </tr>
+  <tr>
+    <td>Username:</td>
+    <td>{{ user.username }}</td>
+  </tr>
+  <tr>
+    <td>E-Mail(s):</td>
+    <td>{{ user.email }}</td>
+  </tr>
+  <tr>
+    <td>Contact:</td>
+    <td>{{ user.contact }}</td>
+  </tr>
+  <tr>
+    <td>Events:</td>
+    <td>{{ user.teams|default:"None" }}</td>
+  </tr>
+  <tr>
+    <td>Social Connections:</td>
+    <td>{% get_providers as socialaccount_providers %}</td>
+  </tr>
+</table>
 {% endblock %}

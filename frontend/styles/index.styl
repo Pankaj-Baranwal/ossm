@@ -1,7 +1,7 @@
 @require './_colors'
 @require './_mixins'
 @require './_typeface'
-@require 'axis'
+@require './_axis'
 
 html, body
   background $gainsboro
@@ -21,8 +21,6 @@ body
   > header
     background $jungle-green
     color $primary-text
-
-    min-height 40vh
 
     > section
       init-container()
@@ -100,3 +98,11 @@ a
   // Global links reset
   color inherit
   text-decoration none
+
+button
+  outline none
+  button()
+
++html5-inputs()
+  input()
+  padding 5px 10px

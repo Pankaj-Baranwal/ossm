@@ -42,7 +42,11 @@
     {% endblock %}
   </header>
   <main>
-  {% block content %}
+  {% block main-content %}
+    <div>
+    {% block content %}
+    {% endblock %}
+    </div>
   {% endblock %}
   </main>
   <footer>
