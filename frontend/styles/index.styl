@@ -33,6 +33,8 @@ body
       display flex
       align-items baseline
       justify-content space-between
+      a
+        reset-link()
 
       h1
         color $white
@@ -55,6 +57,12 @@ body
             icon-arrow(down, 12px, $primary-text, 2px)
             margin-bottom -2px
             display inline-block
+
+          > a
+            color $primary-text
+
+            &:hover, &:active
+              color $primary-text
 
           > ul
             bubble(top, right, $triangle-size: 5px)
@@ -95,14 +103,32 @@ body
         padding 5px 0
 
 a
-  // Global links reset
-  color inherit
-  text-decoration none
+  link($celadon-blue)
 
-button
-  outline none
+form
+  label
+    text-transform uppercase
+    font-size 14px
+    font-family $type-mono
+    // flex-grow value
+    // display block
+    margin-bottom 2px
+
+    & + input
+      display block
+
+    & + input[type='checkbox'], & + input[type='radio']
+      display inline-block
+
+button, input[type='submit']
   button()
+  click-shrink()
+  outline none
+  text-transform uppercase
+  font-weight 300
+  letter-spacing 1px
 
 +html5-inputs()
-  input()
+  input($lavender-gray)
+  color $rich-black
   padding 5px 10px

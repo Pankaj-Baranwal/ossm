@@ -6,7 +6,7 @@ $font-stack = $type-mono
 $font-size  = 16
 $font-color = $primary-dark
 
-$default-color = $base
+$default-color = $celadon-blue
 $highlight-color = $accent
 
 $img-path = ''
@@ -24,3 +24,7 @@ $ligatures = false
 @import 'axis/buttons'
 @import 'axis/forms'
 @import 'axis/tables'
+
+transition()
+  arguments = unquote('all .2s ease') unless arguments
+  transition arguments
