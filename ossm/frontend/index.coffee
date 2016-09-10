@@ -17,4 +17,5 @@ class Ossm
         cash('[data-toggle="target"]').removeClass('open')
 
 
-module.exports = Ossm
+module.exports = ->
+  new Ossm()

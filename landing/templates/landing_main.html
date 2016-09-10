@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load account %}
+{% load brunch %}
 
 {% block root-title %}OSSM{% endblock %}
 
@@ -45,4 +46,13 @@
     before being allowed in the spacecraft cabin.</p>
   </div>
 </section>
+{% endblock %}
+
+
+{% block styles %}
+  {{ 'landing' | style_bundle }}
+{% endblock %}
+
+{% block javascript %}
+  {{ 'landing' | js_bundle }}
 {% endblock %}

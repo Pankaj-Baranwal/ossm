@@ -29,6 +29,11 @@ module.exports = config:
   paths:
     watched: watched
 
+  conventions:
+    ignored: [
+      /tests\//
+    ]
+
   plugins:
     autoReload:
       enabled: yes

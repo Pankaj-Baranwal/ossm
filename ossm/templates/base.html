@@ -1,12 +1,15 @@
 {% load account %}
 {% load static %}
+{% load brunch %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset='utf-8'>
   <title>{% block root-title %}{% block title %}{% endblock %} // OSSM{% endblock %}</title>
   <meta name='viewport' content='width=device-width initial-scale=1'>
-  <link rel='stylesheet' type='text/css' href='{% static "css/app.css" %}'>
+  <link rel='stylesheet' type='text/css' href='{% static "css/ossm.css" %}'>
+  {% block styles %}
+  {% endblock %}
   {% if debug %}
   <script type='text/javascript'>
     window.brunch = {server: 'localhost'};
@@ -59,10 +62,11 @@
       </div>
     </section>
   </footer>
-  <script type='text/javascript' src='{% static "js/app.js" %}'></script>
-  <script type='text/javascript'>
-    var OssmMain = require('ossm');
-    var app = new OssmMain;
-  </script>
+  {% block main-javascript %}
+    <script type='text/javascript' src='{% static "js/vendors.js" %}'></script>
+    {{ 'ossm' | js_bundle }}
+    {% block javascript %}
+    {% endblock %}
+  {% endblock %}
 </body>
 </html>
