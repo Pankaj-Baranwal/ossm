@@ -8,7 +8,7 @@ MODULE_PATH = '**/frontend/**/@(index|main).@(coffee|cjsx|jsx|js|styl)'
 watched = _
   .chain(glob.sync MODULE_PATH)
   .map (filename) ->
-    [_, dirname] = /^(.+)\/(index|main).\w+$/.exec filename
+    [__, dirname] = /^(.+)\/(index|main).\w+$/.exec filename
     dirname
   .uniq()
   .value()
@@ -17,11 +17,15 @@ bundles = do ->
   bndls =
     js: 'js/vendors.js': /^node_modules/
     css: 'css/vendors.css': /^node_modules/
-  for app in (watched.map (x) -> x.split('/')[0])
-    bndls.js["js/#{app}.js"]    = new RegExp "^#{app}\/"
-    bndls.css["css/#{app}.css"] = new RegExp "^#{app}\/"
+  for path in watched
+    cpath = path.replace /\/?frontend/, ''
+    app = cpath.replace /\//, '_'
+    unless app.length then continue
+    bndls.js["js/#{app}.js"]    = new RegExp "^#{path}\/[_\\d\\w]+\\.\\w+$"
+    bndls.css["css/#{app}.css"] = new RegExp "^#{path}\/[_\\d\\w]+\\.\\w+$"
   bndls
 
+console.log bundles
 console.log "---> Discovered #{watched.length} components"
 
 

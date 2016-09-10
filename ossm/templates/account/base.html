@@ -1,3 +1,13 @@
 {% extends "base.html" %}
+{% load brunch %}
 
+{% block main-content %}
+  <div class='allauth'>
+  {% block content %}
+  {% endblock %}
+  </div>
+{% endblock %}
 
+{% block styles %}
+  {{ 'ossm_allauth' | style_bundle }}
+{% endblock %}
