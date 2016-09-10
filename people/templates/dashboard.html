@@ -1,6 +1,12 @@
-{% extends 'site_base.html' %}
+{% extends 'base.html' %}
 
 {% load account %}
 {% load staticfiles %}
 
-{% block title %}Dashboard | {{ user.get_username }}{% endblock %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<section>
+  <h2>Dashboard!</h2>
+</section>
+{% endblock %}

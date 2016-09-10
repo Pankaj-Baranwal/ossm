@@ -20,7 +20,7 @@ from ossm import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='home'),
+    url(r'^$', include('landing.urls')),
     url(r'events/', include('events.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^dashboard/', include('people.urls'))

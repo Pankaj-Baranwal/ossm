@@ -1,0 +1,64 @@
+{% load account %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>{% block root-title %}{% block title %}{% endblock %} // OSSM{% endblock %}</title>
+  <meta name='viewport' content='width=device-width initial-scale=1'>
+  <link rel='stylesheet' type='text/css' href='{% static "css/app.css" %}'>
+  {% if debug %}
+  <script type='text/javascript'>
+    window.brunch = {server: 'localhost'};
+  </script>
+  {% endif %}
+</head>
+<body>
+  <header>
+    <nav>
+      <div>
+        <a href='/'>
+          <h1>convoke</h1>
+        </a>
+        <ul>
+        {% if user.is_authenticated %}
+          <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
+          <li>
+            <a href='#' data-toggle='origin'>{{ user.username }} <i class='arrow down'></i></a>
+            <ul data-toggle='target'>
+              <li><a href='{% url "profile" %}'>Profile</a></li>
+              <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
+              <li><a href='{% url "account_logout" %}'>Logout</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href='{% url "account_login" %}'>Login</a></li>
+          <li><a href='{% url "account_signup" %}'>Signup</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </nav>
+    {% block hero-content %}
+    {% endblock %}
+  </header>
+  <main>
+  {% block content %}
+  {% endblock %}
+  </main>
+  <footer>
+  {% block footer-content %}
+  {% endblock %}
+    <section class='copyright'>
+      <div>
+        Copyright &copy; <a href='/'>convoke.io</a>.
+        Content released under CC-BY.
+      </div>
+    </section>
+  </footer>
+  <script type='text/javascript' src='{% static "js/app.js" %}'></script>
+  <script type='text/javascript'>
+    var OssmMain = require('frontend/components/index');
+    var app = new OssmMain;
+  </script>
+</body>
+</html>
