@@ -30,6 +30,7 @@ module.exports = config:
     stylus:
       plugins: [
         'jeet'
+        'axis'
       ]
 
   overrides:
