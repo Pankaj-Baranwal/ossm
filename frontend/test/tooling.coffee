@@ -3,5 +3,5 @@
 
 describe 'Components', ->
   it 'should exist', ->
-    expect(require '../components').to.be.an 'object'
+    expect(require '../components').to.be.a 'function'
 

@@ -40,9 +40,11 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-webdriver": "^1.2.0",
-    "selenium-webdriver": "^2.42.0",
-    "phantomjs-prebuilt": "^2.1.12",
     "istanbul": "^0.4.5",
-    "mocha": "^3.0.2"
+    "jsdom": "9.5.0",
+    "jsdom-global": "2.1.0",
+    "mocha": "^3.0.2",
+    "phantomjs-prebuilt": "^2.1.12",
+    "selenium-webdriver": "^2.42.0"
   }
 }
