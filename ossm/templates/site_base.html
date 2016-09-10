@@ -16,15 +16,15 @@
 <body>
   <header>
     <nav>
-      <a href='/'>
+      <a href='#'>
         <h1>convoke</h1>
       </a>
       <ul>
       {% if user.is_authenticated %}
         <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
         <li>
-          <a href='#' data-toggle>{{ user.username }} <i class='arrow down'></i></a>
-          <ul>
+          <a href='#' data-toggle='origin'>{{ user.username }} <i class='arrow down'></i></a>
+          <ul data-toggle='target'>
             <li><a href='{% url "profile" %}'>Profile</a></li>
             <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
             <li><a href='{% url "account_logout" %}'>Logout</a></li>
