@@ -14,8 +14,8 @@ after ->
 
 describe 'UI Integration', ->
 
-  before ->
-    driver.get('https://noop.pw')
+  # before ->
+  #   driver.get('https://noop.pw')
 
-  it 'should use phantomjs to render', ->
-    expect('h1').dom.to.be.ok
+  # it 'should use phantomjs to render', ->
+  #   expect('h1').dom.to.be.ok

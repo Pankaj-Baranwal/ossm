@@ -1,7 +1,8 @@
 'use strict'
+require './helper'
 {expect} = require 'chai'
 
 describe 'Components', ->
   it 'should exist', ->
-    expect(require '../components').to.be.a 'function'
+    expect(require_app 'ossm').to.be.a 'function'
 
