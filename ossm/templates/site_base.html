@@ -1,8 +1,17 @@
 {% load account %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset='utf-8'>
   <title>{% block title %}OSSM{% endblock %}</title>
+  <meta name='viewport' content='width=device-width initial-scale=1'>
+  <link rel='stylesheet' type='text/css' href='{% static "css/app.css" %}'>
+  {% if debug %}
+  <script type='text/javascript'>
+    window.brunch = {server: 'localhost'};
+  </script>
+  {% endif %}
 </head>
 <body>
   <header>
@@ -62,5 +71,6 @@
       Content released under CC-BY.</small>
     </section>
   </footer>
+  <script type='text/javascript' src='{% static "js/app.js" %}'></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ django-allauth==0.25.2
 django-allauth-bootstrap==0.2
 django-anymail==0.5
 django-bootstrap-form==3.2.1
+django-extensions==1.7.4
 django-quicky==0.6.4
 oauthlib==1.1.2
 pydash==3.4.3
