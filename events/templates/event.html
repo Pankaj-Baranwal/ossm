@@ -1,16 +1,20 @@
-<div>
-    <h3>{{ event.name }}</h3>
-    <p>
-        {{ event.description }}
-    </p>
-    <h6>Minimum members: {{ event.max_team_size }}</h6>
-    <h6>Maximum members: {{ event.max_team_size }}</h6>
-    <h6>Prizes: {{ event.prize_1 }}, {{ event.prize_2 }}, {{ event.prize_3 }}</h6>
-    <h6>Registered: {% if not user.is_authenticated %}
-        No
-    {% elif registered %}
-        {{ team.name }}
-    {% else %}
-        No
-    {% endif %}</h6>
-</div>
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <h2>{{ event.name }}</h2>
+        <p>
+            {{ event.description }}
+        </p>
+        <h6>Minimum members: {{ event.max_team_size }}</h6>
+        <h6>Maximum members: {{ event.max_team_size }}</h6>
+        <h6>Prizes: {{ event.prize_1 }}, {{ event.prize_2 }}, {{ event.prize_3 }}</h6>
+        <h6>Registered: </h6>
+        {% if registered %}
+            <label>{{ team.name }}</label>
+        {% else %}
+            <label>No</label>
+            <button>Register</button>
+        {% endif %}
+    </div>
+{% endblock %}

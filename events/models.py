@@ -26,7 +26,7 @@ class Event(models.Model):
 class Team(models.Model):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
     nickname = models.CharField(max_length=20, null=True, validators=[alphanumeric])
-    name = models.CharField(max_length=30, null=False)
-    event = models.ForeignKey(to=Event)
+    name = models.CharField(max_length=30, null=False, default='default')
+    event = models.ForeignKey(to=Event, default='default')
     members = models.ManyToManyField('people.User', related_name='teams')
 
