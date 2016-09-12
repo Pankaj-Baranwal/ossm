@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load account %}
 {% load brunch %}
 
@@ -34,16 +35,17 @@
 {% block footer-content %}
 <section class='opensource'>
   <div>
-    <span>GitHub</span> We love open source.
   </div>
 </section>
 <section class='contact'>
   <div>
-    <h3>Contact us</h3>
-    <p>Houston, Tranquillity Base here. The Eagle has landed.</p>
-    <p>The path of a cosmonaut is not an easy, triumphant march to glory.
-    You have to get to know the meaning not just of joy but also of grief,
-    before being allowed in the spacecraft cabin.</p>
+    <div class='info ducic'>
+      <a href='https://ducic.ac.in' target='_blank' rel='noopener noreferrer'>
+        <img src='{% static "img/brand/cic-logo-alt.png" %}'
+            alt='Cluster Innovation Centre Logo'
+            title='Cluster Innovation Centre'>
+      </a>
+    </div>
   </div>
 </section>
 {% endblock %}
