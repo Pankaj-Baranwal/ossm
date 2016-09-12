@@ -29,14 +29,21 @@ body
 
     nav > div
       display flex
-      align-items baseline
+      align-items center
       justify-content space-between
       a
         reset-link()
 
       h1
         color $white
-        margin 0
+        margin 12px 0
+        font-size 20px
+        line-height 10px
+        span
+          visibility hidden
+          position absolute
+        img
+          height 20px
 
       > ul
         reset-ul()
