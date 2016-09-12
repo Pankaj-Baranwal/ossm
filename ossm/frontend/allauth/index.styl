@@ -17,6 +17,43 @@ div.allauth
       &.windowslive
         background #00aced
 
+  form.social
+    // display flex
+    background $platinum
+    padding 5px 10px
+    margin 0 -10px
+    border-radius 3px
+    justify-content space-between
+    align-items baseline
+
+    .provider
+      color #fff
+      padding 2px 5px
+      border-radius 2px
+      margin-right 10px
+      &.github
+        background #232121
+      &.google
+        background #DD4B39
+      &.windowslive
+        background #00aced
+
+    label
+      display flex
+      align-items center
+      span
+        margin 0 8px
+
+    img
+      border-radius 2px
+      height 20px
+      width 20px
+      margin-right 10px
+
+    button
+      margin-top 10px
+      padding 8px 10px
+
   .login-or
     font-family $type-mono
     margin-top 20px
