@@ -1,0 +1,19 @@
+{
+  "name": "OSSM",
+  "description": "OSSM Heroku app.",
+  "success_url": "/",
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+  }
+}
