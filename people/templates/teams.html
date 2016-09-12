@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Teams registered for {{ event.name }}</h2>
+<table id="teams">
+    <tr>
+        <th>#</th>
+        <th>Team Name</th>
+        <th>Team Handle</th>
+        <th>Members</th>
+    </tr>
+    {% for team in teams %}
+        <tr>
+            <td>{{ team.id }}</td>
+            <td>{{ team.name }}</td>
+            <td>{{ team.nickname }}</td>
+            <td>
+                {% for member in team.members %}
+                    {{ member.email }},
+                {% endfor %}
+
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

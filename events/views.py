@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, JsonResponse, HttpResponseServerError
+from django.http import Http404, JsonResponse, HttpResponseServerError, HttpResponseBadRequest
 from django.shortcuts import render
+from django.views.decorators.http import require_POST, require_GET
+import json
+
 
 # Create your views here.
-from django.views.decorators.http import require_POST, require_GET
 
 from events.models import Event, Team
-
+from ossm.exceptions import Http409
 
 @require_GET
 def get_event(request, event_id: int):
@@ -35,12 +37,3 @@ def register(request, event_id: int):
     request.user.save()
     response['user'] = request.user
     return JsonResponse(response)
-
-
-def create_team(request, event_id: int):
-    raise HttpResponseServerError('501: Not yet implemented!')
-
-
-def teams(request, event_id: int):
-    raise HttpResponseServerError('501: Not yet implemented!')
-
