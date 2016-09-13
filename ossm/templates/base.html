@@ -22,6 +22,9 @@
   <meta name='msapplication-config'
         content='{% static "img/favicon/browserconfig.xml" %}'>
   <meta name='theme-color' content='#ffffff'>
+
+  <meta itemprop='csrf-token' content='{{ csrf_token }}'>
+
   <link rel='stylesheet' type='text/css' href='{% static "css/ossm.css" %}'>
   <link rel='stylesheet' type='text/css' href='{% static "fontello-embedded.css" %}'>
   {% block styles %}
@@ -100,6 +103,7 @@
   </footer>
   {% block main-javascript %}
     <script type='text/javascript' src='{% static "js/vendors.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/common.js" %}'></script>
     {{ 'ossm' | js_bundle }}
     {% block javascript %}
     {% endblock %}
