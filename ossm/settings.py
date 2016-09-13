@@ -51,7 +51,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.windowslive',
+    'allauth.socialaccount.providers.facebook',
     'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -66,6 +71,14 @@ ANYMAIL = {
     # (exact settings here depend on your ESP...)
     'MAILGUN_API_KEY': config['mail']['mailgun_api_key'],
     'MAILGUN_SENDER_DOMAIN': config['mail']['mailgun_server_domain'],  # your Mailgun domain, if needed
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.MailgunBackend'  # or sendgrid.SendGridBackend, or...
