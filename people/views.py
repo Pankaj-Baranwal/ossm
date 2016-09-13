@@ -3,12 +3,18 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseServerError
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render, render_to_response
 
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+
 from events.models import Team, Event
 from ossm.exceptions import Http409
+from ossm.views import JSONResponse
 from people.models import User
+from people.serializers import UserSerializer
 
 
 @login_required
@@ -20,7 +26,7 @@ def dashboard(request):
 
 @login_required
 def profile(request):
-    user_profile = User.objects.filter(email=request.user.email).first()
+    user_profile = User.objects.filter(username=request.user.username).first()
     if request.method == 'POST':
         u = request.POST
         if request.user.username != u['username'] and User.objects.filter(username=u['username']).exists():
@@ -36,7 +42,7 @@ def profile(request):
         user_profile.state = u['state']
         user_profile.institute = u['institute']
         user_profile.save()
-        user_profile = User.objects.filter(email=u['email']).first()
+        user_profile = User.objects.filter(username=u['username']).first()
     return render(request, 'profile.html', {
         'user': user_profile
     })
@@ -65,3 +71,31 @@ def teams(request, event_id: int):
     response = {}
     response['teams'] = Team.objects.filter(event=event_id).all()
     return render(request, 'teams.html', response)
+
+
+@login_required
+@csrf_exempt
+def profile_api(request):
+    if request.method == 'GET':
+        user_profile = User.objects.filter(username=request.user.username).first()
+        serializer = UserSerializer(user_profile)
+        return JSONResponse(serializer.data)
+    if request.method == 'PUT':
+        data = JSONParser().parse(request)
+        user_profile = User.objects.filter(username=request.user.username).first()
+        if request.user.username != data['username'] and User.objects.filter(username=data['username']).exists():
+            raise Exception("Username already exists.")
+        if request.user.email != data['email'] and User.objects.filter(email=data['email']).exists():
+            raise Exception("Email already registered.")
+        user_profile.username = data['username']
+        user_profile.email = data['email']
+        user_profile.first_name = data['first_name']
+        user_profile.last_name = data['last_name']
+        user_profile.contact = int(data['contact']) if data['contact'] != '' else 0
+        user_profile.city = data['city']
+        user_profile.state = data['state']
+        user_profile.institute = data['institute']
+        user_profile.save()
+        user_profile = User.objects.filter(email=data['email']).first()
+        serializer = UserSerializer(user_profile)
+        return JSONResponse(serializer.data)
