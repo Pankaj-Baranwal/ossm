@@ -1,32 +1,49 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
+{% load brunch %}
 {% block title %}{{ user.username }} // profile{% endblock %}
 
 {% block content %}
-<table>
-  <tr>
-    <td>Name:</td>
-    <td>{{ user.username }}</td>
-  </tr>
-  <tr>
-    <td>Username:</td>
-    <td>{{ user.username }}</td>
-  </tr>
-  <tr>
-    <td>E-Mail(s):</td>
-    <td>{{ user.email }}</td>
-  </tr>
-  <tr>
-    <td>Contact:</td>
-    <td>{{ user.contact }}</td>
-  </tr>
-  <tr>
-    <td>Events:</td>
-    <td>{{ user.teams|default:"None" }}</td>
-  </tr>
-  <tr>
-    <td>Social Connections:</td>
-    <td>{% get_providers as socialaccount_providers %}</td>
-  </tr>
-</table>
+    <h2>Profile - {{ user.get_username }}</h2>
+    <div class="profile-container">
+        <form action="" method="post">
+            {% csrf_token %}
+            <label>
+                Name:
+                <input id="user-first-name-input" name="first_name" type="text" value="{{ user.first_name }}" >
+                <input id="user-last-name-input" name="last_name" type="text" value="{{ user.last_name }}" >
+            </label>
+            <label>
+                Username:
+                <input id="user-username-input" name="username" type="text" value="{{ user.get_username }}" />
+            </label>
+            <label>
+                E-Mail:
+                <input id="user-email-input" name="email" type="email" value="{{ user.email }}" />
+            </label>
+            <label>
+                Contact:
+                <input id="user-contact-input" name="contact" type="number" value="{{ user.contact }}" >
+            </label>
+            <label>
+                City:
+                <input id="user-city-input" name="city" type="text" value="{{ user.city }}" >
+            </label>
+            <label>
+                State:
+                <input id="user-state-input" name="state" type="text" value="{{ user.state }}" >
+            </label>
+            <label>
+                Institute:
+                <input id="user-institute-input" name="institute" type="text" value="{{ user.institute }}" >
+            </label>
+            <button id="user-name-update-button" type="submit">Update</button>
+            <button id="user-name-cancel-button" type="reset" content="Cancel">Cancel</button>
+        </form>
+        <button id="user-name-edit-button" type="button" content="Edit Name">Edit</button>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ 'people' | js_bundle }}
 {% endblock %}

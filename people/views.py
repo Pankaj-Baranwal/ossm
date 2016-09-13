@@ -20,8 +20,25 @@ def dashboard(request):
 
 @login_required
 def profile(request):
+    user_profile = User.objects.filter(email=request.user.email).first()
+    if request.method == 'POST':
+        u = request.POST
+        if request.user.username != u['username'] and User.objects.filter(username=u['username']).exists():
+            raise Exception("Username already exists.")
+        if request.user.email != u['email'] and User.objects.filter(email=u['email']).exists():
+            raise Exception("Email already registered.")
+        user_profile.username = u['username']
+        user_profile.email = u['email']
+        user_profile.first_name = u['first_name']
+        user_profile.last_name = u['last_name']
+        user_profile.contact = int(u['contact']) if u['contact'] != '' else 0
+        user_profile.city = u['city']
+        user_profile.state = u['state']
+        user_profile.institute = u['institute']
+        user_profile.save()
+        user_profile = User.objects.filter(email=u['email']).first()
     return render(request, 'profile.html', {
-        'user': request.user
+        'user': user_profile
     })
 
 
