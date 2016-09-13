@@ -19,8 +19,7 @@ bundles = do ->
     css: 'css/vendors.css': /^node_modules/
   for path in watched
     cpath = path.replace /\/?frontend/, ''
-    app = cpath.replace /\//, '_'
-    unless app.length then continue
+    app = if /^frontend/.test path then 'common' else cpath.replace /\//, '_'
     bndls.js["js/#{app}.js"]    = new RegExp "^#{path}\/[_\\d\\w]+\\.\\w+$"
     bndls.css["css/#{app}.css"] = new RegExp "^#{path}\/[_\\d\\w]+\\.\\w+$"
   bndls

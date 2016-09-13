@@ -1,9 +1,15 @@
 cash = require 'cash-dom'
+request = require 'mixins/request'
 
 
 class Ossm
   constructor: ->
     @attach_nav()
+    # @devkhan
+    # request(url: '/')
+    #   .then (data) -> console.log data
+    #   .fail (err, msg) -> console.log "no unicorns :("
+    #   .always (nop) -> console.log "always runs"
 
   attach_nav: ->
     cash('a[data-toggle]').on 'click', (e) ->
