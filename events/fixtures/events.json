@@ -1,0 +1,114 @@
+[
+  {
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+      "name": "F1",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+      "name": "F2",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+      "name": "OSSOME",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 4,
+    "fields": {
+      "name": "Bug it",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 5,
+    "fields": {
+      "name": "Esoteric",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 6,
+    "fields": {
+      "name": "Design",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 7,
+    "fields": {
+      "name": "Bot",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 8,
+    "fields": {
+      "name": "Data Wars",
+      "min_team_size": 0,
+      "max_team_size": 2,
+      "description": "Let's Commit",
+      "prize_1": 100000,
+      "prize_2": 50000,
+      "prize_3": 25000,
+      "max_teams": 15
+    }
+  }
+]

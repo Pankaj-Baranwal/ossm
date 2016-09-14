@@ -1,0 +1,52 @@
+[
+  {
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+      "domain": "convoke.io",
+      "name": "convoke"
+    }
+  },
+  {
+    "model": "socialaccount.socialapp",
+    "pk": 1,
+    "fields": {
+      "provider": "google",
+      "name": "G+ Login",
+      "client_id": "34950370402-f5fnu2mcec4ut0ik3fbkhg4vtioajj49.apps.googleusercontent.com",
+      "secret": "UeJQJEtGJKIFgNO_qlrw1Wqs",
+      "key": "",
+      "sites": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "socialaccount.socialapp",
+    "pk": 2,
+    "fields": {
+      "provider": "github",
+      "name": "GitHub",
+      "client_id": "c41585dcf474ad3b6720",
+      "secret": "fd903b157577937ccf8cd87d987cb7b45773e9a7",
+      "key": "",
+      "sites": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "socialaccount.socialapp",
+    "pk": 3,
+    "fields": {
+      "provider": "facebook",
+      "name": "FB Login",
+      "client_id": "1762003584075458",
+      "secret": "82cf3fc0a3958d25589886cdb74477f7",
+      "key": "",
+      "sites": [
+        1
+      ]
+    }
+  }
+]
