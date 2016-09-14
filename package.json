@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --opts frontend/tests/mocha.opts frontend",
     "build": "brunch b -p",
-    "start": "brunch w"
+    "start": "brunch w",
+    "postinstall": "brunch b -p"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "uglify-js-brunch": "^2.0.1"
   },
   "devDependencies": {
+    "app-module-path": "^1.1.0",
     "chai": "^3.5.0",
     "chai-webdriver": "^1.2.0",
     "istanbul": "^0.4.5",

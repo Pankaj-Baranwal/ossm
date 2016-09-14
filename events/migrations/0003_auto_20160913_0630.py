@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='team',
             name='event',
-            field=models.ForeignKey(default='default', on_delete=django.db.models.deletion.CASCADE, to='events.Event'),
+            field=models.ForeignKey(null=True, blank=True, on_delete=django.db.models.deletion.CASCADE, to='events.Event'),
         ),
         migrations.AlterField(
             model_name='team',

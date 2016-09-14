@@ -4,5 +4,5 @@ require './helper'
 
 describe 'Components', ->
   it 'should exist', ->
-    expect(require_app 'ossm').to.be.a 'function'
+    expect(require 'ossm').to.be.a 'function'
 
