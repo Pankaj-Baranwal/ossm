@@ -14,11 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
 from ossm.social_rest_auth import FacebookLogin, GoogleLogin
+from ossm import admin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.urls),
     url(r'^', include('landing.urls')),
     url(r'events/', include('events.urls')),
     url(r'^accounts/', include('allauth.urls')),

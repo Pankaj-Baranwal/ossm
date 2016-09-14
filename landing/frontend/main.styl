@@ -2,8 +2,9 @@
 
 body
   > header
-    min-height 100vh
     position relative
+    nav
+      display none
     .hero
       height 100vh
       background url('/static/img/splash.jpg') no-repeat center center
@@ -11,12 +12,26 @@ body
       div
         vertically-align()
 
-      h2
+      h2, h1
         margin 0
+
+      form
+        max-width 40%
+        margin-top 50px
+        input
+          display block
+          margin-bottom 10px
+        button
+          padding 5px 10px
+      img
+        max-height 40px
+        max-width 100%
 
   > footer
     background lighten($prussian-blue, 20%)
     color $primary-text
+    .contact
+      display none
     .info
       padding 10px 0
       img

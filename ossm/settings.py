@@ -40,10 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'landing',
-    'ossm',
-    'people',
-    'events',
     'anymail',
     'allauth',
     'allauth.account',
@@ -58,6 +54,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+    'landing',
+    'ossm',
+    'people',
+    'events',
 ]
 
 AUTHENTICATION_BACKENDS = (
