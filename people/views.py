@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.core.validators import validate_email
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseServerError
 from django.http import JsonResponse
@@ -9,12 +10,14 @@ from django.shortcuts import render, render_to_response
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework import views
+from rest_framework.response import Response
 
 from events.models import Team, Event
 from ossm.exceptions import Http409
 from ossm.views import JSONResponse
-from people.models import User
-from people.serializers import UserSerializer
+from people.models import User, Subscription
+from people.serializers import UserSerializer, SubscriptionSerializer
 
 
 @login_required
@@ -99,3 +102,32 @@ def profile_api(request):
         user_profile = User.objects.filter(email=data['email']).first()
         serializer = UserSerializer(user_profile)
         return JSONResponse(serializer.data)
+
+
+class SubscriptionApiView(views.APIView):
+    """
+    API end-points that allows subscriptions to be viewed or edited.
+    """
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
+
+    def post(self, request):
+        email = request.POST['email']
+        if email:
+            validate_email(email)
+            return Response(status=201)
+        else:
+            return HttpResponseBadRequest('No E-Mail address provided')
+
+
+class UserApiView(views.APIView):
+    """
+    API end-points that allows user to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        user = User.objects.filter(email=request.user.email).first()
+        serializer = UserSerializer(instance=user)
+        return Response(serializer.data)
