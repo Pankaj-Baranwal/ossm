@@ -28,3 +28,6 @@ class Subscription(db_models.Model):
     def _get_is_member(self):
         return User.objects.filter(email=self.email).exists()
     is_member = property(_get_is_member)
+
+    def __str__(self):
+        return self.email
