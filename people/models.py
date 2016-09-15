@@ -20,3 +20,11 @@ class User(models.AbstractUser):
 
     def is_registered_event(self, event_id):
         return self.teams.filter(event=event_id).exists()
+
+
+class Subscription(db_models.Model):
+    email = db_models.EmailField(null=False, primary_key=True)
+
+    def _get_is_member(self):
+        return User.objects.filter(email=self.email).exists()
+    is_member = property(_get_is_member)
