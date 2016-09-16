@@ -17,6 +17,8 @@ def subscribe(request):
     if request.method == 'POST':
         # data = json.loads(request.body)
         if 'email' in request.POST and request.POST['email'] != '':
+            if Subscription.objects.filter(email=request.POST['email']).exists():
+                return HttpResponse('Already subscribed', status=202)
             subscription = Subscription()
             subscription.email = request.POST['email']
             subscription.save()

@@ -48,6 +48,9 @@
   {{ 'landing' | js_bundle }}
     <script type="application/javascript">
     function subscribe() {
+        if (!document.getElementById('email-input').value) {
+            return;
+        }
         document.getElementById('email-subscribe-submit').disabled = true;
         document.getElementById('email-subscribe-submit').style.backgroundColor = 'gray';
         document.getElementById('email-input').disabled = true;
@@ -62,7 +65,12 @@
                 'X-CSRFToken': document.querySelector('meta[itemprop="csrf-token"]')['content']
             },
             success: function (resp) {
-                document.getElementById('email-subscribe-submit').innerHTML = 'SUBSCRIBED';
+                if (resp == 'Already subscribed') {
+                    document.getElementById('email-subscribe-submit').innerHTML = 'ALREADY SUBSCRIBED';
+                }
+                else {
+                    document.getElementById('email-subscribe-submit').innerHTML = 'SUBSCRIBED';
+                }
                 document.getElementById('email-subscribe-submit').style.backgroundColor = 'green';
                 setTimeout(function() {
                     // Whatever you want to do after the wait
