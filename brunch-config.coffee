@@ -25,7 +25,7 @@ bundles = do ->
   bndls
 
 console.log bundles
-console.log "---> Discovered #{watched.length} components"
+console.log "--> Discovered #{watched.length} components"
 
 
 module.exports = config:
