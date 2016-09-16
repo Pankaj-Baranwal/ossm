@@ -31,3 +31,11 @@ class Subscription(db_models.Model):
 
     def __str__(self):
         return self.email
+
+
+class EmailRead(db_models.Model):
+    email = db_models.EmailField(null=False, primary_key=True)
+    timestamp = db_models.IntegerField(null=False)
+    
+    def __str__(self):
+        return self.email

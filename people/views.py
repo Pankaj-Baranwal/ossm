@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.contrib.auth.decorators import login_required
@@ -16,7 +17,7 @@ from rest_framework.response import Response
 from events.models import Team, Event
 from ossm.exceptions import Http409
 from ossm.views import JSONResponse
-from people.models import User, Subscription
+from people.models import User, Subscription, EmailRead
 from people.serializers import UserSerializer, SubscriptionSerializer
 
 

@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^rest-auth/google/$', GoogleLogin.as_view(), name='g_login'),
     url(r'^rest-auth/github/$', GoogleLogin.as_view(), name='gh_login'),
-    url(r'^subscribe/$', views.subscribe, name='subscribe')
+    url(r'^subscribe/$', views.subscribe, name='subscribe'),
+    url(r'^email_read/$', views.email_read, name='email_track')
 ]

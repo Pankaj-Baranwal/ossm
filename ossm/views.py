@@ -1,10 +1,12 @@
-import json
+import time
 
+from django.core.validators import validate_email
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 
-from people.models import Subscription
+from people.models import Subscription, EmailRead
 
 
 def home(request):
@@ -27,6 +29,19 @@ def subscribe(request):
             return HttpResponseBadRequest('Invalid E-Mail Id.')
     else:
         return HttpResponseNotAllowed('Not allowed.')
+
+
+def email_read(request):
+    email = request.GET['email']
+    if email:
+        email_read = EmailRead()
+        email_read.email = email
+        email_read.timestamp = int(time.time())
+        email_read.save()
+        validate_email(email)
+        return HttpResponse(status=201)
+    else:
+        return HttpResponse(status=200)
 
 
 class JSONResponse(HttpResponse):
