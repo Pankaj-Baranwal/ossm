@@ -120,7 +120,7 @@ class SubscriptionApiView(views.APIView):
             return HttpResponseBadRequest('No E-Mail address provided')
 
 
-class UserApiView(views.APIView):
+class SelfApiView(views.APIView):
     """
     API end-points that allows user to be viewed or edited.
     """
@@ -128,6 +128,26 @@ class UserApiView(views.APIView):
     serializer_class = UserSerializer
 
     def get(self, request):
-        user = User.objects.filter(email=request.user.email).first()
+        user = User.objects.filter(username=request.user.username).first()
         serializer = UserSerializer(instance=user)
+        return Response(serializer.data)
+
+    def patch(self, request):
+        data = JSONParser().parse(request)
+        user_profile = User.objects.filter(username=request.user.username).first()
+        if 'username' in data and request.user.username != data['username'] and User.objects.filter(username=data['username']).exists():
+            raise Exception("Username already exists.")
+        if 'email' in data and request.user.email != data['email'] and User.objects.filter(email=data['email']).exists():
+            raise Exception("Email already registered.")
+        user_profile.email = data['email'] if 'email' in data else user_profile.email
+        user_profile.username = data['username'] if 'username' in data else user_profile.username
+        user_profile.first_name = data['first_name'] if 'first_name' in data else user_profile.first_name
+        user_profile.last_name = data['last_name'] if 'last_name' in data else user_profile.last_name
+        user_profile.contact = int(data['contact']) if 'contact' in data and data['contact'] != '' else user_profile.contact
+        user_profile.city = data['city'] if 'city' in data else user_profile.city
+        user_profile.state = data['state'] if 'state' in data else user_profile.state
+        user_profile.institute = data['institute'] if 'institute' in data else user_profile.institute
+        user_profile.save()
+        user_profile = User.objects.filter(username=user_profile.username).first()
+        serializer = UserSerializer(user_profile)
         return Response(serializer.data)
