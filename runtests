@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
-echo '===> Running Django Tests'
+echo '==> Running Django Tests'
 python manage.py test
-echo '===> Building Frontend assets'
+echo '==> Building Frontend assets'
 npm run build
-echo '===> Running JS tests'
-npm run test
+echo '==> !! Skipping JS tests'
+# npm run test
