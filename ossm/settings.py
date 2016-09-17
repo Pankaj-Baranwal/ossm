@@ -18,13 +18,14 @@ from credentials import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-PROD = 'PRODUCTION' in os.environ
+STAGING = 'STAGING' in os.environ
+PRODUCTION = 'PRODUCTION' in os.environ
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 SECRET_KEY = '&p1c8n_y5efqa5(u9byuutsuj#bbc0$x=fdkcec+8gd45npup#'
-DEBUG = not PROD
+DEBUG = not PRODUCTION
 INTERNAL_IPS = ['127.0.0.1',]
 
 
@@ -59,10 +60,7 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
@@ -73,8 +71,6 @@ ANYMAIL = {
 }
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
     ],
@@ -183,7 +179,7 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/dashboard/'
 
-if PROD:
+if PRODUCTION or STAGING:
     DEBUG = False
     CSRF_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True

@@ -1,13 +1,5 @@
 [
   {
-    "model": "sites.site",
-    "pk": 1,
-    "fields": {
-      "domain": "convoke.io",
-      "name": "convoke"
-    }
-  },
-  {
     "model": "socialaccount.socialapp",
     "pk": 1,
     "fields": {
