@@ -1,19 +1,28 @@
 {
-  "name": "OSSM",
-  "description": "OSSM Heroku app.",
+  "name": "Convoke.io",
+  "description": "Web portal for Convoke 1.0",
   "success_url": "/",
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql:hobby-dev"
   ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Django SECRET_KEY",
+      "generator": "secret",
+      "required": true
+    },
+    "HEROKU_URL": {
+      "description": "Public URL to this app",
+      "value": "staging.convoke.io"
+    }
+  },
   "buildpacks": [
     {
-      "url": "heroku/python"
+      "url": "heroku/nodejs"
     },
     {
-      "url": "heroku/nodejs"
+      "url": "heroku/python"
     }
   ],
-  "scripts": {
-    "postdeploy": "python manage.py migrate"
-  }
+  "repository": "https://github.com/clusterinnovationcentre/ossm"
 }

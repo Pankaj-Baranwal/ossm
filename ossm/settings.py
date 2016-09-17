@@ -18,16 +18,13 @@ from credentials import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-PROD = 'HEROKU_URL' in os.environ
+PROD = 'PRODUCTION' in os.environ
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 SECRET_KEY = '&p1c8n_y5efqa5(u9byuutsuj#bbc0$x=fdkcec+8gd45npup#'
-
 DEBUG = not PROD
-
-ALLOWED_HOSTS = []
 INTERNAL_IPS = ['127.0.0.1',]
 
 
@@ -202,12 +199,20 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/dashboard/'
 
 if PROD:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SITE_URL = os.environ['HEROKU_URL']
-
     DEBUG = False
-    ALLOWED_HOSTS = [SITE_URL,]
-    SECRET_KEY = "2mzw7*s1ih+yge-!#2oi_y^gvozvhjz5jcu=$&p+sh8+%bs8d1"
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    SITE_URL = os.environ['HEROKU_URL']
+    SECRET_KEY = os.environ['SECRET_KEY']
+    ALLOWED_HOSTS = ['*.herokuapp.com', SITE_URL]
     DATABASES = {'default': dj_database_url.config(),}
 
     MIDDLEWARE_CLASSES.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
