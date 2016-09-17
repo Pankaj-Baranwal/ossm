@@ -27,6 +27,16 @@ body
       init-container()
       background $base
 
+    abbr
+      font-family $type-mono
+      font-size 12px
+      font-weight 300
+      left 100%
+      margin-left 5px
+      opacity 0.8
+      position absolute
+      top 0
+
     nav > div
       display flex
       align-items center
@@ -39,6 +49,7 @@ body
         margin 12px 0
         font-size 20px
         line-height 10px
+        position relative
         span
           visibility hidden
           position absolute
@@ -117,6 +128,7 @@ body
           display flex
           align-items center
           justify-content space-between
+          flex-wrap wrap
           ul
             inline-list(10px)
             padding 10px 0

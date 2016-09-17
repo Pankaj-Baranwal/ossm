@@ -1,6 +1,7 @@
 {% load account %}
 {% load static %}
 {% load brunch %}
+{% load revision %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,7 @@
         <a href='/'>
           <h1>
             <span>convoke</span>
-            <img src='{% static "img/brand/logo-alt-1x.png" %}' alt='convoke.io homepage' title='Home'>
+            <img src='{% static "img/brand/logo-alt-1x.png" %}' alt='convoke.io homepage' title='Home'><abbr>{% revision %}</abbr>
           </h1>
         </a>
         <ul>
@@ -80,7 +81,7 @@
     <section class='copyright'>
       <div>
         <ul>
-          <li>&copy; <a href='/'>convoke.io</a>, 2016</li>
+          <li>&copy; <a href='/'>convoke.io</a>, 2016 <abbr>{% revision %}</abbr></li>
           <li><a href='#'>Privacy</a></li>
           <li><a href='#'>API</a></li>
         </ul>

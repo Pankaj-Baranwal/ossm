@@ -14,10 +14,20 @@ body
 
       h2, h1
         margin 0
+        position relative
+        display inline
+      @media(max-width 768px)
+        abbr
+          top 100%
+          left 0
 
       form
         max-width 40%
         margin-top 50px
+
+        @media(max-width 768px)
+          max-width (768px * 0.8) * 0.4
+
         input
           display block
           margin-bottom 10px

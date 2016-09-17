@@ -2,13 +2,14 @@
 {% load static %}
 {% load account %}
 {% load brunch %}
+{% load revision %}
 
 {% block root-title %}Convoke 1.0{% endblock %}
 
 {% block hero-content %}
 <section class='hero'>
   <div>
-    <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'></h1>
+    <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
     <form onsubmit='event.preventDefault(); subscribe()'>
         {% csrf_token %}
         <input id='email-input' type='email' name='email' placeholder='Subscribe'>
