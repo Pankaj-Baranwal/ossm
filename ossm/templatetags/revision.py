@@ -11,6 +11,6 @@ def revision():
     if settings.DEBUG or settings.STAGING:
       rev = git.revision if git.revision else os.environ.get('HEROKU_SLUG_COMMIT', 'unknown')[:7]
       channel = 'staging' if settings.STAGING else 'dev'
-      return '#%s @%s' % (git.revision, channel)
+      return '#%s @%s' % (rev, channel)
     else:
       return ''
