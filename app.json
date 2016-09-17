@@ -14,7 +14,8 @@
     "HEROKU_URL": {
       "description": "Public URL to this app",
       "value": "staging.convoke.io"
-    }
+    },
+    "PRODUCTION": "true"
   },
   "buildpacks": [
     {
