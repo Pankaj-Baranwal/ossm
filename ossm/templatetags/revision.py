@@ -6,6 +6,8 @@ register = template.Library()
 
 @register.simple_tag
 def revision():
-    if settings.DEBUG:
+    if settings.DEBUG or settings.STAGING:
       channel = 'staging' if settings.STAGING else 'dev'
       return '#%s @%s' % (git.revision, channel)
+    else:
+      return ''
