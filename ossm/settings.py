@@ -71,6 +71,7 @@ DEFAULT_FROM_EMAIL = 'postmaster@mail.convoke.io'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -167,5 +168,4 @@ if PRODUCTION or STAGING:
     ALLOWED_HOSTS = ['.herokuapp.com', SITE_URL, ('.%s' % SITE_URL)]
     DATABASES = {'default': dj_database_url.config(),}
 
-    MIDDLEWARE_CLASSES.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
