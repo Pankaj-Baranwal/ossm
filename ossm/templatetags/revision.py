@@ -8,15 +8,13 @@ register = template.Library()
 
 @register.simple_tag
 def revision(prod=False):
-    _hrev = os.environ.get('HEROKU_SLUG_COMMIT', 'unknown')[:7]
-    try:
-      rev = git.revision
-    except Exception:
-      rev = _hrev
+    if 'HEROKU_SLUG_COMMIT' in os.environ:
+      rev = os.environ['HEROKU_SLUG_COMMIT'][:7]
+    else:
+      rev = git.revision if git.revision or 'unknown'
+
     if settings.DEBUG or settings.STAGING:
       channel = 'staging' if settings.STAGING else 'dev'
       return '#%s @%s' % (rev, channel)
-    elif prod:
-      return _hrev
     else:
       return ''
