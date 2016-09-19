@@ -4,8 +4,6 @@ from people import views
 
 
 urlpatterns = [
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/$', views.Profile.as_view(), name='profile'),
     url(r'^$', views.dashboard, name='dashboard'),
-    url(r'^profile/api$', views.profile_api, name='profile_api'),
-    url(r'^api/me', views.SelfApiView.as_view())
 ]

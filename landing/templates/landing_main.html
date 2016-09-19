@@ -10,10 +10,9 @@
 <section class='hero'>
   <div>
     <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
-    <form onsubmit='event.preventDefault(); subscribe()'>
-        {% csrf_token %}
-        <input id='email-input' type='email' name='email' placeholder='Subscribe'>
-        <button id='email-subscribe-submit' type='submit'>Subscribe</button>
+    <form id='subscription'>
+        <input type='email' name='email' placeholder='Subscribe' required>
+        <button type='submit'>Subscribe</button>
     </form>
   </div>
 </section>
@@ -47,55 +46,4 @@
 
 {% block javascript %}
   {{ 'landing' | js_bundle }}
-    <script type="application/javascript">
-    function subscribe() {
-        if (!document.getElementById('email-input').value) {
-            return;
-        }
-        document.getElementById('email-subscribe-submit').disabled = true;
-        document.getElementById('email-subscribe-submit').style.backgroundColor = 'gray';
-        document.getElementById('email-input').disabled = true;
-        var request = require('reqwest');
-        request({
-            url: '/subscribe/',
-            method: 'post',
-            data: {
-                'email': document.getElementById('email-input').value
-            },
-            headers: {
-                'X-CSRFToken': document.querySelector('meta[itemprop="csrf-token"]')['content']
-            },
-            success: function (resp) {
-                if (resp == 'Already subscribed') {
-                    document.getElementById('email-subscribe-submit').innerHTML = 'ALREADY SUBSCRIBED';
-                }
-                else {
-                    document.getElementById('email-subscribe-submit').innerHTML = 'SUBSCRIBED';
-                }
-                document.getElementById('email-subscribe-submit').style.backgroundColor = 'green';
-                setTimeout(function() {
-                    // Whatever you want to do after the wait
-                    document.getElementById('email-subscribe-submit').innerHTML = 'Subscribe';
-                    document.getElementById('email-subscribe-submit').style.backgroundColor = '#007ea7';
-                    document.getElementById('email-subscribe-submit').disabled = false;
-                    document.getElementById('email-input').disabled = false;
-                    document.getElementById('email-input').value = '';
-                }, 1500);
-
-            },
-            error: function (err) {
-                document.getElementById('email-subscribe-submit').innerHTML = 'ERROR';
-                document.getElementById('email-subscribe-submit').style.backgroundColor = 'red';
-                setTimeout(function() {
-                    // Whatever you want to do after the wait
-                    document.getElementById('email-subscribe-submit').innerHTML = 'Subscribe';
-                    document.getElementById('email-subscribe-submit').style.backgroundColor = '#007ea7';
-                    document.getElementById('email-subscribe-submit').disabled = false;
-                    document.getElementById('email-input').disabled = false;
-                    document.getElementById('email-input').value = '';
-                }, 1500);
-            }
-        });
-    }
-    </script>
 {% endblock %}
