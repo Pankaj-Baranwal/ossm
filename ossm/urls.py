@@ -12,6 +12,5 @@ urlpatterns = [
     url(r'^events/', include('events.urls')),
 
     # Support old routes.
-    url(r'^subscribe/$', views.subscribe, name='subscribe'),
     url(r'^email_read/$', views.email_read, name='email_track')
 ]

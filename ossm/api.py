@@ -42,6 +42,6 @@ urlpatterns = [
     url(r'^auth/social/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^auth/social/google/$', GoogleLogin.as_view(), name='g_login'),
     url(r'^auth/social/github/$', GoogleLogin.as_view(), name='gh_login'),
-    url(r'^docs/', schema_view),
     url(r'^', include(api_root.get_urls())),
+    url(r'^', schema_view),
 ]
