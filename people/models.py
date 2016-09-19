@@ -2,6 +2,7 @@ from django.contrib.auth import models
 from django.db import models as db_models
 
 # Create your models here.
+from haikunator import Haikunator
 
 STATES = (
     ('DL', 'Delhi'),
@@ -20,6 +21,12 @@ class User(models.AbstractUser):
 
     def is_registered_event(self, event_id):
         return self.teams.filter(event=event_id).exists()
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            haikunator = Haikunator()
+            self.username = haikunator.haikunate(token_length=0, delimiter='')
+        super().save(*args, **kwargs)
 
 
 class Subscription(db_models.Model):
