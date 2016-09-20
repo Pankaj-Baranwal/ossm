@@ -1,28 +1,27 @@
-{% extends 'base.html' %}
-{% block body-class %}error{% endblock %}
+{% extends '400.html' %}
 
-{% block content %}
-<pre>
-    ALERT!
-    SENSORS REPORT A SERVER ERROR.
+{% block error-message %}
+  <h2>500 <small>Server Error</small></h2>
 
-    THE ERROR MUST BE RECTIFIED.
-    SEEK! LOCATE! EXTERMINATE!
-    SEEK! LOCATE! EXTERMINATE!
+  <pre>
+ALERT!
+SENSORS REPORT A SERVER ERROR.
 
-                   /
-              ___
-      D>=G==='   '.
-            |======|
-            |======|
-        )--/]IIIIII]
-           |_______|
-           C O O O D
-          C O  O  O D
-         C  O  O  O  D
-         C__O__O__O__D
-        [_____________]
-</pre>
-<h3>Sorry, our servers seem to be having a little trouble.</h3>
-<a href='/' class='btn'>Homepage</a>
+THE ERROR MUST BE RECTIFIED.
+SEEK! LOCATE! EXTERMINATE!
+SEEK! LOCATE! EXTERMINATE!
+
+               /
+          ___
+  D>=G==='   '.
+        |======|
+        |======|
+    )--/]IIIIII]
+       |_______|
+       C O O O D
+      C O  O  O D
+     C  O  O  O  D
+     C__O__O__O__D
+    [_____________]
+  </pre>
 {% endblock %}

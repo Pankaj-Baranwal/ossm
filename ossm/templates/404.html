@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-{% block body-class %}error{% endblock %}
+{% extends '400.html' %}
 
-{% block content %}
-
-  <h2>There's nothing here.</h2>
-  <h3>404</h3>
-
+{% block error-message %}
+  <h2>404 <small>Not Found</small></h2>
+  <p>Whoa, this is a hipster URL. We're too old for that. Please click the button below to go visit the homepage.</p>
 {% endblock %}
