@@ -10,6 +10,7 @@ PRODUCTION = 'PRODUCTION' in os.environ
 
 SECRET_KEY = '&p1c8n_y5efqa5(u9byuutsuj#bbc0$x=fdkcec+8gd45npup#'
 DEBUG = not PRODUCTION
+ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = ['127.0.0.1',]
 
 
