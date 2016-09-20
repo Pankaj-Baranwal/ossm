@@ -1,5 +1,8 @@
 from django.conf.urls import url, include
+from django.conf import settings
 from django.views.generic import TemplateView
+from django.views.defaults import (page_not_found, server_error,
+        bad_request, permission_denied)
 
 from . import views, admin
 
@@ -18,3 +21,12 @@ urlpatterns = [
     # Support old routes.
     url(r'^email_read/$', views.email_read, name='email_track')
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^400/$', bad_request, kwargs=dict(exception={})),
+        url(r'^403/$', permission_denied, kwargs=dict(exception={})),
+        url(r'^404/$', page_not_found, kwargs=dict(exception={})),
+        url(r'^500/$', server_error),
+    ]
+
