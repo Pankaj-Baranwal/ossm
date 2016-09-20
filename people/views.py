@@ -1,11 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response
-from django.views.generic.detail import DetailView
+from django.shortcuts import render
+from django.views.generic import TemplateView
 from rest_framework import viewsets, mixins
 
-from events.models import Team, Event
-
-from .models import User, Subscription, EmailRead
+from people.forms import ProfileForm
+from .models import User, Subscription
 from .serializers import UserSerializer, SubscriptionSerializer
 
 
@@ -16,10 +15,27 @@ def dashboard(request):
     })
 
 
-class Profile(DetailView):
+class Profile(TemplateView):
     model = User
-    template_names = ['profile.html']
+    template_name = 'profile.html'
 
+    def get_context_data(self, **kwargs):
+        return {
+            'form': self.form
+        }
+
+    def post(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.form = ProfileForm(request.POST, instance=self.user)
+        context = self.get_context_data(**kwargs)
+        if self.form.is_valid():
+            self.form.save()
+        return self.render_to_response(context)
+
+    def get(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.form = ProfileForm(instance=self.user)
+        return super().get(request, *args, **kwargs)
 
 
 class SubscriptionApiView(mixins.CreateModelMixin, viewsets.GenericViewSet):
@@ -29,7 +45,6 @@ class SubscriptionApiView(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
     permission_classes = ()
-
 
 
 class SelfApiView(viewsets.ModelViewSet):

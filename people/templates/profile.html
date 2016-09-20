@@ -8,35 +8,7 @@
     <div class="profile-container">
         <form action="" method="post">
             {% csrf_token %}
-            <label>
-                Name:
-                <input id="user-first-name-input" name="first_name" type="text" value="{{ user.first_name }}" >
-                <input id="user-last-name-input" name="last_name" type="text" value="{{ user.last_name }}" >
-            </label>
-            <label>
-                Username:
-                <input id="user-username-input" name="username" type="text" value="{{ user.get_username }}" />
-            </label>
-            <label>
-                E-Mail:
-                <input id="user-email-input" name="email" type="email" value="{{ user.email }}" />
-            </label>
-            <label>
-                Contact:
-                <input id="user-contact-input" name="contact" type="number" value="{{ user.contact }}" >
-            </label>
-            <label>
-                City:
-                <input id="user-city-input" name="city" type="text" value="{{ user.city }}" >
-            </label>
-            <label>
-                State:
-                <input id="user-state-input" name="state" type="text" value="{{ user.state }}" >
-            </label>
-            <label>
-                Institute:
-                <input id="user-institute-input" name="institute" type="text" value="{{ user.institute }}" >
-            </label>
+            {{ form }}
             <button id="user-name-update-button" type="submit">Update</button>
             <button id="user-name-cancel-button" type="reset" content="Cancel">Cancel</button>
         </form>

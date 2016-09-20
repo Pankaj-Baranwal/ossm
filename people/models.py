@@ -13,6 +13,7 @@ STATES = (
 
 
 class User(models.AbstractUser):
+    email = db_models.EmailField('email address', blank=False, unique=True, null=False)
     contact = db_models.IntegerField(null=True)
     institute = db_models.CharField(max_length=100, null=True)
     city = db_models.CharField(max_length=50, null=True)
