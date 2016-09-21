@@ -1,3 +1,21 @@
 
 $type-mono    = 'Inconsolata', monospace
 $type-regular = 'Poppins', sans-serif
+
+
+fira-type(weight, sx)
+  @font-face
+    font-family 'Fira Code'
+    src url('/static/fonts/eot/FiraCode-' + sx + '.eot')
+    src url('/static/fonts/eot/FiraCode-' + sx + '.eot') format('embedded-opentype'),
+        url('/static/fonts/woff2/FiraCode-' + sx + '.woff2') format('woff2'),
+        url('/static/fonts/woff/FiraCode-' + sx + '.woff') format('woff'),
+        url('/static/fonts/ttf/FiraCode-' + sx + '.ttf') format('truetype')
+    font-weight weight
+    font-style normal
+
+fira-type(300, 'Light')
+// fira-type(400, 'Regular')
+fira-type(500, 'Medium')
+
+type-fira = 'Fira Code', Courier, monospace

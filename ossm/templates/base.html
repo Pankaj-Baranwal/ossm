@@ -101,6 +101,21 @@
         </ul>
       </div>
     </section>
+    <section class='terminal' id='term' rv-class-visible='visible' rv-on-click='onFocus'>
+      <button type='button' rv-on-click='onToggle'>
+        <span rv-hide='visible'>>_</span>
+        <span rv-show='visible'>×</span>
+      </button>
+      <ul>
+        <li rv-each-line='buffer'>
+          <pre rv-text='line'></pre>
+        </li>
+      </ul>
+      <footer>
+        <span>~</span>
+        <input type='text' autofocus rv-disabled='busy' rv-value='input' rv-on-keyup='onKeyUp'>
+      </footer>
+    </section>
   </footer>
   {% block main-javascript %}
     <script type='text/javascript' src='{% static "js/vendors.js" %}'></script>
