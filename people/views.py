@@ -48,9 +48,10 @@ class SubscriptionApiView(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = ()
 
 
-class SelfApiView(viewsets.ModelViewSet):
+class SelfApiView(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     API end-points that allows user to be viewed or edited.
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = 'username'
