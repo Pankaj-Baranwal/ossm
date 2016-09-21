@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from rest_framework import viewsets, mixins
 
 from people.forms import ProfileForm
+from people.permissions import IsOwnerOrReadOnly
 from .models import User, Subscription
 from .serializers import UserSerializer, SubscriptionSerializer
 
@@ -55,3 +56,4 @@ class SelfApiView(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.G
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
+    permission_classes = (IsOwnerOrReadOnly, )
