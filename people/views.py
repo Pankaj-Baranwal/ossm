@@ -27,9 +27,10 @@ class Profile(TemplateView):
     def post(self, request, *args, **kwargs):
         self.user = User.objects.get(username=request.user.username)
         self.form = ProfileForm(request.POST, instance=self.user)
-        context = self.get_context_data(**kwargs)
         if self.form.is_valid():
             self.form.save()
+        self.form = ProfileForm(instance=self.user)
+        context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
     def get(self, request, *args, **kwargs):
