@@ -27,6 +27,9 @@ class User(models.AbstractUser):
         if self.pk is None:
             haikunator = Haikunator()
             self.username = haikunator.haikunate(token_length=0, delimiter='')
+            while User.objects.filter(username=self.username).exists():
+                self.username = haikunator.haikunate(token_length=0, delimiter='')
+
         super().save(*args, **kwargs)
 
 
