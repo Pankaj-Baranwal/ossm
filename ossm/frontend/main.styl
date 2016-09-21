@@ -1,5 +1,5 @@
-@require 'frontend'
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Poppins:400,600')
+@require 'frontend'
 
 html, body
   background $gainsboro
@@ -154,6 +154,7 @@ a
   link($celadon-blue)
 
 form
+  max-width 400px
   label
     text-transform uppercase
     font-size 14px
@@ -182,6 +183,10 @@ button, input[type='submit'], .btn
   color $rich-black
   width 100%
   padding 5px 10px
+
+  &:disabled
+    background lighten($lavender-gray, 70%)
+    color darken($lavender-gray, 60%)
 
 article.privacy
   max-width 700px
