@@ -101,8 +101,11 @@
         </ul>
       </div>
     </section>
-    <section class='terminal' id='term' rv-class-visible='visible'>
-      <button type='button' rv-on-click='onHide'>×</button>
+    <section class='terminal' id='term' rv-class-visible='visible' rv-on-click='onFocus'>
+      <button type='button' rv-on-click='onToggle'>
+        <span rv-hide='visible'>>_</span>
+        <span rv-show='visible'>×</span>
+      </button>
       <ul>
         <li rv-each-line='buffer'>
           <pre rv-text='line'></pre>

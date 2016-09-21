@@ -4,14 +4,19 @@ rivets = require 'rivets'
 class Terminal
   constructor: (container) ->
     @term =
-      visible: yes
+      visible: no
       busy: no
       buffer: []
       input: ''
+      onToggle: => @term.visible = !@term.visible
+      onFocus: => if @term.visible then @_input_el.focus()
       onKeyUp: (e) =>
         if e.keyCode is 13 then @trigger()
     @_buf_el = container.querySelector('ul')
+    @_input_el = container.querySelector('input')
     @_view = rivets.bind container, @term
+
+    @term.visible = /^\/$/.test window.location.pathname
 
   trigger: ->
     varg = @term.input
