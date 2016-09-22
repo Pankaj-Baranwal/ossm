@@ -3,6 +3,8 @@ fs = require 'fs'
 glob = require 'glob'
 _ = require 'lodash'
 
+PROD = process.env.STAGING? or process.env.PRODUCTION?
+STATIC_ROOT = if PROD then process.env.STATIC_ROOT else '/static'
 # [@prashnts] This bit here is used to generate the watched folders
 MODULE_PATH = '**/frontend/**/@(index|main).@(coffee|cjsx|jsx|js|styl)'
 watched = _
@@ -24,8 +26,11 @@ bundles = do ->
     bndls.css["css/#{app}.css"] = new RegExp "^#{path}\/[_\\d\\w]+\\.\\w+$"
   bndls
 
-console.log bundles
-console.log "--> Discovered #{watched.length} components"
+console.log "==> #{unless PROD then 'Dev' else 'Production'} build"
+console.log " --> Static root set to: #{STATIC_ROOT}"
+console.log "==> Discovered #{watched.length} components"
+for k, v of bundles.js
+  console.log " --> #{/js\/(.+)\.js/.exec(k)[1]}"
 
 
 module.exports = config:
@@ -35,6 +40,7 @@ module.exports = config:
   conventions:
     ignored: [
       /tests\//
+      /^frontend\/.+\.styl$/
     ]
 
   plugins:
@@ -49,6 +55,9 @@ module.exports = config:
         'jeet'
         'axis'
       ]
+    keyword:
+      filePattern: /\.(js|css)$/
+      map: static: STATIC_ROOT
 
   npm:
     enabled: yes

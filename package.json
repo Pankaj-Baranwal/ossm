@@ -32,6 +32,7 @@
     "css-brunch": "^2.6.1",
     "javascript-brunch": "^2.0.0",
     "jeet": "^6.1.4",
+    "keyword-brunch": "github:prashnts/keyword-brunch#5ee50ec",
     "lodash": "^4.15.0",
     "postcss-brunch": "^2.0.3",
     "react": "^15.3.1",
