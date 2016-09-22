@@ -37,18 +37,32 @@ class CommandHandler
     return
 
   execute: (cargs) ->
-    switch
-      when cargs == '' or /[ ]+$/.test cargs then return ''
-      when /help/.test cargs then return @help ''
-      when /^:wq/.test cargs then return @navigate '//hashinclude.ducic.ac.in'
+    cargs = cargs.trim()
+    cargs = cargs.split " "
+    switch cargs[0]
+      when 'help', '?' then return @help cargs.splice 1, cargs.length - 1
+      when 'event' then return @event cargs.splice 1, cargs.length - 1
+      when 'takeme' then return @navigate cargs.splice 1, cargs.length - 1
+      when 'exit' then return @exit cargs.splice 1, cargs.length - 1
       else return 'Nope. Wrong Command.'
 
-  help: (topic) ->
-    return 'We need help too.'
+  help: (args) ->
+    if args.length > 0 then return "unknown option(s): #{ args }"
+    return "available commands:\n
+            help (or ?) - show help and exit\n
+            event [event_name] - do something with events\n
+            takeme [location] - navigate around the website\n
+            exit - minimize this terminal\n
+            tip - use ? at the end of any command to see its help"
 
-  navigate: (url) ->
+  navigate: (args) ->
     window.location = url
     return 'Namaste!'
+
+  event: (args) ->
+    switch args[1]
+      when 'ossome' then
+    return 'Ooh! You seem excited for the events!'
 
 
 module.exports = Terminal
