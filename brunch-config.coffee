@@ -4,7 +4,10 @@ glob = require 'glob'
 _ = require 'lodash'
 
 PROD = process.env.STAGING? or process.env.PRODUCTION?
-STATIC_ROOT = if PROD then process.env.STATIC_ROOT else '/static'
+STATIC_ROOT =
+  if PROD
+    "//#{process.env.AWS_BUCKET_NAME}.s3.amazonaws.com"
+  else '/static'
 # [@prashnts] This bit here is used to generate the watched folders
 MODULE_PATH = '**/frontend/**/@(index|main).@(coffee|cjsx|jsx|js|styl)'
 watched = _
