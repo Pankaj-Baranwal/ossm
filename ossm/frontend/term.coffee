@@ -22,17 +22,33 @@ class Terminal
     varg = @term.input
     @term.busy = yes
     @appendToBuffer '~ ' + varg
-    switch
-      when varg == '' or /[ ]+$/.test varg then @appendToBuffer()
-      when /help/.test varg then @appendToBuffer 'We need help too.'
-      when /^:wq/.test varg then window.location = 'google.com'
-      else @appendToBuffer 'Nope. Wrong Command.'
+    handler = new CommandHandler()
+    @appendToBuffer handler.execute(varg)
     @term.busy = no
     @term.input = ''
 
   appendToBuffer: (value) ->
     @term.buffer.push value
     @_buf_el.lastElementChild.scrollIntoView()
+
+
+class CommandHandler
+  constructor: () ->
+    return
+
+  execute: (cargs) ->
+    switch
+      when cargs == '' or /[ ]+$/.test cargs then return ''
+      when /help/.test cargs then return @help ''
+      when /^:wq/.test cargs then return @navigate '//hashinclude.ducic.ac.in'
+      else return 'Nope. Wrong Command.'
+
+  help: (topic) ->
+    return 'We need help too.'
+
+  navigate: (url) ->
+    window.location = url
+    return 'Namaste!'
 
 
 module.exports = Terminal
