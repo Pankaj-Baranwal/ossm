@@ -21,7 +21,9 @@ class Terminal
   trigger: ->
     varg = @term.input
     @term.busy = yes
+    @appendToBuffer '~ ' + varg
     switch
+      when varg == '' or /[ ]+$/.test varg then @appendToBuffer()
       when /help/.test varg then @appendToBuffer 'We need help too.'
       when /^:wq/.test varg then window.location = 'google.com'
       else @appendToBuffer 'Nope. Wrong Command.'
