@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'rest_framework_swagger',
+    'storages',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -153,7 +154,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'public'), # brunch builds
+    os.path.join(BASE_DIR, 'public'),  # brunch builds
 ]
 
 LOGIN_REDIRECT_URL = '/dashboard/'
@@ -174,4 +175,11 @@ if PRODUCTION or STAGING:
     ALLOWED_HOSTS = ['.herokuapp.com', SITE_URL, ('.%s' % SITE_URL)]
     DATABASES = {'default': dj_database_url.config(),}
 
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_BUCKET_NAME')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = r'%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    STATIC_ROOT = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
