@@ -11,4 +11,4 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ('nickname', 'name', 'event', 'members')
+        fields = ('nickname', 'name', 'event', 'first_member', 'second_member')
