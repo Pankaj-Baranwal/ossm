@@ -1,5 +1,3 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from rest_framework import viewsets, mixins
 from django.db.models import Q
@@ -9,13 +7,6 @@ from people.forms import ProfileForm
 from people.permissions import IsOwnerOrReadOnly
 from .models import User, Subscription
 from .serializers import UserSerializer, SubscriptionSerializer
-
-
-@login_required
-def dashboard(request):
-    return render(request, 'dashboard.html', {
-        'user': request.user
-    })
 
 
 class Dashboard(TemplateView):
