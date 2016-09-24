@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.db.models import Q
 
+from people.models import User
 
 EVENTS = (
     (0, 'OSC'),
@@ -22,12 +24,27 @@ class Event(models.Model):
     prize_3 = models.IntegerField(null=False, default=0)
     max_teams = models.IntegerField(null=False, default=15)
 
+    def set_registered(self, user: User):
+        if user.is_authenticated:
+            teams = Team.objects.filter(event=self.code).all()
+            self.registered = teams.filter(first_member__username=user.username).exists() or\
+                              teams.filter(second_member__username=user.username).exists()
+        else:
+            self.registered = False
+
+    def set_team(self, user: User):
+        if user.is_authenticated:
+            team = Team.objects.filter(Q(first_member=user.username) | Q(second_member=user.username)).first()
+            self.team = team
+        else:
+            self.team = None
+
 
 class Team(models.Model):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
     nickname = models.CharField(max_length=20, null=False, validators=[alphanumeric], unique=True)
     name = models.CharField(max_length=30, null=False, default='default', unique=True)
     event = models.ForeignKey(to=Event, to_field='code', null=False, blank=False)
-    first_member = models.ForeignKey(to='people.User', to_field='username', null=False, related_name='first_member')
-    second_member = models.ForeignKey(to='people.User', to_field='username', null=True, related_name='second_member')
+    first_member = models.ForeignKey(to='people.User', to_field='username', null=False, related_name='team_first_member')
+    second_member = models.ForeignKey(to='people.User', to_field='username', null=True, related_name='team_second_member')
 
