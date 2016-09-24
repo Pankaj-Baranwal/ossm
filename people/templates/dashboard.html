@@ -6,7 +6,34 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<section>
-  <h2>Dashboard!</h2>
-</section>
+    <section>
+        <h2>Dashboard!</h2>
+        <table>
+            <thead>
+                <th>Event Code</th>
+                <th>Event Name</th>
+                <th>Registered</th>
+                <th>Team</th>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.code }}</td>
+                    <td>{{ event.name }}</td>
+                    <td>
+                        <a href="{% url 'dashboard' %}">Register{% if event.registered %}ed{% endif %}</a>
+                    </td>
+                    <td>
+                        {% if event.max_team_size == 1 %}
+                            NA
+                        {% else %}
+                            <button disabled>{{ event.team }}</button>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </section>
 {% endblock %}

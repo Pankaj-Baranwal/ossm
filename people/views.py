@@ -2,7 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from rest_framework import viewsets, mixins
+from django.db.models import Q
 
+from events.models import Team, Event
 from people.forms import ProfileForm
 from people.permissions import IsOwnerOrReadOnly
 from .models import User, Subscription
@@ -14,6 +16,25 @@ def dashboard(request):
     return render(request, 'dashboard.html', {
         'user': request.user
     })
+
+
+class Dashboard(TemplateView):
+    template_name = 'dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'events': self.events,
+            'teams': self.teams
+        }
+
+    def get(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.teams = Team.objects.filter(Q(first_member=self.user.username) | Q(second_member=self.user.username)).all()
+        self.events = Event.objects.all()
+        for event in self.events:
+            event.set_registered(self.user)
+            event.set_team(self.user)
+        return super().get(request, *args, **kwargs)
 
 
 class Profile(TemplateView):
