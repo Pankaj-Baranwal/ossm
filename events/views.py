@@ -3,12 +3,14 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
+from django.views.generic import TemplateView
 from rest_framework import viewsets, mixins
 
 
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
 
+from events.forms import TeamForm
 from events.models import Event, Team
 from events.serializers import TeamSerializer
 from people.models import User
@@ -62,4 +64,19 @@ class TeamApiViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Cr
     serializer_class = TeamSerializer
     lookup_field = 'nickname'
     permission_classes = (IsAuthenticated, )
-    csrf_exempt = True
+
+
+class TeamView(TemplateView):
+    template_name = 'team.html'
+    permission_classes = (IsAuthenticated, )
+
+    def get_context_data(self, **kwargs):
+        return {
+            'form': self.form
+        }
+
+    def get(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.form = TeamForm()
+        return super().get(request, *args, **kwargs)
+
