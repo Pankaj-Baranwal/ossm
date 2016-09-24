@@ -8,7 +8,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         model = Event
         
 
-class TeamSerializer(serializers.HyperlinkedModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = ('nickname', 'name', 'event', 'members')

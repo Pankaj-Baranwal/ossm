@@ -1,5 +1,4 @@
 from django.db import models
-from people import models as people_models
 from django.core.validators import RegexValidator
 
 
@@ -13,6 +12,7 @@ EVENTS = (
 
 
 class Event(models.Model):
+    code = models.CharField(max_length=2, null=False, unique=True)
     name = models.CharField(max_length=20, null=False)
     min_team_size = models.IntegerField(null=False, default=0)
     max_team_size = models.IntegerField(null=False, default=2)
@@ -25,8 +25,9 @@ class Event(models.Model):
 
 class Team(models.Model):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
-    nickname = models.CharField(max_length=20, null=True, validators=[alphanumeric])
-    name = models.CharField(max_length=30, null=False, default='default')
-    event = models.ForeignKey(to=Event, null=True, blank=True)
-    members = models.ManyToManyField('people.User', related_name='teams')
+    nickname = models.CharField(max_length=20, null=False, validators=[alphanumeric], unique=True)
+    name = models.CharField(max_length=30, null=False, default='default', unique=True)
+    event = models.ForeignKey(to=Event, to_field='code', null=False, blank=False)
+    first_member = models.ForeignKey(to='people.User', to_field='username', null=False, related_name='first_member')
+    second_member = models.ForeignKey(to='people.User', to_field='username', null=True, related_name='second_member')
 

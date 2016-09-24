@@ -1,15 +1,16 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, JsonResponse, HttpResponseServerError, HttpResponseBadRequest
+from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
-import json
+from rest_framework import viewsets, mixins
 
 
 # Create your views here.
+from rest_framework.permissions import IsAuthenticated
 
 from events.models import Event, Team
-from ossm.exceptions import Http409
+from events.serializers import TeamSerializer
 from people.models import User
 
 
@@ -54,3 +55,11 @@ def register_api(request, event_id: int):
     team.members.add(User.objects.filter(username=request.user.username).first())
     team.save()
     return JsonResponse(object(), status=201)
+
+
+class TeamApiViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
+    lookup_field = 'nickname'
+    permission_classes = (IsAuthenticated, )
+    csrf_exempt = True
