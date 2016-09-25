@@ -35,7 +35,7 @@ class Event(models.Model):
     def set_team(self, user: User):
         if user.is_authenticated:
             teams = Team.objects.filter(event=self.code).all()
-            self.team = Team.objects.filter(Q(first_member=user.username) | Q(second_member=user.username)).first()
+            self.team = teams.filter(Q(first_member=user.username) | Q(second_member=user.username)).first()
         else:
             self.team = None
 

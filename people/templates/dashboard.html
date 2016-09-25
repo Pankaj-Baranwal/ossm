@@ -27,9 +27,9 @@
                         {% if event.max_team_size == 1 %}
                             NA
                         {% elif event.team == None %}
-                            <a href="{% url 'edit_team' %}">{{ event.team }}</a>
+                            <a href="{% url 'team' %}">{{ "CREATE A TEAM" }}</a>
                         {% else %}
-                            <a href="{% url 'new_team' %}">{{ "CREATE A TEAM" }}</a>
+                            <a href="{% url 'team' %}?team={{ event.team.nickname }}">{{ event.team.nickname }}</a>
                         {% endif %}
                     </td>
                 </tr>
