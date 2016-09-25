@@ -45,6 +45,7 @@ class Team(models.Model):
     nickname = models.CharField(max_length=20, null=False, validators=[alphanumeric], unique=True)
     name = models.CharField(max_length=30, null=False, default='default', unique=True)
     event = models.ForeignKey(to=Event, to_field='code', null=False, blank=False)
+    individual = models.BooleanField(null=False, default=True)
     first_member = models.ForeignKey(to='people.User', to_field='username', null=False, related_name='team_first_member')
     second_member = models.ForeignKey(to='people.User', to_field='username', null=True, related_name='team_second_member')
 

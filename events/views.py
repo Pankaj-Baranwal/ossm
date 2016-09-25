@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 from django.views.generic import TemplateView
+from rest_framework import status
 from rest_framework import viewsets, mixins
 
 
@@ -63,7 +64,10 @@ def register_api(request, event_id: int):
     return JsonResponse(object(), status=201)
 
 
-class TeamApiViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+class TeamApiViewSet(mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     lookup_field = 'nickname'
@@ -79,6 +83,18 @@ class TeamApiViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Cr
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        if Team.objects.filter(Q(event__code=request.POST.get('event')) &
+                               (Q(first_member__username=request.user.username) |
+                                Q(second_member__username=request.user.username))):
+            return HttpResponseBadRequest('Already registered!')
+
+        serializer.save(owner=request.user)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class TeamView(TemplateView):
