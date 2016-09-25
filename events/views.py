@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, JsonResponse
+from django.db.models import Q
+from django.http import Http404, JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
@@ -9,11 +10,14 @@ from rest_framework import viewsets, mixins
 
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from events.forms import TeamForm
 from events.models import Event, Team
+from events.permissions import IsTeamMember
 from events.serializers import TeamSerializer
 from people.models import User
+from people.permissions import IsOwnerOrReadOnly
 
 
 @require_GET
@@ -63,7 +67,18 @@ class TeamApiViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Cr
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     lookup_field = 'nickname'
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, IsTeamMember, )
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.filter(Q(first_member=request.user.username) | Q(second_member=request.user.username)).all()
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class TeamView(TemplateView):
