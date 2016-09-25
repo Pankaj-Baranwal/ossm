@@ -7,7 +7,7 @@ class TeamForm(forms.ModelForm):
     event = forms.ModelChoiceField(Event.objects.filter(max_team_size__gt=1).all(), empty_label='(Nothing)')
 
     def __init__(self, *args, **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(*args, **kwargs)
         if 'instance' in kwargs:
             self.fields['event'].initial = kwargs.get('instance').event
 
