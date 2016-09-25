@@ -1,3 +1,4 @@
+from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404, JsonResponse, HttpResponseBadRequest
@@ -18,7 +19,6 @@ from events.models import Event, Team
 from events.permissions import IsTeamMember
 from events.serializers import TeamSerializer
 from people.models import User
-from people.permissions import IsOwnerOrReadOnly
 
 
 @require_GET
@@ -87,11 +87,20 @@ class TeamApiViewSet(mixins.ListModelMixin,
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        if Team.objects.filter(Q(event__code=request.POST.get('event')) &
+        if Team.objects.filter(Q(event__code=request.data.get('event')) &
                                (Q(first_member__username=request.user.username) |
-                                Q(second_member__username=request.user.username))):
+                                Q(second_member__username=request.user.username))).exists():
             return HttpResponseBadRequest('Already registered!')
-
+        if Event.objects.get(code=request.data.get('event')).max_team_size < 2 and\
+            not request.data.get('individual'):
+            return HttpResponseBadRequest('Only individuals allowed for this event!')
+        if request.data.get('event') in ['os'] and not SocialAccount.\
+                objects.\
+                filter(user=request.user).\
+                all().\
+                filter(provider='github').exists():
+            return HttpResponseBadRequest('GitHub account must be connected')
+        # TODO: Check if competitive programming website handle is registered for respective events
         serializer.save(owner=request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
