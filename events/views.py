@@ -72,11 +72,36 @@ class TeamView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return {
-            'form': self.form
+            'form': self.form,
+            'title': self.title
         }
 
     def get(self, request, *args, **kwargs):
         self.user = User.objects.get(username=request.user.username)
         self.form = TeamForm()
+        self.title = 'Create a team'
+        if 'team' in request.GET:
+            self.title = 'Edit team'
+            team = Team.objects.get(nickname=request.GET['team'])
+            if team and self.user in [team.first_member, team.second_member]:
+                self.form = TeamForm(instance=team)
+            else:
+                raise Http404('Team not found!')
         return super().get(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        if 'team' in request.GET:
+            team = Team.objects.get(nickname=request.GET['team'])
+            if team and self.user in [team.first_member, team.second_member]:
+                self.team = team
+                self.form = TeamForm(request.POST, instance=self.team)
+        else:
+            self.form = TeamForm(request.POST)
+        if self.form.is_valid():
+            self.form.save()
+        else:
+            return self.render_to_response(self.form.errors)
+        self.title = '%s // Team' % self.form.instance.nickname
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
