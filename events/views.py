@@ -13,12 +13,13 @@ from rest_framework import viewsets, mixins
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from events.forms import TeamForm
 from events.models import Event, Team
 from events.permissions import IsTeamMember
 from events.serializers import TeamSerializer
-from people.models import User
+from people.models import User, Contestant
 
 
 @require_GET
@@ -85,8 +86,6 @@ class TeamApiViewSet(mixins.ListModelMixin,
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
         if Team.objects.filter(Q(event__code=request.data.get('event')) &
                                (Q(first_member__username=request.user.username) |
                                 Q(second_member__username=request.user.username))).exists():
@@ -101,6 +100,12 @@ class TeamApiViewSet(mixins.ListModelMixin,
                 filter(provider='github').exists():
             return HttpResponseBadRequest('GitHub account must be connected')
         # TODO: Check if competitive programming website handle is registered for respective events
+        if request.data.get('event') in ['bi', 'es'] and \
+                Contestant.objects.get(user=request.user).hackerrank is None:
+            return HttpResponseBadRequest('Please add hackerrank username to your account for this event!')
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         serializer.save(owner=request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
@@ -145,3 +150,35 @@ class TeamView(TemplateView):
         self.title = '%s // Team' % self.form.instance.nickname
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
+
+
+class Register(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request, format=None):
+        event = request.POST.get('event')
+        user = User.objects.get(username=request.user.username)
+        if Team.objects.filter(Q(event__code=event) &
+                                Q(first_member__username=user.username)).exists():
+            return Response('Already registered!', status=202)
+        if request.POST.get('event') in ['os'] and not SocialAccount. \
+                objects. \
+                filter(user=user). \
+                all(). \
+                filter(provider='github').exists():
+            return HttpResponseBadRequest('ERR_GITHUB_NOT_CONNECTED')
+        if request.POST.get('event') in ['bi', 'es']:
+            contestant = Contestant.objects.get(user=user)
+            if contestant.hackerrank is None:
+                return HttpResponseBadRequest('ERR_HACKERRANK_NOT_CONNECTED')
+        team = Team()
+        team.first_member = user
+        team.second_member = None
+        team.individual = True
+        team.event = Event.objects.get(code=event)
+        team.nickname = '%s__%s' % (user.username, event)
+        team.name = '%s__%s' % (user.get_full_name(), event)
+        team.save()
+
+        return Response('SUCCESS_REGISTER', status=200)
+
