@@ -2,6 +2,7 @@
 
 {% load account %}
 {% load staticfiles %}
+{% load brunch %}
 
 {% block title %}Dashboard{% endblock %}
 
@@ -21,7 +22,7 @@
                     <td>{{ event.code }}</td>
                     <td>{{ event.name }}</td>
                     <td>
-                        <a href="{% url 'dashboard' %}">Register{% if event.registered %}ed{% endif %}</a>
+                        <button class="register-button" id="register-{{ event.code }}-button" data-event="{{ event.code }}">Register{% if event.registered %}ed{% endif %}</button>
                     </td>
                     <td>
                         {% if event.max_team_size == 1 %}
@@ -37,4 +38,8 @@
             </tbody>
         </table>
     </section>
+{% endblock %}
+
+{% block javascript %}
+    {{ 'people' | js_bundle }}
 {% endblock %}

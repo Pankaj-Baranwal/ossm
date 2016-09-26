@@ -1,5 +1,6 @@
 var $ = require('cash-dom');
-var west = require('reqwest');
+var request = require('mixins/request');
+var rivets = require('rivets');
 console.log('people scripts init');
 
 function resetButtons() {
@@ -45,3 +46,21 @@ $('#user-name-edit-button').on('click', function (e) {
 });
 
 resetButtons();
+
+$('.register-button').each(function (button) {
+    $(button).on('click', function () {
+        var eventCode = $(this).data('event');
+        request({
+            url: '../events/register/',
+            method: 'post',
+            data: {
+                event: eventCode
+            },
+            success: function (resp) {
+                if (this.status in [200, 201, 202]) {
+                    $(button).text('Registered');
+                }
+            }
+        });
+    });
+});
