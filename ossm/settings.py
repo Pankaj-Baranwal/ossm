@@ -11,7 +11,7 @@ PRODUCTION = 'PRODUCTION' in os.environ
 SECRET_KEY = '&p1c8n_y5efqa5(u9byuutsuj#bbc0$x=fdkcec+8gd45npup#'
 DEBUG = not PRODUCTION
 ALLOWED_HOSTS = ['*']
-INTERNAL_IPS = ['127.0.0.1',]
+INTERNAL_IPS = ['127.0.0.1', ]
 
 
 INSTALLED_APPS = [
@@ -62,6 +62,14 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     )
+}
+
+SWAGGER_SETTINGS = {
+    'JSON_EDITOR': True,
+    'APIS_SORTER': 'alpha',
+    'OPERATIONS_SORTER': 'method',
+    'SHOW_REQUEST_HEADERS': True,
+    'VALIDATOR_URL': None,
 }
 
 JWT_EXPIRATION_DELTA = 3000 if DEBUG else 86400
@@ -116,10 +124,10 @@ DATABASES = {
 
 if not DEBUG:
   AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
   ]
 
 SITE_ID = 1
@@ -173,7 +181,7 @@ if PRODUCTION or STAGING:
     SITE_URL = os.environ['HEROKU_URL']
     SECRET_KEY = os.environ['SECRET_KEY']
     ALLOWED_HOSTS = ['.herokuapp.com', SITE_URL, ('.%s' % SITE_URL)]
-    DATABASES = {'default': dj_database_url.config(),}
+    DATABASES = {'default': dj_database_url.config()}
 
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_BUCKET_NAME')
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load brunch %}
+
+
+{% block content %}
+  <div id='quake' class='quake'>
+    <span rv-></span>
+    <canvas></canvas>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  {{ 'ossm/quake' | style_bundle }}
+{% endblock %}
+
+{% block javascript %}
+  {{ 'ossm/quake' | js_bundle }}
+{% endblock %}

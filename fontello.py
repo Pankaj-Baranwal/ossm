@@ -6,6 +6,7 @@ from zipfile import ZipFile
 
 URL = 'http://fontello.com/'
 
+
 def fontello():
   with open('fontello.config.json', 'rb') as fl:
     resp = requests.post(URL, files=dict(config=fl))
