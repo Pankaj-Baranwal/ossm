@@ -1,6 +1,5 @@
 rivets = require 'rivets'
 
-
 class Terminal
   constructor: (container) ->
     @term =
@@ -8,7 +7,7 @@ class Terminal
       busy: no
       buffer: []
       input: ''
-      onToggle: => @term.visible = !@term.visible
+      onToggle: => @term.visible = not @term.visible
       onFocus: => if @term.visible then @_input_el.focus()
       onKeyUp: (e) =>
         if e.keyCode is 13 then @trigger()
