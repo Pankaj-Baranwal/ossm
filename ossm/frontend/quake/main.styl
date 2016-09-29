@@ -1,3 +1,4 @@
+@require 'frontend'
 
 .quake
   canvas
@@ -7,3 +8,12 @@
     height 100vh
     top 0
     left 0
+
+  #oat
+    position fixed
+    height 10px
+    transition .1s all linear
+    font-family type-mono
+
+    &.facing-left
+      transform scaleX(-1)

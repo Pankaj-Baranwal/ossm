@@ -1,61 +1,53 @@
 rivets = require 'rivets'
 mousetrap = require 'mousetrap'
 
-Isomer = require 'isomer'
-{Shape, Point, Color} = Isomer
-{Prism} = Shape
+rivets.binders['coor-*'] = (el, value) ->
+  prop = if @args[0] is 'x' then 'left' else 'top'
+  el.style.setProperty(prop, "#{value}px")
 
-blue = new Color 50, 60, 160
+class Oat
+  constructor: (el) ->
+    @el = el
+    @state =
+      cx: 0
+      cy: 100
+      fl: no
+      emote: ':)'
+    @_init_rv_binding()
+    @_init_key_binding()
+    @move 0
+
+  _init_rv_binding: ->
+    @_view = rivets.bind @el, @state
+
+  _init_key_binding: ->
+    mousetrap.bind ['left', 'a', 'h'], => @move -40
+    mousetrap.bind ['right', 'd', 'l'], => @move 30
+
+  getY: (x) -> if x > 200 then 200 else 100
+  getX: (dx) ->
+    dxi = @state.cx + dx
+    switch
+      when dxi < 10 then 10
+      when dxi > 400 then 400
+      else dxi
+  getEmote: ->
+    switch
+      when @state.cx < 10 then '⌐■ ⍘ ■ つ¤==>'
+      when @state.cx < 100 then '୧ᴗ ε ᴗ つ¤==>'
+      else '⸮> ∀ <?つ¤==>'
+
+  move: (dx) ->
+    @state.fl = dx < 0
+    @state.cx = @getX dx
+    @state.cy = @getY @state.cx
+    @state.emote = @getEmote()
+
 
 class Quake
   constructor: (container) ->
-    console.log Isomer
-    @MULTIPLIER = 10
-    @canvas =
-      character:
-        emotion: ':)'
-        coor_x: 0
-        left: no
+    @oat = new Oat container.querySelector '#oat'
 
-    mousetrap.bind ['left', 'a', 'h'], @getMotion(-1)
-    mousetrap.bind ['right', 'd', 'l'], @getMotion(1)
-
-    @_view = rivets.bind container, @canvas
-
-  getMotion: (direction) -> (e) =>
-    @canvas.character.coor_x += direction * @MULTIPLIER
-    console.log @canvas.character.coor_x
-
-
-class IsoQuake
-  constructor: (container) ->
-    @container = container
-    canvas = container.querySelector 'canvas'
-    canvas.height = @_h = 2 * window.innerHeight
-    canvas.width = @_w = 2 * window.innerWidth
-    @context = canvas.getContext('2d')
-    @iso = new Isomer canvas
-    @_state =
-      tile_count: 0
-      frame_ct: 0
-    window.requestAnimationFrame @stack_tiles
-
-  clear: ->
-    @context.clearRect(0, 0, @_w, @_h)
-
-  stack_tiles: =>
-    @clear()
-    for i in [0...@_state.tile_count + 1]
-      if i is @_state.tile_count
-        @_state.frame_ct += 1
-        @iso.add(Prism(Point(10 - i * 2, 0, 9 - @_state.frame_ct), 2, 2, .5))
-        if @_state.frame_ct is 10
-          @_state.frame_ct = 0
-          @_state.tile_count += 1
-      else
-        @iso.add(Prism(Point(10 - i * 2, 0, -1), 2, 2, .5))
-    if @_state.tile_count < 6
-      window.requestAnimationFrame @stack_tiles
 
 module.exports = ->
-  new IsoQuake document.getElementById 'quake'
+  new Quake document.getElementById 'quake'
