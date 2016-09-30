@@ -42,6 +42,7 @@
     "reqwest": "^2.0.5",
     "rivets": "^0.9.4",
     "stylus-brunch": "^2.7.2",
+    "svg.js": "^2.3.4",
     "uglify-js-brunch": "^2.0.1"
   },
   "devDependencies": {

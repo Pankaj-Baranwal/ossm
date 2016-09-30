@@ -17,6 +17,14 @@
     </form>
   </div>
 </section>
+<div id='quake' class='quake'>
+  <span id='oat'
+      rv-coor-x='cx'
+      rv-coor-y='cy'
+      rv-text='emote'
+      rv-class-facing-left='fl'></span>
+  <div id='woot'></div>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -43,8 +51,10 @@
 
 {% block styles %}
   {{ 'landing' | style_bundle }}
+  {{ 'ossm/quake' | style_bundle }}
 {% endblock %}
 
 {% block javascript %}
   {{ 'landing' | js_bundle }}
+  {{ 'ossm/quake' | js_bundle }}
 {% endblock %}
