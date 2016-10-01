@@ -1,6 +1,6 @@
 cash = require 'cash-dom'
 request = require 'mixins/request'
-terminal = require 'ossm/term'
+Terminal = require 'ossm/term'
 
 
 class Ossm
@@ -10,7 +10,7 @@ class Ossm
 
   attach_terminal: ->
     el = document.getElementById 'term'
-    new terminal(el)
+    new Terminal(el)
 
   attach_nav: ->
     cash('a[data-toggle]').on 'click', (e) ->

@@ -7,16 +7,28 @@
 {% block root-title %}Convoke 1.0{% endblock %}
 
 {% block hero-content %}
-<section class='hero'>
-  <div>
-    <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
-    <h2></h2>
-    <form id='subscription'>
-        <input type='email' name='email' placeholder='Subscribe' required>
-        <button type='submit'>Subscribe</button>
-    </form>
-  </div>
-</section>
+<div role='slides'>
+  <section class='hero'>
+    <div class='logo'>
+      <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
+    </div>
+  </section>
+  <section>
+    <div id='datacenter' class='backdrop'></div>
+  </section>
+  <div id='woot' class='backdrop'></div>
+</div>
+<div role='nav'>
+  <button class='right'><i class='icon icon-angle-right'></i></button>
+  <button class='left'><i class='icon icon-angle-left'></i></button>
+</div>
+<div id='quake' class='quake'>
+  <span id='oat'
+      rv-coor-x='cx'
+      rv-coor-y='cy'
+      rv-text='emote'
+      rv-class-facing-left='fl'></span>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -43,8 +55,10 @@
 
 {% block styles %}
   {{ 'landing' | style_bundle }}
+  {{ 'ossm/quake' | style_bundle }}
 {% endblock %}
 
 {% block javascript %}
   {{ 'landing' | js_bundle }}
+  {{ 'ossm/quake' | js_bundle }}
 {% endblock %}

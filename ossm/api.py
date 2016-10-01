@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
 
 from .social_rest_auth import FacebookLogin, GoogleLogin
+from .schema_renderer import MyAPIRenderer
 
 
 class APIRoot(object):
@@ -17,8 +18,8 @@ class APIRoot(object):
     def get_urls(self):
         urls = []
         for router in self.routes:
-            for url in router.urls:
-                urls.append(url)
+            for u in router.urls:
+                urls.append(u)
         return urls
 
 api_root = APIRoot()
@@ -30,9 +31,9 @@ for app in settings.INSTALLED_APPS:
         pass
 
 @api_view()
-@renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
+@renderer_classes([MyAPIRenderer, SwaggerUIRenderer])
 def schema_view(request):
-    generator = schemas.SchemaGenerator()
+    generator = schemas.SchemaGenerator(title='OSSM API')
     return response.Response(generator.get_schema(request=request))
 
 
