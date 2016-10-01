@@ -5,5 +5,5 @@ from people import views
 
 urlpatterns = [
     url(r'^profile/$', views.Profile.as_view(), name='profile'),
-    url(r'^$', views.dashboard, name='dashboard'),
+    url(r'^$', views.Dashboard.as_view(), name='dashboard'),
 ]

@@ -3,19 +3,36 @@
 body
   > header
     position relative
-    nav
-      display none
-    .hero
-      height 100vh
-      background url('{!static!}/img/splash.jpg') no-repeat center center
+    overflow hidden
+    // nav
+    //   display none
 
-      div
-        vertically-align()
+    > section
+      height 100vh
+      width 100vw
+      flex-shrink 0
+      flex-grow 0
+      position relative
+
+
+    section.hero
+      .logo
+        position absolute
+        right 10%
+        top 10%
+        height 30vw
+        width 30vw
+        display flex
+        background url('{!static!}/img/rad/radiation.png') no-repeat center center
+        background-size cover
+        align-items center
+        justify-content center
 
       h2, h1
         margin 0
         position relative
         display inline
+
       @media(max-width 768px)
         abbr
           top 100%
@@ -26,7 +43,7 @@ body
         margin-top 50px
 
         @media(max-width 768px)
-          max-width (768px * 0.8) * 0.4
+          max-width (768px * .8) * .4
 
         input
           display block
@@ -37,10 +54,39 @@ body
         max-height 40px
         max-width 100%
 
+    .backdrop
+      height 100%
+      z-index 2
+    #woot
+      width 100vw * 4
+      z-index 0
+      top 0
+      position absolute
+
+    div[role='nav']
+      button
+        position fixed
+        top 50vh
+        z-index 90
+        padding 20px 2px
+        font-size 2em
+        transform translateY(-50%)
+        background transparent
+        &:hover
+          background alpha($white, .2)
+      button.left
+        left 0
+      button.right
+        right 0
+
   > main
     display none
 
   > footer
+    position fixed
+    bottom 0
+    left 0
+    right 0
     background lighten($prussian-blue, 20%)
     color $primary-text
     .contact
@@ -49,3 +95,41 @@ body
       padding 10px 0
       img
         height 60px
+
+div[role='slides']
+  overflow hidden
+  width 6 * 100vw
+  margin-left 0
+  height 100vh
+  transition margin-left .5s cubic-bezier(0.175, 0.885, 0.32, 1.1)
+  background url('{!static!}/img/spacey.png') repeat
+  factr = .5 + .2
+  background-size (758px * factr) (395px * factr)
+  position relative
+  section
+    width 100vw
+    height 100vh
+    flex-grow 1
+    flex-shrink 0
+    position relative
+    display inline-block
+
+svg
+  .servers-block-led
+    fill red
+
+.event-content
+  position absolute
+  top 0
+  right 0
+  width 500px
+  height 500px
+  margin-top 100px
+  margin-right 100px
+
+  > ul
+    > li
+      padding 10px
+
+    display inline-flex
+    list-style-type none
