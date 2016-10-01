@@ -1,7 +1,11 @@
+import json
+
+import os
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404, JsonResponse, HttpResponseBadRequest
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
@@ -20,6 +24,13 @@ from events.models import Event, Team
 from events.permissions import IsTeamMember
 from events.serializers import TeamSerializer
 from people.models import User, Contestant
+from ossm.settings import BASE_DIR
+
+
+def events(request):
+    with open(os.path.join(BASE_DIR, 'events', 'events.json')) as data_file:
+        data = json.load(data_file)
+    return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 @require_GET

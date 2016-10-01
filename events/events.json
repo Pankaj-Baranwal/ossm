@@ -1,0 +1,86 @@
+[
+  {
+    "id": 0,
+    "code": "  ",
+    "title": "XOXOXO",
+    "image_url": "http://ossm.s3.amazonaws.com/event_{event_code}.png",
+    "start_time": 1475313273,
+    "end_time": 1475313273,
+    "prizes": [
+      10000,
+      5000,
+      3000
+    ],
+    "min_team_size": 2,
+    "max_team_size": 1,
+    "contact": "{event_code}+info@convoke.io",
+    "details": {
+      "description" : "The event involves contributing to open source projects undertaken by the students of Cluster Innovation Center. Here, we would stress upon the participant's skills in open source development and his/her understanding of a new project through its documentation.",
+      "prelims": "Long text",
+      "mains": "long text"
+    }
+  },
+  {
+    "id": 0,
+    "code": "  ",
+    "title": "XOXOXO",
+    "image_url": "http://ossm.s3.amazonaws.com/event_{event_code}.png",
+    "start_time": 1475313273,
+    "end_time": 1475313273,
+    "prizes": [
+      10000,
+      5000,
+      3000
+    ],
+    "min_team_size": 2,
+    "max_team_size": 1,
+    "contact": "{event_code}+info@convoke.io",
+    "details": {
+      "description" : "The event involves contributing to open source projects undertaken by the students of Cluster Innovation Center. Here, we would stress upon the participant's skills in open source development and his/her understanding of a new project through its documentation.",
+      "prelims": "Long text",
+      "mains": "long text"
+    }
+  },
+  {
+    "id": 0,
+    "code": "  ",
+    "title": "XOXOXO",
+    "image_url": "http://ossm.s3.amazonaws.com/event_{event_code}.png",
+    "start_time": 1475313273,
+    "end_time": 1475313273,
+    "prizes": [
+      10000,
+      5000,
+      3000
+    ],
+    "min_team_size": 2,
+    "max_team_size": 1,
+    "contact": "{event_code}+info@convoke.io",
+    "details": {
+      "description" : "The event involves contributing to open source projects undertaken by the students of Cluster Innovation Center. Here, we would stress upon the participant's skills in open source development and his/her understanding of a new project through its documentation.",
+      "prelims": "Long text",
+      "mains": "long text"
+    }
+  },
+  {
+    "id": 0,
+    "code": "  ",
+    "title": "XOXOXO",
+    "image_url": "http://ossm.s3.amazonaws.com/event_{event_code}.png",
+    "start_time": 1475313273,
+    "end_time": 1475313273,
+    "prizes": [
+      10000,
+      5000,
+      3000
+    ],
+    "min_team_size": 2,
+    "max_team_size": 1,
+    "contact": "{event_code}+info@convoke.io",
+    "details": {
+      "description" : "The event involves contributing to open source projects undertaken by the students of Cluster Innovation Center. Here, we would stress upon the participant's skills in open source development and his/her understanding of a new project through its documentation.",
+      "prelims": "Long text",
+      "mains": "long text"
+    }
+  }
+]
