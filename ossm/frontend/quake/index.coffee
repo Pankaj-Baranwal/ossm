@@ -51,9 +51,12 @@ class Oat
 
 
 class Woot
-  constructor: (container) ->
+  constructor: ->
     @_sprites = {}
-    @svg = new svg container.querySelector '#woot'
+    @svg = new svg document.getElementById 'woot'
+    @_vp =
+      h: window.innerHeight
+      w: window.innerWidth
     @_init_()
 
   _init_: ->
@@ -64,9 +67,9 @@ class Woot
         path = @svg.path node.path
         path.node.id = node.id
         defs.add path
-      @draw(100, 250, '#14213D', 1)
-      @draw(50, 150, '#003459')
-      @draw(0, 70, '#2A9D8F')
+      #@draw(80, 250, '#14213D', 1)
+      #@draw(60, 150, '#003459')
+      @draw(0, 60, '#2A9D8F')
       @draw()
 
   draw: (x = 0, y = 0, fill = '#007EA7', scale = 1) ->
@@ -76,25 +79,28 @@ class Woot
     # [CS1, CL1, CS3, CL3] >=> [R1, R2]
     # [CS2, CL2, CS4, CL4] >=> [CS1, CS2, CL1, CL2, R3, R4]
     ###
-    group = @svg.group().move(x, y).fill(fill).scale(scale)
+    group = @svg.group().move(x, y + (@_vp.h - 450)).fill(fill).scale(.8)
     w_l = 0
     e_l = null
-    for i in [0..20]
+    s_count = ~~(@_vp.w * 4 / 80)
+    console.log s_count
+    for i in [0..s_count]
       elid = null
       if i is 0
         elid = _sample ['L3', 'L4']
-      else if i is 19
+      else if i is s_count - 1
         elid = _sample ['R3', 'R4']
       else
         #if e_l in ['CS2', 'CL2', 'CS4', 'CL4'] or e_l.startsWith 'L'
         elid = _sample ['CS1', 'CS2', 'CL1', 'CL2']
       e_l = elid
-      el = svg.get elid
+      el = svg.get(elid)
       shape = @svg.use(el)
         .move w_l, _random(-20, 20)
+        .scale 1.01
       group.add shape
       w_l += el.width()
-    mask = @svg.rect(2000, 800).move(0, 140).fill('#fff')
+    mask = @svg.rect(@_vp.w * 5, 800).move(0, 200).fill('#fff')
     group.clipWith mask
 
 
@@ -106,4 +112,4 @@ class Quake
 module.exports = ->
   quaker = document.getElementById 'quake'
   new Quake quaker
-  new Woot quaker
+  new Woot

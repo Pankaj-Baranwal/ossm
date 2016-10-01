@@ -8,14 +8,11 @@
 
 {% block hero-content %}
 <section class='hero'>
-  <div>
+  <div class='logo'>
     <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
-    <h2></h2>
-    <form id='subscription'>
-        <input type='email' name='email' placeholder='Subscribe' required>
-        <button type='submit'>Subscribe</button>
-    </form>
   </div>
+</section>
+<section>
 </section>
 <div id='quake' class='quake'>
   <span id='oat'
@@ -23,8 +20,8 @@
       rv-coor-y='cy'
       rv-text='emote'
       rv-class-facing-left='fl'></span>
-  <div id='woot'></div>
 </div>
+<div id='woot'></div>
 {% endblock %}
 
 {% block content %}

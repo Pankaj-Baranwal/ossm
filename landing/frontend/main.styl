@@ -2,22 +2,46 @@
 
 body
   > header
+    background url('{!static!}/img/spacey.png') repeat
+    factr = .5 + .2
+    background-size (758px * factr) (395px * factr)
     position relative
+    display flex
+    width 100vw
+    overflow hidden
     nav
       display none
-    .hero
-      height 100vh
-      background url('{!static!}/img/spacey.png') repeat
-      factr = .5 + .2
-      background-size (758px * factr) (395px * factr)
 
-      div
-        vertically-align()
+    > section
+      height 100vh
+      width 100vw
+      flex-shrink 0
+      flex-grow 0
+      position relative
+
+    section.hero
+      height 100vh
+
+      > div
+        width 100%
+
+      .logo
+        position absolute
+        right 10%
+        top 10%
+        height 30vw
+        width 30vw
+        display flex
+        background url('{!static!}/img/rad/radiation.png') no-repeat center center
+        background-size cover
+        align-items center
+        justify-content center
 
       h2, h1
         margin 0
         position relative
         display inline
+
       @media(max-width 768px)
         abbr
           top 100%
@@ -38,6 +62,11 @@ body
       img
         max-height 40px
         max-width 100%
+
+    #woot
+      height 100vh
+      width 100vw * 4
+      position absolute
 
   > main
     margin-top 0
