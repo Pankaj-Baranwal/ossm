@@ -51,26 +51,28 @@ class Oat
 
 
 class Woot
+  access_uri: '/static/img/rad/woot.json'
+  element_id: 'woot'
+
   constructor: ->
     @_sprites = {}
-    @svg = new svg document.getElementById 'woot'
+    @svg = new svg document.getElementById @element_id
     @_vp =
       h: window.innerHeight
       w: window.innerWidth
     @_init_()
 
   _init_: ->
-    request(url: '/static/img/rad/woot.json')
-    .then (dat) =>
-      defs = @svg.defs()
-      dat.map (node) =>
-        path = @svg.path node.path
-        path.node.id = node.id
-        defs.add path
-      #@draw(80, 250, '#14213D', 1)
-      #@draw(60, 150, '#003459')
-      @draw(0, 60, '#2A9D8F')
-      @draw()
+    request(url: @access_uri).then (dat) => @routine(dat)
+
+  routine: (dat) ->
+    defs = @svg.defs()
+    dat.map (node) =>
+      path = @svg.path node.path
+      path.node.id = node.id
+      defs.add path
+    @draw(0, 60, '#2A9D8F')
+    @draw()
 
   draw: (x = 0, y = 0, fill = '#007EA7', scale = 1) ->
     ###
@@ -83,7 +85,6 @@ class Woot
     w_l = 0
     e_l = null
     s_count = ~~(@_vp.w * 4 / 80)
-    console.log s_count
     for i in [0..s_count]
       elid = null
       if i is 0
@@ -104,6 +105,53 @@ class Woot
     group.clipWith mask
 
 
+class Servers extends Woot
+  access_uri: '/static/img/rad/servers.json'
+  element_id: 'datacenter'
+
+  constructor: ->
+    super()
+    {width, height} = @svg.node.getBoundingClientRect()
+    @_vp.cw = width
+    @_vp.ch = height
+
+  routine: (data) =>
+    defs = @svg.defs()
+    for k, v of data
+      defs.svg(v)
+    @draw_racks()
+    @draw_comp()
+    @draw_blocks()
+
+  draw_comp: ->
+    master = @svg.group()
+    comp = @svg.use(svg.get 'master')
+    master.add(comp).center(@_vp.cw / 2, @_vp.ch / 2)
+
+  draw_racks: ->
+    racks = @svg.group()
+    for i in [0...2]
+      for j in [0...10]
+        rack = @svg.use(svg.get 'rack')
+          .move(140 * i, 30 * j)
+          .scale(.2)
+        racks.add rack
+    {width, height} = racks.node.getBoundingClientRect()
+    racks.move(0 - width, @_vp.ch - (height + 200))
+
+  draw_blocks: ->
+    blocks = @svg.group().move(100, 10)
+    for i in [0...4]
+      for j in [0...5]
+        block = @svg.use(svg.get 'block')
+          .scale(.3)
+          .translate(130 * i, 20 * j)
+        blocks.add block
+    {width, height} = blocks.node.getBoundingClientRect()
+    rect = @svg.rect(width, height).fill('#555572')
+    blocks.add(rect).move(@_vp.cw - width, @_vp.ch - (height + 200))
+    rect.scale(1.05, 1.1).back()
+
 class Quake
   constructor: (container) ->
     @oat = new Oat container.querySelector '#oat'
@@ -112,4 +160,5 @@ class Quake
 module.exports = ->
   quaker = document.getElementById 'quake'
   new Quake quaker
-  new Woot
+  new Woot()
+  new Servers()

@@ -63,10 +63,29 @@ body
         max-height 40px
         max-width 100%
 
-    #woot
+    .backdrop
       height 100vh
+      z-index 1
+    #woot
       width 100vw * 4
+      z-index 0
       position absolute
+
+    div[role='nav']
+      button
+        position fixed
+        top 50vh
+        z-index 90
+        padding 20px 2px
+        font-size 2em
+        transform translateY(-50%)
+        background transparent
+        &:hover
+          background alpha($white, .2)
+      button.left
+        left 0
+      button.right
+        right 0
 
   > main
     margin-top 0
@@ -80,3 +99,7 @@ body
       padding 10px 0
       img
         height 60px
+
+svg
+  .servers-block-led
+    fill red
