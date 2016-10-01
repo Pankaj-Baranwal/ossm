@@ -7,14 +7,17 @@
 {% block root-title %}Convoke 1.0{% endblock %}
 
 {% block hero-content %}
-<section class='hero'>
-  <div class='logo'>
-    <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
-  </div>
-</section>
-<section>
-  <div id='datacenter' class='backdrop'></div>
-</section>
+<div role='slides'>
+  <section class='hero'>
+    <div class='logo'>
+      <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
+    </div>
+  </section>
+  <section>
+    <div id='datacenter' class='backdrop'></div>
+  </section>
+  <div id='woot' class='backdrop'></div>
+</div>
 <div role='nav'>
   <button class='right'><i class='icon icon-angle-right'></i></button>
   <button class='left'><i class='icon icon-angle-left'></i></button>
@@ -26,7 +29,6 @@
       rv-text='emote'
       rv-class-facing-left='fl'></span>
 </div>
-<div id='woot' class='backdrop'></div>
 {% endblock %}
 
 {% block content %}

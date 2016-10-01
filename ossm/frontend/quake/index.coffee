@@ -2,6 +2,7 @@ rivets = require 'rivets'
 mousetrap = require 'mousetrap'
 request = require 'mixins/request'
 svg = require 'svg.js'
+cash = require 'cash-dom'
 
 _sample = require 'lodash/sample'
 _random = require 'lodash/random'
@@ -30,12 +31,12 @@ class Oat
     mousetrap.bind ['left', 'a', 'h'], => @move -40
     mousetrap.bind ['right', 'd', 'l'], => @move 30
 
-  getY: (x) -> if x > 200 then 200 else 100
+  getY: (x) -> 500
   getX: (dx) ->
     dxi = @state.cx + dx
     switch
       when dxi < 10 then 10
-      when dxi > 400 then 400
+      when dxi > 900 then 400
       else dxi
   getEmote: ->
     switch
@@ -157,8 +158,29 @@ class Quake
     @oat = new Oat container.querySelector '#oat'
 
 
+class Slides
+  constructor: ->
+    @slide_nb = 0
+    @_vw = window.innerWidth
+    @container = cash('div[role="slides"]')
+    @_init_nav_handlers_()
+
+  _activate_slide: (nb) ->
+    if nb < 0 then return
+    margin = nb * @_vw
+    @container.css('margin-left', "-#{margin}px")
+    @slide_nb = nb
+
+  _init_nav_handlers_: ->
+    cash('div[role="nav"] button').on 'click', (el) =>
+      switch el.currentTarget.className
+        when 'left' then @_activate_slide @slide_nb - 1
+        when 'right' then @_activate_slide @slide_nb + 1
+
+
 module.exports = ->
   quaker = document.getElementById 'quake'
   new Quake quaker
   new Woot()
   new Servers()
+  new Slides()
