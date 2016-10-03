@@ -167,18 +167,18 @@ class Register(APIView):
     permission_classes = (IsAuthenticated, )
 
     def post(self, request, format=None):
-        event = request.POST.get('event')
+        event = request.data.get('event')
         user = User.objects.get(username=request.user.username)
         if Team.objects.filter(Q(event__code=event) &
                                 Q(first_member__username=user.username)).exists():
             return Response('Already registered!', status=202)
-        if request.POST.get('event') in ['os'] and not SocialAccount. \
+        if request.data.get('event') in ['os'] and not SocialAccount. \
                 objects. \
                 filter(user=user). \
                 all(). \
                 filter(provider='github').exists():
             return HttpResponseBadRequest('ERR_GITHUB_NOT_CONNECTED')
-        if request.POST.get('event') in ['bi', 'es']:
+        if request.data.get('event') in ['bi', 'es']:
             contestant = Contestant.objects.get(user=user)
             if contestant.hackerrank is None:
                 return HttpResponseBadRequest('ERR_HACKERRANK_NOT_CONNECTED')

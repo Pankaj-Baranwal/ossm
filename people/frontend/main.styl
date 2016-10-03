@@ -1,0 +1,44 @@
+@require 'frontend'
+
+
+ul.event-stack
+  reset-list()
+
+  li
+    margin 0 -10px 20px
+    padding 10px
+    border-radius 3px
+    display flex
+
+    bgs = #2A9D8F #E9C46A #F4A261 #9BC53D #E76F51 #5BC0EB
+    for bg, ix in bgs
+      &:nth-of-type({ix + 1})
+        background tint(bg, 60%)
+
+        button
+          background-color shade(bg, 10%)
+
+        img
+          box-shadow 0 0 20px 0 alpha(bg, .8)
+
+    img
+      flex-shrink 0
+      height 80px
+      width 80px
+      margin 5px 10px 0 0
+      border-radius 3px
+
+    h3
+      margin 0
+      small
+        font-family type-mono
+        text-transform uppercase
+        margin-left 5px
+        background alpha($black, .1)
+        padding 2px 10px
+        border-radius 2px
+        color tint($black, 20%)
+        display inline-block
+    p
+      margin 0 0 10px
+      font-family type-mono

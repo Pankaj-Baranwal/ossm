@@ -39,6 +39,9 @@ class Event(models.Model):
         else:
             self.team = None
 
+    def __str__(self):
+        return '{} [{}]'.format(self.name, self.code)
+
 
 class Team(models.Model):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')

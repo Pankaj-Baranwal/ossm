@@ -7,39 +7,32 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-    <section>
-        <h2>Dashboard!</h2>
-        <table>
-            <thead>
-                <th>Event Code</th>
-                <th>Event Name</th>
-                <th>Registered</th>
-                <th>Team</th>
-            </thead>
-            <tbody>
-            {% for event in events %}
-                <tr>
-                    <td>{{ event.code }}</td>
-                    <td>{{ event.name }}</td>
-                    <td>
-                        <button class="register-button" id="register-{{ event.code }}-button" data-event="{{ event.code }}">Register{% if event.registered %}ed{% endif %}</button>
-                    </td>
-                    <td>
-                        {% if event.max_team_size == 1 %}
-                            NA
-                        {% elif event.team == None %}
-                            <a href="{% url 'team' %}">{{ "CREATE A TEAM" }}</a>
-                        {% else %}
-                            <a href="{% url 'team' %}?team={{ event.team.nickname }}">{{ event.team.nickname }}</a>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </section>
+  <section>
+    <h2>Dashboard!</h2>
+    <ul class='event-stack'>
+    {% for event in events %}
+      <li>
+        <img src='https://unsplash.it/80/?random&{{ event.code }}'>
+        <div>
+          <h3>{{ event.name }}
+            <small>{{ event.code }}</small>
+          </h3>
+
+          <p>{{ event.description }}</p>
+          <button class='register' data-event='{{ event.code }}'>
+            Register{% if event.registered %}ed{% endif %}
+          </button>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
 {% endblock %}
 
 {% block javascript %}
-    {{ 'people' | js_bundle }}
+  {{ 'people' | js_bundle }}
+{% endblock %}
+
+{% block styles %}
+  {{ 'people' | style_bundle }}
 {% endblock %}

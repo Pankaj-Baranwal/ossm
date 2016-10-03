@@ -36,31 +36,31 @@ function updateName() {
     $('#user-name-cancel-button').removeAttr('disabled', 'disabled');
 }
 
-$('#user-name-edit-button').on('click', function (e) {
-    $('form').find('input').removeAttr('disabled');
-    $('#user-name-edit-button').css('visibility', 'collapse');
-    $('#user-name-update-button').css('visibility', 'visible');
-    // $('#user-name-update-button').on('click', updateName);
-    $('#user-name-cancel-button').css('visibility', 'visible');
-    $('#user-name-cancel-button').on('click', resetButtons);
-});
+// $('#user-name-edit-button').on('click', function (e) {
+//     $('form').find('input').removeAttr('disabled');
+//     $('#user-name-edit-button').css('visibility', 'collapse');
+//     $('#user-name-update-button').css('visibility', 'visible');
+//     // $('#user-name-update-button').on('click', updateName);
+//     $('#user-name-cancel-button').css('visibility', 'visible');
+//     $('#user-name-cancel-button').on('click', resetButtons);
+// });
 
-resetButtons();
-
-$('.register-button').each(function (button) {
-    $(button).on('click', function () {
-        var eventCode = $(this).data('event');
-        request({
-            url: '../events/register/',
-            method: 'post',
-            data: {
-                event: eventCode
-            },
-            success: function (resp) {
-                if (this.status in [200, 201, 202]) {
-                    $(button).text('Registered');
+module.exports = function () {
+    $('button.register').each(function (button) {
+        $(button).on('click', function () {
+            var eventCode = $(this).data('event');
+            request({
+                url: '../events/register/',
+                method: 'post',
+                data: {
+                    event: eventCode
+                },
+                success: function (resp) {
+                    if (this.status in [200, 201, 202]) {
+                        $(button).text('Registered');
+                    }
                 }
-            }
+            });
         });
     });
-});
+};
