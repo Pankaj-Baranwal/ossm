@@ -1,0 +1,10 @@
+/**
+ * @description general purpose animation mixin
+ * @params {unit} [$duration] total length of time animation should take
+ * @params {number} [$times] number of times to repeat animation
+ * @params {literal} [$fill] fill mode to use
+ */
+animation( $duration = 1s, $times = 1, $fill = both )
+  animation-duration: $duration
+  animation-fill-mode: $fill
+  animation-iteration-count: $times

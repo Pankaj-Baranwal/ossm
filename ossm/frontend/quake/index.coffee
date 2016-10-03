@@ -13,16 +13,22 @@ rivets.binders['coor-*'] = (el, value) ->
   el.style.setProperty(prop, "#{value}px")
 
 class Oat
-  constructor: (el) ->
-    @el = el
+  constructor: (slides) ->
+    @el = document.getElementById 'oat'
     @state =
       cx: 0
       cy: 100
       fl: no
       emote: ':)'
+    @slides = slides
     @_init_rv_binding()
     @_init_key_binding()
     @move 0
+    @slides._callback = (nb, lt) =>
+      @state.cx = if lt
+        @slides._vw * (nb + 1) - 50
+      else
+        @slides._vw * nb
 
   _init_rv_binding: ->
     @_view = rivets.bind @el, @state
@@ -36,7 +42,6 @@ class Oat
     dxi = @state.cx + dx
     switch
       when dxi < 10 then 10
-      when dxi > 900 then 400
       else dxi
   getEmote: ->
     switch
@@ -49,6 +54,7 @@ class Oat
     @state.cx = @getX dx
     @state.cy = @getY @state.cx
     @state.emote = @getEmote()
+    @slides._activate_slide ~~(@state.cx / @slides._vw)
 
 
 class Woot
@@ -160,16 +166,26 @@ class Quake
 
 class Slides
   constructor: ->
-    @slide_nb = 0
+    @slide_nb = null
     @_vw = window.innerWidth
     @container = cash('div[role="slides"]')
     @_init_nav_handlers_()
+    @_callback = null
+    @_activate_slide(0)
 
   _activate_slide: (nb) ->
-    if nb < 0 then return
+    if nb < 0 or @slide_nb is nb then return
+    lt = @slide_nb > nb
     margin = nb * @_vw
     @container.css('margin-left', "-#{margin}px")
+    @container.css('background-position', "-#{margin / 4}px 0")
     @slide_nb = nb
+
+    children = @container.children('section')
+    children.removeClass('active')
+    cash(children.get(nb)).addClass('active')
+
+    @_callback?(nb, lt)
 
   _init_nav_handlers_: ->
     cash('div[role="nav"] button').on 'click', (el) =>
@@ -179,8 +195,7 @@ class Slides
 
 
 module.exports = ->
-  quaker = document.getElementById 'quake'
-  new Quake quaker
+  slides = new Slides()
+  oat = new Oat(slides)
   new Woot()
   new Servers()
-  new Slides()

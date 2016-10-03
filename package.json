@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/clusterinnovationcentre/ossm#readme",
   "dependencies": {
+    "animate.css": "^3.5.2",
     "auto-reload-brunch": "^2.7.1",
     "autoprefixer": "^6.4.1",
     "axis": "^0.6.1",

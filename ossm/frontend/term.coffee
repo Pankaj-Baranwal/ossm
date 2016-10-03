@@ -15,8 +15,6 @@ class Terminal
     @_input_el = container.querySelector('input')
     @_view = rivets.bind container, @term
 
-    @term.visible = /^\/$/.test window.location.pathname
-
   trigger: ->
     varg = @term.input
     @term.busy = yes
