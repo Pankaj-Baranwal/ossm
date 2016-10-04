@@ -105,14 +105,7 @@ class Isometric {
 }
 
 
-module.exports = selector => {
-  const canvas = document.querySelector(selector),
-        context = canvas.getContext("2d"),
-        width = window.innerWidth * 2,
-        height = window.innerHeight * 2;
-  canvas.width = width
-  canvas.height = height
-
+module.exports = (context, width, height) => {
   let isocontext = new Isometric(context);
   isocontext.scale3d(100, 100, 100);
 

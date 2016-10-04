@@ -1,19 +1,10 @@
 const d3 = require('d3')
 
-module.exports = selector => {
-
-  const canvas = document.querySelector(selector),
-        context = canvas.getContext("2d"),
-        width = window.innerWidth * 2,
-        height = window.innerHeight * 2;
-  canvas.width = width
-  canvas.height = height
-
+module.exports = (context, width, height) => {
   const N = 1 << 0,
         S = 1 << 1,
         W = 1 << 2,
         E = 1 << 3;
-
 
   const cellSize = 1,
         cellSpacing = 60,
