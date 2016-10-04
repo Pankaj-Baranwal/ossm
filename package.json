@@ -31,6 +31,7 @@
     "coffee-react-transform": "^4.0.0",
     "coffee-script-brunch": "^2.0.0",
     "css-brunch": "^2.6.1",
+    "d3": "^4.2.6",
     "isomer": "^0.2.6",
     "javascript-brunch": "^2.0.0",
     "jeet": "^6.1.4",

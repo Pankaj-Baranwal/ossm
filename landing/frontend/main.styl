@@ -1,10 +1,12 @@
 @require 'frontend'
 @require 'frontend/animate/fading_entrances/fadeInDown'
+@require 'frontend/animate/fading_entrances/fadeInUp'
 
 body
   > header
     position relative
     overflow hidden
+    background $rich-black
     // nav
     //   display none
 
@@ -59,12 +61,6 @@ body
       z-index 2
       perspective 200px
 
-    #woot
-      width 100vw * 6
-      z-index 0
-      top 0
-      position absolute
-
     div[role='nav']
       button
         position fixed
@@ -91,6 +87,7 @@ body
     right 0
     background lighten($prussian-blue, 20%)
     color $primary-text
+    z-index 2
     .contact
       display none
     .info
@@ -104,7 +101,7 @@ div[role='slides']
   margin-left 0
   height 100vh
   transition all .5s cubic-bezier(.175, .685, .32, 1)
-  background url('{!static!}/img/spacey.png') repeat fixed
+  // background url('{!static!}/img/spacey.png') repeat fixed
   factr = .5 + .2
   background-size (758px * factr) (395px * factr)
   background-position 0 0
@@ -116,10 +113,19 @@ div[role='slides']
     flex-shrink 0
     position relative
     display inline-block
+    z-index 1
 
     &.active
       .event-content
         animation fadeInDown .5s
+
+    canvas
+      position absolute
+      top 0
+      left 0
+      z-index -1
+      width 100vw
+      height 100vh
 
 svg
   .servers-block-led
