@@ -105,7 +105,7 @@ class Isometric {
 }
 
 
-module.exports = function(selector) {
+module.exports = selector => {
   const canvas = document.querySelector(selector),
         context = canvas.getContext("2d"),
         width = window.innerWidth * 2,
