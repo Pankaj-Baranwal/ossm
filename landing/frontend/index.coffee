@@ -3,17 +3,22 @@ request = require('mixins/request')
 isometric = require 'landing/isometric'
 maze = require 'landing/maze'
 swarm = require 'landing/swarm'
+hexbin = require 'landing/hexbin'
 
 
 module.exports = ->
-  width = window.innerWidth * 2
-  height = window.innerHeight * 2
+  [width, height] = [window.innerWidth, window.innerHeight]
+  [width2x, height2x] = (x * 2 for x in [width, height])
+
   canvas = document.querySelector '#isoslide'
-  canvas.width = width
-  canvas.height = height
+  svg = document.querySelector '#hexslide'
+
+  canvas.width = width2x
+  canvas.height = height2x
 
   context = canvas.getContext('2d')
 
-  # isometric context, width, height
-  # maze context, width, height
-  swarm context, width, height
+  # isometric context, width2x, height2x
+  # maze context, width2x, height2x
+  # swarm context, width2x, height2x
+  hexbin svg, width, height
