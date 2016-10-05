@@ -107,14 +107,14 @@ class Isometric {
 
 module.exports = (context, width, height) => {
   let isocontext = new Isometric(context);
-  isocontext.scale3d(100, 100, 100);
+  isocontext.scale3d(100, 800, 100);
 
   const timer = d3.timer(function(elapsed) {
     context.save();
     context.clearRect(0, 0, width, height);
-    context.fillStyle = "#003459";
-    context.strokeStyle = "#000";
-    context.translate(width / 2, height * 0.6);
+    context.fillStyle = "#051923";
+    context.strokeStyle = "#2A9D8F";
+    // context.translate(width / 2, height * 0.6);
     for (let x = 14, d, t = (elapsed / 5000) % 1; x >= -14; --x) {
       for (let y = 14; y >= -14; --y) {
         if ((d = distanceManhattan(x, y)) > 15) {
@@ -125,7 +125,7 @@ module.exports = (context, width, height) => {
       }
     }
     context.restore();
-    if (elapsed > 5000) {
+    if (elapsed > 3000) {
       timer.stop();
     }
   });
@@ -153,7 +153,7 @@ module.exports = (context, width, height) => {
     isocontext.lineTo(+0.5, -0.5, -0.5);
     isocontext.closePath();
     context.fill();
-    context.lineWidth = 1.5;
+    context.lineWidth = 2;
     context.stroke();
 
     context.beginPath();
@@ -163,9 +163,11 @@ module.exports = (context, width, height) => {
     isocontext.lineTo(-0.5, +0.5, +0.5);
     isocontext.moveTo(-0.5, -0.5, +0.5);
     isocontext.lineTo(-0.5, -0.5, -0.5);
-    context.lineWidth = 0.75;
+    context.lineWidth = 1;
     context.stroke();
 
     isocontext.restore();
   }
+
+  return timer
 }

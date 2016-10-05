@@ -6,31 +6,32 @@ module.exports = (context, width, height) => {
         W = 1 << 2,
         E = 1 << 3;
 
-  const cellSize = 1,
-        cellSpacing = 60,
-        cellWidth = Math.floor((width - cellSpacing) / (cellSize + cellSpacing)),
-        cellHeight = Math.floor((height - cellSpacing) / (cellSize + cellSpacing));
+  const cellSize = 1.5,
+        cellSpacing = 70,
+        cellWidth = Math.floor((width + cellSpacing) / (cellSize + cellSpacing)),
+        cellHeight = Math.floor((height + cellSpacing) / (cellSize + cellSpacing));
 
   let cells = new Array(cellWidth * cellHeight), // each cell’s edge bits
       frontier = [];
 
 
-  context.translate(
-    Math.round((width - cellWidth * cellSize - (cellWidth + 1) * cellSpacing) / 2),
-    Math.round((height - cellHeight * cellSize - (cellHeight + 1) * cellSpacing) / 2)
-  );
+  // context.translate(
+  //   Math.round((width - cellWidth * cellSize - (cellWidth + 1) * cellSpacing) / 2),
+  //   Math.round((height - cellHeight * cellSize - (cellHeight + 1) * cellSpacing) / 2)
+  // );
+  context.clearRect(0, 0, width, height);
 
-  context.fillStyle = "white";
+  context.fillStyle = "#843B62";
 
   // Add a random cell and two initial edges.
-  let start = ~~((cellHeight / 2) * (cellWidth / 2));
+  let start = ~~((cellHeight / 3) * (cellWidth / 1));
   cells[start] = 0;
   fillCell(start);
   frontier.push({index: start, direction: N});
   frontier.push({index: start, direction: E});
 
   // Explore the frontier until the tree spans the graph.
-  d3.timer(() => {
+  const timer = d3.timer(() => {
     var done, k = 0;
     while (++k < 10 && !(done = exploreFrontier()));
     return done;
@@ -61,8 +62,11 @@ module.exports = (context, width, height) => {
       cells[i0] |= d0, cells[i1] |= d1;
       context.fillStyle = "#E9C46A";
       if (y1 > 0 && cells[i1 - cellWidth] == null) fillSouth(i1 - cellWidth), frontier.push({index: i1, direction: N});
+      context.fillStyle = "#F67E7D";
       if (y1 < cellHeight - 1 && cells[i1 + cellWidth] == null) fillSouth(i1), frontier.push({index: i1, direction: S});
+      context.fillStyle = "#FFB997";
       if (x1 > 0 && cells[i1 - 1] == null) fillEast(i1 - 1), frontier.push({index: i1, direction: W});
+      context.fillStyle = "#007EA7";
       if (x1 < cellWidth - 1 && cells[i1 + 1] == null) fillEast(i1), frontier.push({index: i1, direction: E});
     }
   }
@@ -88,4 +92,6 @@ module.exports = (context, width, height) => {
     t = array[i], array[i] = array[n - 1], array[n - 1] = t;
     return array.pop();
   }
+
+  return timer
 }

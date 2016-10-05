@@ -121,7 +121,7 @@ module.exports = (svg, width, height) => {
 
   var color = d3.scaleLinear()
       .domain([0, 20])
-      .range(["white", "steelblue"])
+      .range(["#843B62", "#F67E7D"])
       .interpolate(d3.interpolateLab);
 
   var hexbin = d3.hexbin()

@@ -1,4 +1,6 @@
 request = require('mixins/request')
+cash = require 'cash-dom'
+d3 = require 'd3'
 
 isometric = require 'landing/isometric'
 maze = require 'landing/maze'
@@ -9,21 +11,67 @@ chained_transition = require 'landing/chained_transition'
 pixels = require 'landing/pixels'
 
 
+class Slides
+  constructor: ->
+    @slide_nb = null
+    @container = cash('div[role="slides"]')
+
+    @_vw = window.innerWidth
+    @_init_nav_handlers_()
+
+    @onActivate = {}
+
+  activate: (nb) ->
+    if nb < 0 or @slide_nb is nb then return
+    lt = @slide_nb > nb
+    margin = nb * @_vw
+    @container.css('margin-left', "-#{margin}px")
+    @container.css('background-position', "-#{margin / 4}px 0")
+    @slide_nb = nb
+
+    children = @container.children('section')
+    children.removeClass('active')
+    cash(children.get(nb)).addClass('active')
+
+    @onActivate[nb]?()
+
+  _init_nav_handlers_: ->
+    cash('div[role="nav"] button').on 'click', (el) =>
+      switch el.currentTarget.className
+        when 'left' then @activate @slide_nb - 1
+        when 'right' then @activate @slide_nb + 1
+
+
 module.exports = ->
   [width, height] = [window.innerWidth, window.innerHeight]
   [width2x, height2x] = (x * 2 for x in [width, height])
 
-  canvas = document.querySelector '#isoslide'
-  svg = document.querySelector '#hexslide'
+  canvas = document.querySelector '#backdropC'
+  context = canvas.getContext('2d')
 
   canvas.width = width2x
   canvas.height = height2x
 
-  context = canvas.getContext('2d')
+  svg = document.querySelector '#backdropS'
+
+  slides = new Slides()
+  timer = null
+
+
+  slides.onActivate[0] = ->
+    timer?.stop()
+    timer = isometric context, width2x, height2x
+
+  slides.onActivate[1] = ->
+    timer?.stop()
+    timer = maze context, width2x, height2x
+
+  slides.activate(0)
 
   # isometric context, width2x, height2x
-  # maze context, width2x, height2x
+
   # swarm context, width2x, height2x
   # hexbin svg, width, height
-  pixels svg, width, height
+  # chained_transition svg, width, height
+  # pixels svg, width, height
   # game svg, width, height

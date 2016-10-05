@@ -18,8 +18,8 @@ module.exports = (context, width, height) => {
   let time0 = Date.now(),
       time1;
 
-  context.fillStyle = "#007EA7";
-  context.strokeStyle = "#003459";
+  context.fillStyle = "#843B62";
+  context.strokeStyle = "#F67E7D";
   context.strokeWidth = 1.5;
 
   d3.timer(function() {

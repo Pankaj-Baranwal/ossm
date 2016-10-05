@@ -8,11 +8,12 @@
 
 {% block hero-content %}
 <div role='slides'>
+
   <section class='hero'>
-    <canvas id='isoslide'></canvas>
-    <svg id='hexslide'></canvas>
-    <div class='logo'>
+    <div class="event-content">
       <h1><img src='{% static "img/brand/logo-alt-2x.png" %}'><abbr>{% revision %}</abbr></h1>
+      <h2>Come, let's build something useless!</h2>
+      <p>Building shit is hard. That's why you need to get self affirmation from time to time.</p>
     </div>
   </section>
   <section>
@@ -116,6 +117,8 @@
 
     </div>
   </section>
+  <canvas id='backdropC'></canvas>
+  <svg id='backdropS'></svg>
 
   <span id='oat'
       rv-coor-x='cx'
@@ -165,10 +168,10 @@
 
 {% block styles %}
   {{ 'landing' | style_bundle }}
-  {{ 'ossm/quake' | style_bundle }}
+  {# {{ 'ossm/quake' | style_bundle }} #}
 {% endblock %}
 
 {% block javascript %}
   {{ 'landing' | js_bundle }}
-  {{ 'ossm/quake' | js_bundle }}
+  {# {{ 'ossm/quake' | js_bundle }} #}
 {% endblock %}

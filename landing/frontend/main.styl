@@ -7,30 +7,10 @@ body
     position relative
     overflow hidden
     background $rich-black
-    // nav
-    //   display none
-
-    > section
-      height 100vh
-      width 100vw
-      flex-shrink 0
-      flex-grow 0
-      position relative
 
     section.hero
-      .logo
-        position absolute
-        right 10%
-        top 10%
-        height 30vw
-        width 30vw
-        display flex
-        background url('{!static!}/img/rad/radiation.png') no-repeat center center
-        background-size cover
-        align-items center
-        justify-content center
 
-      h2, h1
+      h1
         margin 0
         position relative
         display inline
@@ -40,26 +20,10 @@ body
           top 100%
           left 0
 
-      form
-        max-width 40%
-        margin-top 50px
-
-        @media(max-width 768px)
-          max-width (768px * .8) * .4
-
-        input
-          display block
-          margin-bottom 10px
-        button
-          padding 5px 10px
       img
         max-height 40px
         max-width 100%
 
-    .backdrop
-      height 100%
-      z-index 2
-      perspective 200px
 
     div[role='nav']
       button
@@ -106,48 +70,40 @@ div[role='slides']
   background-size (758px * factr) (395px * factr)
   background-position 0 0
   position relative
+  display flex
+
+  font-family type-sans-serif
   section
     width 100vw
     height 100vh
     flex-grow 1
     flex-shrink 0
     position relative
-    display inline-block
+    display flex
     z-index 1
+    pointer-events none
+    cursor none
+    padding 20px
+
+    .event-content
+      margin auto 10%
 
     &.active
       .event-content
         animation fadeInDown .5s
 
-    canvas, svg, #chained
-      position absolute
-      top 0
-      left 0
-      z-index -1
-      width 100vw
-      height 100vh
+  canvas, svg, #chained
+    position fixed
+    top 0
+    left 0
+    z-index 0
+    width 100vw
+    height 100vh
 
-#chained
-  div
-    width 10px
-    height 10px
-    margin 1px 0 0 1px
-    float left
-    background #eee
-    display inline-block
 
-.event-content
-  position absolute
-  top 0
-  right 0
-  width 500px
-  height 500px
-  margin-top 100px
-  margin-right 100px
+  section
+    h2
+      font-size 3rem
+    p
+      font-size 1.2rem
 
-  > ul
-    > li
-      padding 10px
-
-    display inline-flex
-    list-style-type none
