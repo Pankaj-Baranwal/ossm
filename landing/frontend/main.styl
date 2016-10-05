@@ -52,6 +52,7 @@ body
     background lighten($prussian-blue, 20%)
     color $primary-text
     z-index 2
+
     .contact
       display none
     .info
@@ -71,8 +72,10 @@ div[role='slides']
   background-position 0 0
   position relative
   display flex
+  background #EBEBEB
 
   font-family type-sans-serif
+
   section
     width 100vw
     height 100vh
@@ -81,12 +84,24 @@ div[role='slides']
     position relative
     display flex
     z-index 1
-    pointer-events none
-    cursor none
+    // pointer-events none
+    // cursor none
     padding 20px
 
     .event-content
-      margin auto 10%
+      margin auto 30% auto 10%
+      position relative
+      padding 0 20px
+
+      &:before
+        position absolute
+        top -100%
+        bottom -100%
+        content ' '
+        width 100%
+        left 0
+        right 0
+        z-index -1
 
     &.active
       .event-content
@@ -104,6 +119,37 @@ div[role='slides']
   section
     h2
       font-size 3rem
+      font-weight 800
+      text-transform uppercase
     p
       font-size 1.2rem
+      line-height 1.5rem
 
+
+  &[active='0']
+    background #EBEBEB
+    color #3A405A
+
+    button
+      color #3A405A
+
+    h2
+      span.em1
+        font-size 4rem
+        font-weight 700
+        letter-spacing 2px
+    // section > div
+    //   &:before
+    //     background alpha(shade(#B75D69, 50%), .4)
+
+
+  &[active='1']
+    background #004E98
+    color #EBEBEB
+
+
+  &[active='2']
+    background #004E98
+    color #000
+    svg
+      opacity .2

@@ -107,13 +107,13 @@ class Isometric {
 
 module.exports = (context, width, height) => {
   let isocontext = new Isometric(context);
-  isocontext.scale3d(100, 800, 100);
+  isocontext.scale3d(400, 400, 100);
 
   const timer = d3.timer(function(elapsed) {
     context.save();
     context.clearRect(0, 0, width, height);
-    context.fillStyle = "#051923";
-    context.strokeStyle = "#2A9D8F";
+    context.fillStyle = "#EBEBEB";
+    context.strokeStyle = "#BBB";
     // context.translate(width / 2, height * 0.6);
     for (let x = 14, d, t = (elapsed / 5000) % 1; x >= -14; --x) {
       for (let y = 14; y >= -14; --y) {

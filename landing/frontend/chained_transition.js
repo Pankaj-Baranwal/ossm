@@ -13,6 +13,7 @@ module.exports = (svg, width, height) => {
       .data(d3.range(n * m))
     .enter()
       .append("circle")
+      .attr('fill', 'transparent')
       .attr("r", d => Math.random() + (a / 2))
       .attr("cx", d => b + ~~(d % n) * (a + b))
       .attr("cy", d => b + ~~(d / n) * (a + b))

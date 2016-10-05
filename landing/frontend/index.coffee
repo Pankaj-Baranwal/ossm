@@ -27,6 +27,7 @@ class Slides
     margin = nb * @_vw
     @container.css('margin-left', "-#{margin}px")
     @container.css('background-position', "-#{margin / 4}px 0")
+    @container.attr('active', nb)
     @slide_nb = nb
 
     children = @container.children('section')
@@ -57,14 +58,22 @@ module.exports = ->
   slides = new Slides()
   timer = null
 
+  reset = ->
+    context.clearRect(0, 0, width2x, height2x)
+    cash(svg).empty()
+    timer?.stop()
 
   slides.onActivate[0] = ->
-    timer?.stop()
+    reset()
     timer = isometric context, width2x, height2x
 
   slides.onActivate[1] = ->
-    timer?.stop()
+    reset()
     timer = maze context, width2x, height2x
+
+  slides.onActivate[2] = ->
+    reset()
+    timer = chained_transition svg, width, height
 
   slides.activate(0)
 
