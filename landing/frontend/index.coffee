@@ -28,6 +28,7 @@ class Slides
     @container.css('margin-left', "-#{margin}px")
     @container.css('background-position', "-#{margin / 4}px 0")
     @container.attr('active', nb)
+    @container.parent().attr('slide-active', nb)
     @slide_nb = nb
 
     children = @container.children('section')
@@ -73,7 +74,7 @@ module.exports = ->
 
   slides.onActivate[2] = ->
     reset()
-    timer = chained_transition svg, width, height
+    # timer = chained_transition svg, width, height
 
   slides.activate(0)
 

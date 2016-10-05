@@ -3,62 +3,69 @@
 @require 'frontend/animate/fading_entrances/fadeInUp'
 
 body
+  > main
+    display none
   > header
     position relative
     overflow hidden
     background $rich-black
 
-    section.hero
+    > nav
+      box-shadow none
+      transition all .2s
 
+    section.hero
       h1
         margin 0
         position relative
         display inline
-
       @media(max-width 768px)
         abbr
           top 100%
           left 0
-
       img
         max-height 40px
         max-width 100%
 
-
-    div[role='nav']
-      button
-        position fixed
-        top 50vh
-        z-index 90
-        padding 20px 2px
-        font-size 2em
-        transform translateY(-50%)
-        background transparent
-        &:hover
-          background alpha($white, .2)
-      button.left
-        left 0
-      button.right
-        right 0
-
-  > main
-    display none
+    &[slide-active='0']
+      > nav
+        opacity 0
 
   > footer
     position fixed
     bottom 0
     left 0
     right 0
-    background lighten($prussian-blue, 20%)
     color $primary-text
     z-index 2
 
-    .contact
+    .contact, .terminal
       display none
+
     .info
       padding 10px 0
       img
         height 60px
+
+    section.copyright
+      background transparent
+
+
+div[role='nav']
+  button
+    position fixed
+    top 50vh
+    z-index 90
+    padding 20px 2px
+    font-size 2em
+    transform translateY(-50%)
+    background transparent
+    &:hover
+      background alpha($white, .2)
+  button.left
+    left 0
+  button.right
+    right 0
 
 div[role='slides']
   overflow hidden
@@ -149,7 +156,13 @@ div[role='slides']
 
 
   &[active='2']
-    background #004E98
+    background #FDE75C
     color #000
-    svg
-      opacity .2
+
+    button
+      color #3A405A
+
+
+  &[active='3']
+    background #0E122D
+    color #EBEBEB
