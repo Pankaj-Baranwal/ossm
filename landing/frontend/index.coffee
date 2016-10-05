@@ -14,7 +14,6 @@ module.exports = ->
 
   canvas = document.querySelector '#isoslide'
   svg = document.querySelector '#hexslide'
-  chained = document.querySelector '#chained'
 
   canvas.width = width2x
   canvas.height = height2x
@@ -25,5 +24,5 @@ module.exports = ->
   # maze context, width2x, height2x
   # swarm context, width2x, height2x
   # hexbin svg, width, height
-  # chained_transition chained
-  game svg, width, height
+  chained_transition svg, width, height
+  # game svg, width, height
