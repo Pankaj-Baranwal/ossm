@@ -6,6 +6,7 @@ swarm = require 'landing/swarm'
 hexbin = require 'landing/hexbin'
 game = require 'landing/game'
 chained_transition = require 'landing/chained_transition'
+pixels = require 'landing/pixels'
 
 
 module.exports = ->
@@ -24,5 +25,5 @@ module.exports = ->
   # maze context, width2x, height2x
   # swarm context, width2x, height2x
   # hexbin svg, width, height
-  chained_transition svg, width, height
+  pixels svg, width, height
   # game svg, width, height
