@@ -69,7 +69,8 @@ slide-count = 6
   height 100vh
   margin-left 0
 
-  transition all .5s cubic-bezier(.175, .685, .32, 1)
+  easeInOut = cubic-bezier(.175, .685, .32, 1)
+  transition all .5s, background .5s
 
   position relative
   display flex
@@ -173,7 +174,7 @@ body
 
   &[slide-active='design']
     .slides
-      background #2D4472
+      background #1d2b64
       color #C8CCC6
 
   &[slide-active='programming']

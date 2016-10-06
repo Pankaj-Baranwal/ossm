@@ -11,6 +11,7 @@ game = require 'landing/game'
 chained_transition = require 'landing/chained_transition'
 pixels = require 'landing/pixels'
 balls = require 'landing/balls'
+connectivity = require 'landing/connectivity'
 
 
 class Slides
@@ -110,7 +111,7 @@ module.exports = ->
     ossome: ->
       backdrop.init maze
     dataweave: ->
-      backdrop.reinit()
+      backdrop.init connectivity
     design: ->
       backdrop.init balls
     programming: ->

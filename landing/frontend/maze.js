@@ -14,11 +14,6 @@ module.exports = (context, width, height) => {
   let cells = new Array(cellWidth * cellHeight), // each cell’s edge bits
       frontier = [];
 
-
-  // context.translate(
-  //   Math.round((width - cellWidth * cellSize - (cellWidth + 1) * cellSpacing) / 2),
-  //   Math.round((height - cellHeight * cellSize - (cellHeight + 1) * cellSpacing) / 2)
-  // );
   context.clearRect(0, 0, width, height);
 
   context.fillStyle = "#843B62";
