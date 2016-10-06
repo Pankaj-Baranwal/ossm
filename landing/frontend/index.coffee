@@ -1,4 +1,5 @@
-request = require('mixins/request')
+request = require 'mixins/request'
+mousetrap = require 'mousetrap'
 cash = require 'cash-dom'
 d3 = require 'd3'
 
@@ -19,6 +20,7 @@ class Slides
     @_init_refs_()
     @_init_nav_handlers_()
     @_init_hash_handlers_()
+    @_init_kb_handlers_()
     @_hasLoaded = no
     @onActivate = {}
 
@@ -64,6 +66,10 @@ class Slides
       ref = window.location.hash
       @activate ref[1..]
     )
+
+  _init_kb_handlers_: ->
+    mousetrap.bind ['left', 'a', 'h'], => @activate @slide_nb - 1
+    mousetrap.bind ['right', 'd', 'l'], => @activate @slide_nb + 1
 
   _init_refs_: ->
     @refs = @container.find('section[ref]').map((el) -> cash(el).attr('ref'))
