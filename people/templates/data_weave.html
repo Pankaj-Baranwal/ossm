@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load account %}
+{% load staticfiles %}
+{% load brunch %}
+
+{% block title %}DATAWEAVE Subission{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>DATAWEAVE Submission (Gist URL):</h2>
+    <form method="post" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">UPDATE</button>
+    </form>
+  </section>
+{% endblock %}
+
+{% block javascript %}
+  {{ 'people' | js_bundle }}
+{% endblock %}
+
+{% block styles %}
+  {{ 'people' | style_bundle }}
+{% endblock %}
