@@ -16,12 +16,11 @@ balls = require 'landing/balls'
 class Slides
   constructor: ->
     @slide_nb = null
-    @container = cash('body > main')
+    @container = cash('body > main > .slides')
 
     @_init_refs_()
     @_init_nav_handlers_()
     @_init_hash_handlers_()
-    @_init_kb_handlers_()
     @_hasLoaded = no
     @onActivate = {}
 
@@ -34,9 +33,8 @@ class Slides
       slide = cash(@container.children('section').get(arg))
       nb = arg
       ref = slide.attr('ref')
-    console.log nb, ref
 
-    if nb < 0 or @slide_nb is nb then return
+    if nb < 0 or nb > 5 or @slide_nb is nb then return
     lt = @slide_nb > nb
     margin = nb * window.innerWidth
 
@@ -56,10 +54,14 @@ class Slides
     @onActivate[ref]?(slide)
 
   _init_nav_handlers_: ->
-    cash('div[role="nav"] button').on 'click', (el) =>
-      switch el.currentTarget.className
-        when 'left' then @activate @slide_nb - 1
-        when 'right' then @activate @slide_nb + 1
+    ltHandler = => @activate @slide_nb - 1
+    rtHandler = => @activate @slide_nb + 1
+
+    cash('button.switch.left').on 'click', ltHandler
+    cash('button.switch.right').on 'click', rtHandler
+
+    mousetrap.bind ['left', 'a', 'h'], ltHandler
+    mousetrap.bind ['right', 'd', 'l'], rtHandler
 
   _init_hash_handlers_: ->
     window.addEventListener('hashchange', =>
@@ -67,10 +69,6 @@ class Slides
       ref = window.location.hash
       @activate ref[1..]
     )
-
-  _init_kb_handlers_: ->
-    mousetrap.bind ['left', 'a', 'h'], => @activate @slide_nb - 1
-    mousetrap.bind ['right', 'd', 'l'], => @activate @slide_nb + 1
 
   _init_refs_: ->
     @refs = @container.find('section[ref]').map((el) -> cash(el).attr('ref'))
@@ -81,47 +79,41 @@ class Slides
     @_hasLoaded = yes
 
 
+class Backdrop
+  constructor: ->
+    @canvas = document.querySelector '#backdrop'
+    @width = 2 * window.innerWidth
+    @height = 2 * window.innerHeight
+
+    @canvas.width = @width
+    @canvas.height = @height
+
+    @context = @canvas.getContext('2d')
+    @timer = null
+
+  reinit: ->
+    @context.clearRect 0, 0, @width, @height
+    @timer?.stop?()
+
+  init: (animation) ->
+    @reinit()
+    @timer = animation @context, @width, @height
+
+
 module.exports = ->
-  [width, height] = [window.innerWidth, window.innerHeight]
-  [width2x, height2x] = (x * 2 for x in [width, height])
-
-  canvas = document.querySelector '#backdropC'
-  context = canvas.getContext('2d')
-
-  canvas.width = width2x
-  canvas.height = height2x
-
-  svg = document.querySelector '#backdropS'
-
   slides = new Slides()
-  timer = null
-
-  reset = ->
-    context.clearRect(0, 0, width2x, height2x)
-    cash(svg).empty()
-    timer?.stop()
+  backdrop = new Backdrop()
 
   slides.onActivate =
-    home: (slide) ->
-      reset()
-      timer = isometric context, width2x, height2x
-
-    ossome: (slide) ->
-      reset()
-      timer = maze context, width2x, height2x
-
-    design: (slide) ->
-      reset()
-      timer = balls context, width2x, height2x
-
-    # timer = chained_transition svg, width, height
+    home: ->
+      backdrop.init isometric
+    ossome: ->
+      backdrop.init maze
+    dataweave: ->
+      backdrop.reinit()
+    design: ->
+      backdrop.init balls
+    programming: ->
+      backdrop.reinit()
 
   slides.init()
-
-  # isometric context, width2x, height2x
-
-  # swarm context, width2x, height2x
-  # hexbin svg, width, height
-  # chained_transition svg, width, height
-  # pixels svg, width, height
-  # game svg, width, height

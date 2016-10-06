@@ -8,15 +8,15 @@
 
 {% block hero-content %}
   <div role='nav'>
-    <button class='right'><i class='icon icon-angle-right'></i></button>
-    <button class='left'><i class='icon icon-angle-left'></i></button>
+    <button class='switch right'><i class='icon icon-angle-right'></i></button>
+    <button class='switch left'><i class='icon icon-angle-left'></i></button>
   </div>
 {% endblock %}
 
 
 {% block main-content %}
-  <canvas id='backdropC'></canvas>
-  <svg id='backdropS'></svg>
+<div class='slides'>
+  <canvas id='backdrop'></canvas>
 
   <section ref='home'>
     <article>
@@ -96,7 +96,6 @@
       </ul>
     </article>
   </section>
-
   <section ref='programming'>
     <article>
       <h2>Programming</h2>
@@ -112,33 +111,28 @@
       </p>
     </article>
   </section>
+  <section ref='meh'>
+    <article>
+      <h2>Programming</h2>
+      <blockquote>Any product that needs a manual to work is broken.
+        <cite>Elon Musk</cite>
+      </blockquote>
+      <p>
+      The prelims will be conducted on “hackerrank”. There will be five
+      programming challenges and the teams which make it to top 20 teams
+      will move to the final on-site round. In the on-site round qualifying
+      teams will be given 10 problems and the teams will have to solve them
+      in maximum languages possible.
+      </p>
+    </article>
+  </section>
+</div>
 {% endblock %}
-
-{% block footer-content %}
-<section class='opensource'>
-  <div>
-  </div>
-</section>
-<section class='contact'>
-  <div>
-    <div class='info ducic'>
-      <a href='https://ducic.ac.in' target='_blank' rel='noopener noreferrer'>
-        <img src='{% static "img/brand/cic-logo-alt.png" %}'
-            alt='Cluster Innovation Centre Logo'
-            title='Cluster Innovation Centre'>
-      </a>
-    </div>
-  </div>
-</section>
-{% endblock %}
-
 
 {% block styles %}
   {{ 'landing' | style_bundle }}
-  {# {{ 'ossm/quake' | style_bundle }} #}
 {% endblock %}
 
 {% block javascript %}
   {{ 'landing' | js_bundle }}
-  {# {{ 'ossm/quake' | js_bundle }} #}
 {% endblock %}

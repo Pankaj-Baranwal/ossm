@@ -3,11 +3,7 @@
 @require 'frontend/animate/fading_entrances/fadeInUp'
 
 body
-  overflow-x hidden
   > header
-    position relative
-    overflow hidden
-    background $rich-black
 
     > nav
       box-shadow none
@@ -64,7 +60,7 @@ body > main
 
 slide-count = 6
 
-body > main
+.slides
   background #EBEBEB
   font-family type-sans-serif
   overflow hidden
@@ -150,7 +146,7 @@ body > main
 
 body
   &[slide-active='home']
-    main
+    .slides
       background #EBEBEB
       color #3A405A
 
@@ -166,22 +162,22 @@ body
         display none
 
   &[slide-active='ossome']
-    main
+    .slides
       background #004E98
       color #EBEBEB
 
   &[slide-active='dataweave']
-    main
+    .slides
       background #0E122D
       color #EBEBEB
 
   &[slide-active='design']
-    main
+    .slides
       background #2D4472
       color #C8CCC6
 
   &[slide-active='programming']
-    main
+    .slides
       background #212412
       color #EBEBEB
 
