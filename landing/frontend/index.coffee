@@ -12,7 +12,6 @@ chained_transition = require 'landing/chained_transition'
 pixels = require 'landing/pixels'
 balls = require 'landing/balls'
 connectivity = require 'landing/connectivity'
-particles = require 'landing/particles'
 
 
 class Slides
@@ -116,6 +115,6 @@ module.exports = ->
     design: ->
       backdrop.init balls
     programming: ->
-      backdrop.init particles
+      backdrop.reinit()
 
   slides.init()
