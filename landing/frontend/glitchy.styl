@@ -1,0 +1,42 @@
+
+random(min, max)
+  return math(math(0, 'random') * (max - min + 1) + min, 'floor')
+
+
+.glitch
+  position relative
+
+  &:after, &:before
+    content attr(data-text)
+    position absolute
+    left 2px
+    text-shadow -1px 0 green
+    background #EBEBEB
+    top 0
+    overflow hidden
+    clip rect(0, 900px, 0, 0)
+
+  &:after
+    animation glitcy 2s infinite linear alternate-reverse
+
+  &:before
+    animation glitcy-two 3s infinite linear alternate-reverse
+
+
+@keyframes glitcy
+  steps = 20
+  for i in 0..steps
+    {100% / steps * i}
+      b = unit(random(0, 100), 'px')
+      c = unit(random(0, 100), 'px')
+      clip rect(b, 9999px, c, 0)
+
+
+@keyframes glitcy-two
+  steps = 20
+  for i in 0..steps
+    {100% / steps * i}
+      b = unit(random(0, 100), 'px')
+      c = unit(random(0, 100), 'px')
+      clip rect(b, 9999px, c, 0)
+
