@@ -36,3 +36,25 @@ class HackerrankForm(forms.ModelForm):
                                               'Please contact HashInclude if you have any issues.'
             return False
         return True
+
+
+class DataWeaveForm(forms.ModelForm):
+
+    class Meta:
+        model = Contestant
+        fields = ['data_weave']
+
+    def is_valid(self, **kwargs):
+        # run the parent validation first
+        valid = super().is_valid()
+
+        # we're done now if not valid
+        if not valid:
+            return valid
+
+        dw = kwargs.get('data_weave')
+        if dw != self.cleaned_data['data_weave'] and Contestant.objects.filter(data_weave=self.cleaned_data['data_weave']).exists():
+            self._errors['data_weave'] = 'Another account is already registered with this HackerRank username.' \
+                                         'Please contact HashInclude if you have any issues.'
+            return False
+        return True

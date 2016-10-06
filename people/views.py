@@ -3,7 +3,7 @@ from rest_framework import viewsets, mixins
 from django.db.models import Q
 
 from events.models import Team, Event
-from people.forms import ProfileForm, HackerrankForm
+from people.forms import ProfileForm, HackerrankForm, DataWeaveForm
 from people.permissions import IsOwnerOrReadOnly
 from .models import User, Subscription, Contestant
 from .serializers import UserSerializer, SubscriptionSerializer
@@ -91,6 +91,35 @@ class HackerRankView(TemplateView):
         self.hackerrank = "" + self.contestant.hackerrank
         self.form = HackerrankForm(request.POST, instance=self.contestant)
         if self.form.is_valid(hackerrank=self.hackerrank):
+            self.form.save()
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+
+class DataWeaveView(TemplateView):
+    template_name = 'data_weave.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'form': self.form
+        }
+
+    def get(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.data_weave = Contestant.objects.get(user=self.user)
+        self.form = DataWeaveForm(instance=self.data_weave)
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.contestant = Contestant.objects.get(user=self.user)
+        self.data_weave = "" + str(self.contestant.data_weave)
+        self.form = DataWeaveForm(request.POST, instance=self.contestant)
+
+        """
+        Check if it is a valid gist, run and calculate accuracy.
+        """
+        if self.form.is_valid(data_weave=self.data_weave):
             self.form.save()
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
