@@ -55,12 +55,12 @@ function init(ctx, w, h) {
         list[i] = p;
     }
 
-    cash('canvas').on( 'mousemove', function(e) {
-        var bounds = document.body.getBoundingClientRect();
-        mx = e.clientX - bounds.left;
-        my = e.clientY - bounds.top;
-        man = true;
-    });
+    // cash('canvas').on( 'mousemove', function(e) {
+    //     var bounds = document.body.getBoundingClientRect();
+    //     mx = e.clientX - bounds.left;
+    //     my = e.clientY - bounds.top;
+    //     man = true;
+    // });
 }
 
 function step() {

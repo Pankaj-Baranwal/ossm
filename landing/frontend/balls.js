@@ -2,9 +2,10 @@ const d3 = require('d3')
 
 
 module.exports = (context, width, height) => {
-  const nodes = d3.range(350).map(() => ({radius: Math.random() * 10 + 2})),
+
+  const nodes = d3.range(~~(width * height * .00006)).map(() => ({radius: Math.random() * 10 + 2})),
         root = nodes[0],
-        w2 = width / 2,
+        w2 = width / 1.25,
         h2 = height / 2,
         manybody = d3.forceManyBody(),
         centering = d3.forceCenter()
