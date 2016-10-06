@@ -14,20 +14,7 @@ body
       box-shadow none
       transition all .2s
 
-    section.hero
-      h1
-        margin 0
-        position relative
-        display inline
-      @media(max-width 768px)
-        abbr
-          top 100%
-          left 0
-      img
-        max-height 40px
-        max-width 100%
-
-    &[slide-active='0']
+    &[slide-active='home']
       > nav
         opacity 0
 
@@ -50,119 +37,140 @@ body
     section.copyright
       background transparent
 
-
-div[role='nav']
-  button
-    position fixed
-    top 50vh
-    z-index 90
-    padding 20px 2px
-    font-size 2em
-    transform translateY(-50%)
-    background transparent
-    &:hover
-      background alpha($white, .2)
-  button.left
-    left 0
-  button.right
-    right 0
+slide-count = 6
 
 div[role='slides']
+  background #EBEBEB
+  font-family type-sans-serif
   overflow hidden
-  width 6 * 100vw
-  margin-left 0
+
+  width slide-count * 100vw
   height 100vh
+  margin-left 0
+
   transition all .5s cubic-bezier(.175, .685, .32, 1)
-  // background url('{!static!}/img/spacey.png') repeat fixed
-  factr = .5 + .2
-  background-size (758px * factr) (395px * factr)
-  background-position 0 0
+
   position relative
   display flex
-  background #EBEBEB
 
-  font-family type-sans-serif
+  div[role='nav']
+    button
+      position fixed
+      top 50vh
+      z-index 90
+      padding 20px 2px
+      font-size 2em
+      transform translateY(-50%)
+      background transparent
+      color inherit
+      &:hover
+        background alpha($white, .2)
+    button.left
+      left 0
+    button.right
+      right 0
 
   section
     width 100vw
     height 100vh
-    flex-grow 1
+
+    display flex
+    flex-grow 0
     flex-shrink 0
     position relative
-    display flex
-    z-index 1
-    // pointer-events none
-    // cursor none
-    padding 20px
 
-    .event-content
+    z-index 1
+
+    article
       margin auto 30% auto 10%
       position relative
       padding 0 20px
 
-      &:before
-        position absolute
-        top -100%
-        bottom -100%
-        content ' '
-        width 100%
-        left 0
-        right 0
-        z-index -1
-
-    &.active
-      .event-content
-        animation fadeInDown .5s
-
-  canvas, svg, #chained
-    position fixed
-    top 0
-    left 0
-    z-index 0
-    width 100vw
-    height 100vh
-
-
-  section
+    h1
+      margin 0
+      position relative
+      display inline
     h2
       font-size 3rem
       font-weight 800
       text-transform uppercase
+    h3
+      font-weight 600
     p
       font-size 1.2rem
+      font-weight 300
       line-height 1.5rem
+    blockquote
+      margin 10px -15px
+      padding 0 10px
 
+      font-weight 600
+      line-height 1.5em
+      font-size 1.2em
+      position relative
 
-  &[active='0']
+      &:before
+        content '‟'
+        position absolute
+        left -30px
+        top 15px
+        font-size 60px
+      cite
+        display block
+        font-style normal
+        font-size 1em
+        font-weight 300
+
+    @media(max-width 768px)
+      abbr
+        top 100%
+        left 0
+
+    img
+      max-height 40px
+      max-width 100%
+
+    &.active
+      article
+        animation fadeInDown .5s
+
+  canvas, svg
+    position fixed
+    top 0
+    left 0
+    z-index 0
+
+    width 100vw
+    height 100vh
+
+  &[slide-active='home']
     background #EBEBEB
     color #3A405A
-
-    button
-      color #3A405A
 
     h2
       span.em1
         font-size 4rem
         font-weight 700
         letter-spacing 2px
-    // section > div
-    //   &:before
-    //     background alpha(shade(#B75D69, 50%), .4)
 
+    button
+      &.left
+        opacity 0
+        pointer-events none
 
-  &[active='1']
+  &[slide-active='ossome']
     background #004E98
     color #EBEBEB
 
-
-  &[active='2']
-    background #FDE75C
-    color #000
-
-    button
-      color #3A405A
-
-
-  &[active='3']
+  &[slide-active='dataweave']
     background #0E122D
     color #EBEBEB
+
+  &[slide-active='design']
+    background #FDE75C
+    color #3A405A
+
+  &[slide-active='programming']
+    background #212412
+    color #EBEBEB
+

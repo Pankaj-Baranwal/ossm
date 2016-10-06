@@ -16,32 +16,56 @@ class Slides
     @slide_nb = null
     @container = cash('div[role="slides"]')
 
-    @_vw = window.innerWidth
     @_init_nav_handlers_()
-
+    @_init_hash_handlers_()
+    @_hasLoaded = no
     @onActivate = {}
 
-  activate: (nb) ->
+  activate: (arg) ->
+    try
+      slide = @container.find("[ref=#{arg}]")
+      nb = slide.index()
+      ref = arg
+    catch
+      slide = cash(@container.children().get(arg))
+      nb = arg
+      ref = slide.attr('ref')
+
     if nb < 0 or @slide_nb is nb then return
     lt = @slide_nb > nb
-    margin = nb * @_vw
-    @container.css('margin-left', "-#{margin}px")
-    @container.css('background-position', "-#{margin / 4}px 0")
-    @container.attr('active', nb)
-    @container.parent().attr('slide-active', nb)
+    margin = nb * window.innerWidth
+
+    @container
+      .css('margin-left', "-#{margin}px")
+      .css('background-position', "-#{margin / 4}px 0")
+      .attr('slide-active', ref)
+      .parent()
+        .attr('slide-active', ref)
     @slide_nb = nb
 
-    children = @container.children('section')
-    children.removeClass('active')
-    cash(children.get(nb)).addClass('active')
+    @container.children('section').removeClass('active')
+    slide.addClass('active')
 
-    @onActivate[nb]?()
+    window.location.hash = ref
+
+    @onActivate[ref]?()
 
   _init_nav_handlers_: ->
     cash('div[role="nav"] button').on 'click', (el) =>
       switch el.currentTarget.className
         when 'left' then @activate @slide_nb - 1
         when 'right' then @activate @slide_nb + 1
+
+  _init_hash_handlers_: ->
+    window.addEventListener('hashchange', =>
+      unless @_hasLoaded then return
+      ref = window.location.hash
+      @activate ref[1..]
+    )
+
+  init: ->
+    @activate window.location.hash?[1..] or 'home'
+    @_hasLoaded = yes
 
 
 module.exports = ->
@@ -64,19 +88,20 @@ module.exports = ->
     cash(svg).empty()
     timer?.stop()
 
-  slides.onActivate[0] = ->
-    reset()
-    timer = isometric context, width2x, height2x
+  slides.onActivate =
+    home: ->
+      reset()
+      timer = isometric context, width2x, height2x
 
-  slides.onActivate[1] = ->
-    reset()
-    timer = maze context, width2x, height2x
+    ossome: ->
+      reset()
+      timer = maze context, width2x, height2x
 
-  slides.onActivate[2] = ->
-    reset()
+    dataweave: ->
+      reset()
     # timer = chained_transition svg, width, height
 
-  slides.activate(0)
+  slides.init()
 
   # isometric context, width2x, height2x
 

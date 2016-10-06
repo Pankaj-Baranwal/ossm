@@ -9,36 +9,41 @@
 {% block hero-content %}
 <div role='slides'>
 
-  <section class='hero' id="home">
-    <div class="event-content">
+  <section class='hero' ref='home'>
+    <article>
       <h1><img src='{% static "img/brand/logo-2x.png" %}'><abbr>{% revision %}</abbr></h1>
       <h2>Come, let's <br><span class='em1'>build</span> <br><span>something</span> <br>useless!</h2>
       <p>Building shit is hard. That's why you need to get self affirmation from time to time.</p>
-    </div>
+    </article>
   </section>
-  <section id="ossome">
-    <div class="event-content">
+  <section ref='ossome'>
+    <article>
       <h2>OSSOME</h2>
-      <blockquote>Software is like sex: it's better when it's free.</blockquote>
-      <small class="author">Linus Torvalds</small>
-      <p class="short-description">
-        Participants will be required to contribute to some open source projects owned or maintained by our team members hosted  on GitHub. Every issue(bug-fix, feature, docs, etc.) has an associated score. Score will be awarded at the dicsretion of the project maintainers. The top cummulative scoring participants will qualify for the on-site finals, wher more projects and issues will be revealed.
+      <blockquote>
+        Software is like sex: it's better when it's free.
+        <small>Linus Torvalds</small>
+      </blockquote>
+      <p>
+        Participants will be required to contribute to some open source projects
+        owned or maintained by our team members hosted  on GitHub. Every issue
+        (bug-fix, feature, docs, etc.) has an associated score. Score will be
+        awarded at the dicsretion of the project maintainers. The top cummulative
+        scoring participants will qualify for the on-site finals, where more
+        projects and issues will be revealed.
       </p>
-      <button>PROJECTS</button>
-      <button>REGISTER FOR PRE-LIMS</button>
-      <button disabled>Rs. 20000</button>
+
       <ul class="prizes">
         <li class="platinum">Platinum</li>
         <li class="diamond">Diamond</li>
         <li class="gold">Gold</li>
       </ul>
-    </div>
+    </article>
   </section>
-  <section id="dataweave">
-    <div class="event-content">
-      <h2 class="title">DATAWEAVE</h2>
+  <section ref='dataweave'>
+    <article>
+      <h2>DATAWEAVE</h2>
       <blockquote>Some profound quote</blockquote>
-      <p class="short-description">
+      <p>
         If you are a master story teller at heart and a data enthusiast by passion. DATAWEAVE is THE event for you,Register online and show your data prowess in a first of its kind DATA SCIENCE competition.
       </p>
       <p>
@@ -50,94 +55,57 @@
       <p>
         Second round will be a day long data science hackathon where you will work on a real world data problem and present your findings to a panel of expert judges.
       </p>
-      <button>KNOW MORE</button>
-      <button>REGISTER FOR PRE-LIMS</button>
+      <button>Know More</button>
+      <button>Register for pre-lims</button>
       <button disabled>Rs. 20000</button>
       <ul class="prizes">
         <li class="platinum">Platinum</li>
         <li class="diamond">Diamond</li>
         <li class="gold">Gold</li>
       </ul>
-    </div>
+    </article>
   </section>
-  <section>
-    <div id='datacenter' class='backdrop'></div>
-    <div class="event-content">
-      <h2 class="title">Event Title</h2>
-      <blockquote>Some profound quote</blockquote>
-      <p class="short-description">
-        Something amazing is coming your way, be prepared! (Even though we aren't prepared ourselves and probably fail this semester.)
-        Okay, we need more text, so, blah, blah, blah, blah-blah-blah, blah, ... blah.
+  <section ref='design'>
+    <article>
+      <h2>Design</h2>
+      <blockquote>Any product that needs a manual to work is broken.
+        <cite>Elon Musk</cite>
+      </blockquote>
+      <h3>Here is a chance to showcase your desigining skills</h3>
+      <p>$Design is an UI UX designing competition. The competitors would be
+      provided with a real world problem on the spot. Participants would design
+      a UI UX explaining their idea of the apps or websites working for the
+      problem.
+      </p>
+      <p>The top three designs selected by the panelist get an opportunity for a
+      paid internship with Design Innovation Centre, University of Delhi.
       </p>
       <ul class="prizes">
         <li class="platinum">Platinum</li>
         <li class="diamond">Diamond</li>
         <li class="gold">Gold</li>
       </ul>
-    </div>
+    </article>
   </section>
-  <section>
-    <div id='datacenter' class='backdrop'></div>
-    <div class="event-content">
-      <h2 class="title">Event Title</h2>
-      <blockquote>Some profound quote</blockquote>
-      <p class="short-description">
-        Something amazing is coming your way, be prepared! (Even though we aren't prepared ourselves and probably fail this semester.)
-        Okay, we need more text, so, blah, blah, blah, blah-blah-blah, blah, ... blah.
-      </p>
-      <ul class="prizes">
-        <li class="platinum">Platinum</li>
-        <li class="diamond">Diamond</li>
-        <li class="gold">Gold</li>
-      </ul>
-    </div>
-  </section>
-  <section>
-    <div id='datacenter' class='backdrop'></div>
-    <div class="event-content">
-      <h2 class="title">Event Title</h2>
-      <blockquote>Some profound quote</blockquote>
-      <p class="short-description">
-        Something amazing is coming your way, be prepared! (Even though we aren't prepared ourselves and probably fail this semester.)
-        Okay, we need more text, so, blah, blah, blah, blah-blah-blah, blah, ... blah.
-      </p>
-      <ul class="prizes">
-        <li class="platinum">Platinum</li>
-        <li class="diamond">Diamond</li>
-        <li class="gold">Gold</li>
-      </ul>
-    </div>
-  </section>
-  <section>
-    <div id='datacenter' class='backdrop'></div>
-    <div class="event-content">
-      <h2 class="title">Event Title</h2>
-      <blockquote>Some profound quote</blockquote>
-      <p class="short-description">
-        Something amazing is coming your way, be prepared! (Even though we aren't prepared ourselves and probably fail this semester.)
-        Okay, we need more text, so, blah, blah, blah, blah-blah-blah, blah, ... blah.
-      </p>
-      <ul class="prizes">
-        <li class="platinum">Platinum</li>
-        <li class="diamond">Diamond</li>
-        <li class="gold">Gold</li>
-      </ul>
-    </div>
-  </section>
-  <section>
-    <div id='sponsors' class='backdrop'></div>
-    <div class='sponsors'>
 
-    </div>
+  <section ref='programming'>
+    <article>
+      <h2>Programming</h2>
+      <blockquote>Any product that needs a manual to work is broken.
+        <cite>Elon Musk</cite>
+      </blockquote>
+      <p>
+      The prelims will be conducted on “hackerrank”. There will be five
+      programming challenges and the teams which make it to top 20 teams
+      will move to the final on-site round. In the on-site round qualifying
+      teams will be given 10 problems and the teams will have to solve them
+      in maximum languages possible.
+      </p>
+    </article>
   </section>
+
   <canvas id='backdropC'></canvas>
   <svg id='backdropS'></svg>
-
-  <span id='oat'
-      rv-coor-x='cx'
-      rv-coor-y='cy'
-      rv-text='emote'
-      rv-class-facing-left='fl'></span>
 
 <div role='nav'>
   <button class='right'><i class='icon icon-angle-right'></i></button>
@@ -145,20 +113,11 @@
 </div>
 
 </div>
-<div id='quake' class='quake'>
-</div>
+
 {% endblock %}
 
 {% block content %}
-<section>
-  <h1>Foo</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</section>
+
 
 {% endblock %}
 
