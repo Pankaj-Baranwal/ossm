@@ -7,9 +7,18 @@
 {% block root-title %}Convoke 1.0{% endblock %}
 
 {% block hero-content %}
-<div role='slides'>
+  <div role='nav'>
+    <button class='right'><i class='icon icon-angle-right'></i></button>
+    <button class='left'><i class='icon icon-angle-left'></i></button>
+  </div>
+{% endblock %}
 
-  <section class='hero' ref='home'>
+
+{% block main-content %}
+  <canvas id='backdropC'></canvas>
+  <svg id='backdropS'></svg>
+
+  <section ref='home'>
     <article>
       <h1><img src='{% static "img/brand/logo-2x.png" %}'><abbr>{% revision %}</abbr></h1>
       <h2>Come, let's <br><span class='em1'>build</span> <br><span>something</span> <br>useless!</h2>
@@ -103,22 +112,6 @@
       </p>
     </article>
   </section>
-
-  <canvas id='backdropC'></canvas>
-  <svg id='backdropS'></svg>
-
-<div role='nav'>
-  <button class='right'><i class='icon icon-angle-right'></i></button>
-  <button class='left'><i class='icon icon-angle-left'></i></button>
-</div>
-
-</div>
-
-{% endblock %}
-
-{% block content %}
-
-
 {% endblock %}
 
 {% block footer-content %}

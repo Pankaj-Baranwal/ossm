@@ -3,8 +3,6 @@
 @require 'frontend/animate/fading_entrances/fadeInUp'
 
 body
-  > main
-    display none
   > header
     position relative
     overflow hidden
@@ -13,10 +11,6 @@ body
     > nav
       box-shadow none
       transition all .2s
-
-    &[slide-active='home']
-      > nav
-        opacity 0
 
   > footer
     position fixed
@@ -37,22 +31,7 @@ body
     section.copyright
       background transparent
 
-slide-count = 6
-
-div[role='slides']
-  background #EBEBEB
-  font-family type-sans-serif
-  overflow hidden
-
-  width slide-count * 100vw
-  height 100vh
-  margin-left 0
-
-  transition all .5s cubic-bezier(.175, .685, .32, 1)
-
-  position relative
-  display flex
-
+body > header
   div[role='nav']
     button
       position fixed
@@ -70,9 +49,38 @@ div[role='slides']
     button.right
       right 0
 
+body > main
+  overflow hidden
+  margin-top 0
+  canvas, svg
+    position fixed
+    top 0
+    left 0
+    z-index 0
+
+    width 100vw
+    height 100vh
+
+slide-count = 6
+
+body > main
+  background #EBEBEB
+  font-family type-sans-serif
+  overflow hidden
+
+  width slide-count * 100vw
+  height 100vh
+  margin-left 0
+
+  transition all .5s cubic-bezier(.175, .685, .32, 1)
+
+  position relative
+  display flex
+
   section
     width 100vw
     height 100vh
+    margin 0
 
     display flex
     flex-grow 0
@@ -121,8 +129,12 @@ div[role='slides']
         font-size 1em
         font-weight 300
 
-    @media(max-width 768px)
-      abbr
+    abbr
+      font-family $type-mono
+      font-size .8em
+      font-weight 300
+
+      @media(max-width 768px)
         top 100%
         left 0
 
@@ -134,43 +146,41 @@ div[role='slides']
       article
         animation fadeInDown .5s
 
-  canvas, svg
-    position fixed
-    top 0
-    left 0
-    z-index 0
 
-    width 100vw
-    height 100vh
-
+body
   &[slide-active='home']
-    background #EBEBEB
-    color #3A405A
+    main
+      background #EBEBEB
+      color #3A405A
 
-    h2
-      span.em1
-        font-size 4rem
-        font-weight 700
-        letter-spacing 2px
+      h2
+        span.em1
+          font-size 4rem
+          font-weight 700
+          letter-spacing 2px
 
-    button
-      &.left
-        opacity 0
-        pointer-events none
+    div[role='nav']
+      color #3A405A
+      button.left
+        display none
 
   &[slide-active='ossome']
-    background #004E98
-    color #EBEBEB
+    main
+      background #004E98
+      color #EBEBEB
 
   &[slide-active='dataweave']
-    background #0E122D
-    color #EBEBEB
+    main
+      background #0E122D
+      color #EBEBEB
 
   &[slide-active='design']
-    background #FDE75C
-    color #3A405A
+    main
+      background #FDE75C
+      color #3A405A
 
   &[slide-active='programming']
-    background #212412
-    color #EBEBEB
+    main
+      background #212412
+      color #EBEBEB
 

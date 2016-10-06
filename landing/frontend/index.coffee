@@ -14,8 +14,9 @@ pixels = require 'landing/pixels'
 class Slides
   constructor: ->
     @slide_nb = null
-    @container = cash('div[role="slides"]')
+    @container = cash('body > main')
 
+    @_init_refs_()
     @_init_nav_handlers_()
     @_init_hash_handlers_()
     @_hasLoaded = no
@@ -23,13 +24,14 @@ class Slides
 
   activate: (arg) ->
     try
-      slide = @container.find("[ref=#{arg}]")
-      nb = slide.index()
+      slide = @container.find("section[ref=#{arg}]")
+      nb = @refs.indexOf(arg)
       ref = arg
     catch
-      slide = cash(@container.children().get(arg))
+      slide = cash(@container.children('section').get(arg))
       nb = arg
       ref = slide.attr('ref')
+    console.log nb, ref
 
     if nb < 0 or @slide_nb is nb then return
     lt = @slide_nb > nb
@@ -39,8 +41,8 @@ class Slides
       .css('margin-left', "-#{margin}px")
       .css('background-position', "-#{margin / 4}px 0")
       .attr('slide-active', ref)
-      .parent()
-        .attr('slide-active', ref)
+
+    cash('body').attr('slide-active', ref)
     @slide_nb = nb
 
     @container.children('section').removeClass('active')
@@ -63,8 +65,12 @@ class Slides
       @activate ref[1..]
     )
 
+  _init_refs_: ->
+    @refs = @container.find('section[ref]').map((el) -> cash(el).attr('ref'))
+
   init: ->
-    @activate window.location.hash?[1..] or 'home'
+    initial_hash = window.location.hash?[1..]
+    @activate if initial_hash in @refs then initial_hash else 'home'
     @_hasLoaded = yes
 
 
