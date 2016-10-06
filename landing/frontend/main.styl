@@ -2,9 +2,16 @@
 @require 'frontend/animate/fading_entrances/fadeInDown'
 @require 'frontend/animate/fading_entrances/fadeInUp'
 
+html
+  font-size 14px
+  @media (min-width 800px)
+    font-size 16px
+
+  @media (min-width 1200px)
+    font-size 15px
+
 body
   > header
-
     > nav
       box-shadow none
       transition all .2s
@@ -17,16 +24,9 @@ body
     color $primary-text
     z-index 2
 
-    .contact, .terminal
+    .terminal
       display none
 
-    .info
-      padding 10px 0
-      img
-        height 60px
-
-    section.copyright
-      background transparent
 
 body > header
   div[role='nav']
@@ -89,6 +89,7 @@ slide-count = 6
 
     article
       margin auto 30% auto 10%
+      max-width 600px
       position relative
       padding 0 20px
 
@@ -106,6 +107,7 @@ slide-count = 6
       font-size 1.2rem
       font-weight 300
       line-height 1.5rem
+
     blockquote
       margin 10px -15px
       padding 0 15px
@@ -151,12 +153,6 @@ body
       background #EBEBEB
       color #3A405A
 
-      h2
-        span.em1
-          font-size 4rem
-          font-weight 700
-          letter-spacing 2px
-
     div[role='nav']
       color #3A405A
       button.left
@@ -177,8 +173,22 @@ body
       background #1d2b64
       color #C8CCC6
 
+      h2
+        color #F4CE4B
+
   &[slide-active='programming']
     .slides
       background #212412
       color #EBEBEB
 
+      p
+        font-family type-fira
+
+        span.op
+          color #EB5432
+        span.kw
+          color #FED43F
+        span.tag
+          color #8DCEE2
+        span.num
+          color #5EBC4E
