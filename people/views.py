@@ -3,9 +3,9 @@ from rest_framework import viewsets, mixins
 from django.db.models import Q
 
 from events.models import Team, Event
-from people.forms import ProfileForm
+from people.forms import ProfileForm, HackerrankForm
 from people.permissions import IsOwnerOrReadOnly
-from .models import User, Subscription
+from .models import User, Subscription, Contestant
 from .serializers import UserSerializer, SubscriptionSerializer
 
 
@@ -69,3 +69,28 @@ class SelfApiView(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.G
     serializer_class = UserSerializer
     lookup_field = 'username'
     permission_classes = (IsOwnerOrReadOnly, )
+
+
+class HackerRankView(TemplateView):
+    template_name = 'hackerrank.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'form': self.form
+        }
+
+    def get(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.contestant = Contestant.objects.get(user=self.user)
+        self.form = HackerrankForm(instance=self.contestant)
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.user = User.objects.get(username=request.user.username)
+        self.contestant = Contestant.objects.get(user=self.user)
+        self.hackerrank = "" + self.contestant.hackerrank
+        self.form = HackerrankForm(request.POST, instance=self.contestant)
+        if self.form.is_valid(hackerrank=self.hackerrank):
+            self.form.save()
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
