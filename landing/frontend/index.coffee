@@ -10,6 +10,7 @@ hexbin = require 'landing/hexbin'
 game = require 'landing/game'
 chained_transition = require 'landing/chained_transition'
 pixels = require 'landing/pixels'
+balls = require 'landing/balls'
 
 
 class Slides
@@ -52,7 +53,7 @@ class Slides
 
     window.location.hash = ref
 
-    @onActivate[ref]?()
+    @onActivate[ref]?(slide)
 
   _init_nav_handlers_: ->
     cash('div[role="nav"] button').on 'click', (el) =>
@@ -101,16 +102,18 @@ module.exports = ->
     timer?.stop()
 
   slides.onActivate =
-    home: ->
+    home: (slide) ->
       reset()
       timer = isometric context, width2x, height2x
 
-    ossome: ->
+    ossome: (slide) ->
       reset()
       timer = maze context, width2x, height2x
 
-    dataweave: ->
+    design: (slide) ->
       reset()
+      timer = balls context, width2x, height2x
+
     # timer = chained_transition svg, width, height
 
   slides.init()
