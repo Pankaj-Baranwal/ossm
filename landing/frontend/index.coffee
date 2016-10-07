@@ -116,5 +116,7 @@ module.exports = ->
       backdrop.init balls
     programming: ->
       backdrop.reinit()
+    sponsors: ->
+      backdrop.reinit()
 
   slides.init()
