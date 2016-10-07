@@ -35,7 +35,7 @@ class Slides
       nb = arg
       ref = slide.attr('ref')
 
-    if nb < 0 or nb > 5 or @slide_nb is nb then return
+    if nb < 0 or nb > 6 or @slide_nb is nb then return
     lt = @slide_nb > nb
     margin = nb * window.innerWidth
 
