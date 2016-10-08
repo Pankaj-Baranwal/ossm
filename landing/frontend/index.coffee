@@ -6,13 +6,11 @@ d3 = require 'd3'
 
 isometric = require 'landing/isometric'
 maze = require 'landing/maze'
-swarm = require 'landing/swarm'
-hexbin = require 'landing/hexbin'
-game = require 'landing/game'
-chained_transition = require 'landing/chained_transition'
-pixels = require 'landing/pixels'
 balls = require 'landing/balls'
 connectivity = require 'landing/connectivity'
+game = require 'landing/game'
+
+pixels = require 'landing/pixels'
 
 
 class Slides
@@ -139,7 +137,7 @@ module.exports = ->
     design: ->
       backdrop.init balls
     programming: ->
-      backdrop.reinit()
+      backdrop.init game
     debugging: ->
       backdrop.reinit()
     sponsors: ->

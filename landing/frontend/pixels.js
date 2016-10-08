@@ -13,7 +13,7 @@ const cursor = [[1, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 1, 1, 0]]
 const CUR_W = 11, CUR_H = 17
 
-module.exports = (svg, width, height) => {
+module.exports = (context, width, height) => {
   const a = 10, b = 10,
         n = ~~((width + b) / (a + b)),
         m = ~~((height + b) / (a + b))
@@ -34,23 +34,23 @@ module.exports = (svg, width, height) => {
       .attr("cx", d => b + ~~(d % n) * (a + b))
       .attr("cy", d => b + ~~(d / n) * (a + b))
 
-  function mouseHandler (ev) {
-    const cx = ~~(ev % n),
-          cy = ~~(ev / n)
+  // function mouseHandler (ev) {
+  //   const cx = ~~(ev % n),
+  //         cy = ~~(ev / n)
 
-    nodes.attr('fill', function (d) {
-      const dy = ~~(d % n) - cx + 2,
-            dx = ~~(d / n) - cy + 4
+  //   nodes.attr('fill', function (d) {
+  //     const dy = ~~(d % n) - cx + 2,
+  //           dx = ~~(d / n) - cy + 4
 
-      const bitc = cursor[dx] && cursor[dx][dy]
+  //     const bitc = cursor[dx] && cursor[dx][dy]
 
-      switch (bitc) {
-        case 1: return '#348AA7'
-        case 2: return '#5DD39E'
-        default: return color(d%20)
-      }
-    })
-  }
+  //     switch (bitc) {
+  //       case 1: return '#348AA7'
+  //       case 2: return '#5DD39E'
+  //       default: return color(d%20)
+  //     }
+  //   })
+  // }
 
-  nodes.on('mouseover', _throttle(mouseHandler, 50))
+  // nodes.on('mouseover', _throttle(mouseHandler, 50))
 }
