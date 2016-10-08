@@ -55,6 +55,7 @@ class Slides
 
     window.location.hash = ref
 
+    cash('[data-toggle-target]').removeClass('open')
     @onActivate[ref]?(slide)
 
   _init_nav_handlers_: ->
