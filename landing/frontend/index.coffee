@@ -66,12 +66,15 @@ class Slides
     cash('button.switch.left').on 'click', ltHandler
     cash('button.switch.right').on 'click', rtHandler
 
-    hammertime = new hammer(cash('body').get(0))
+    body = cash('body > main')
+    hammertime = new hammer(body.get(0))
     hammertime.on 'panmove', (e) =>
       margin = @slide_nb * @_vw - e.deltaX
+      body.addClass 'panning'
       @container.css('margin-left', "-#{margin}px")
 
     hammertime.on 'panend', (e) =>
+      body.removeClass 'panning'
       margin = @slide_nb * @_vw
       @container.css('margin-left', "-#{margin}px")
 

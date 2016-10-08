@@ -195,9 +195,18 @@ nav.root
     img
       height 30px
 
-body > main
-  overflow hidden
-  margin-top 0
+body
+  > main
+    cursor -moz-grab
+    cursor -webkit-grab
+    cursor grab
+    overflow hidden
+    margin-top 0
+    &.panning
+      cursor -moz-grabbing
+      cursor -webkit-grabbing
+      cursor grabbing
+
   canvas, svg
     position fixed
     top 0
