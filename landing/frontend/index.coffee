@@ -65,7 +65,7 @@ class Slides
     cash('button.switch.left').on 'click', ltHandler
     cash('button.switch.right').on 'click', rtHandler
 
-    cash('body').on 'touchend', (e) -> console.log e.pageX, e.pageY
+    # cash('body').on 'touchend', (e) -> console.log e.pageX, e.pageY
 
     mousetrap.bind ['left', 'a', 'h'], ltHandler
     mousetrap.bind ['right', 'd', 'l'], rtHandler
@@ -84,6 +84,9 @@ class Slides
     initial_hash = window.location.hash?[1..]
     @activate if initial_hash in @refs then initial_hash else 'home'
     @_hasLoaded = yes
+
+  reinit: ->
+    @activate @slide_nb
 
 
 class Backdrop
@@ -128,3 +131,12 @@ module.exports = ->
       backdrop.reinit()
 
   slides.init()
+
+  splash = cash('#splash')
+  window.setTimeout ->
+    splash.addClass 'loaded'
+    window.setTimeout ->
+      splash.remove()
+      slides.reinit()
+    , 300
+  , 300

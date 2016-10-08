@@ -22,7 +22,7 @@
     {% if user.is_authenticated %}
       <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
       <li>
-        <a href='#' onClick='return false;' data-toggle='accountactions'>{{ user.username }} <i class='icon icon-angle-down'></i></a>
+        <a href='#' onClick='return false;' data-toggle='#accountactions'>{{ user.username }} <i class='icon icon-angle-down'></i></a>
         <ul data-toggle-target id='accountactions' class='secondary'>
           <li><a href='{% url "profile" %}'>Profile</a></li>
           <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
@@ -50,6 +50,15 @@
     <button class='switch left'><i class='icon icon-angle-left'></i></button>
   </div>
 </nav>
+<div class='preload' id='splash'>
+  <div>
+    <h1>
+      <img src='{% static "img/brand/logo-1x.png" %}' alt='convoke.io homepage' title='Home'>
+      <abbr>{% revision %}</abbr>
+    </h1>
+    <p>Loading...</p>
+  </div>
+</div>
 {% endblock %}
 
 

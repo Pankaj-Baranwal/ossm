@@ -167,6 +167,33 @@ nav.root
       z-index 10
       position absolute
 
+.preload
+  position fixed
+  width 100vw
+  height 100vh
+  background #FFF
+  color #000
+  transform translateX(0)
+  opacity 1
+  top 0
+  z-index 1000
+  transition transform .3s, opacity .3s
+
+  &.loaded
+    opacity 0
+    transform translateX(-100vw)
+
+  div
+    width 80%
+    top 50%
+    position relative
+    margin auto
+    transform translateY(-50%)
+    h1
+      position relative
+      display inline-block
+    img
+      height 30px
 
 body > main
   overflow hidden
