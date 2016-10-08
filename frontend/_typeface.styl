@@ -1,6 +1,6 @@
 
-$type-mono    = 'Inconsolata', monospace
-$type-regular = 'Poppins', sans-serif
+$type-regular = -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica, \
+    helvetica neue, ubuntu, roboto, noto, segoe ui, arial, sans-serif
 
 
 fira-type(weight, sx)
@@ -14,11 +14,11 @@ fira-type(weight, sx)
     font-weight weight
     font-style normal
 
-fira-type(300, 'Light')
-// fira-type(400, 'Regular')
-fira-type(500, 'Medium')
+fira-type(400, 'Light')
+fira-type(500, 'Regular')
+fira-type(600, 'Medium')
 
 type-fira = 'Fira Code', Courier, monospace
+$type-mono = type-fira
 
-type-sans-serif = -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica, \
-    helvetica neue,ubuntu,roboto,noto,segoe ui,arial,sans-serif
+type-sans-serif = $type-regular

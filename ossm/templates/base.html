@@ -39,7 +39,7 @@
 <body class='{% block body-class %}{% endblock %}'>
   <header>
   {% block header-content %}
-    <nav>
+    <nav class='root'>
       <div>
         <a href='/'>
           <h1>
@@ -51,7 +51,7 @@
         {% if user.is_authenticated %}
           <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
           <li>
-            <a href='#' data-toggle='origin'>{{ user.username }} <i class='arrow down'></i></a>
+            <a href='#' data-toggle='origin'>{{ user.username }} <i class='icon icon-angle-down'></i></a>
             <ul data-toggle='target'>
               <li><a href='{% url "profile" %}'>Profile</a></li>
               <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
@@ -69,7 +69,7 @@
     {% endblock %}
   {% endblock %}
   </header>
-  <main>
+  <main class='root'>
   {% block main-content %}
     <div>
     {% block content %}
@@ -77,32 +77,30 @@
     </div>
   {% endblock %}
   </main>
-  <footer>
+  <footer class='root'>
   {% block footer-content %}
   {% endblock %}
-    <section class='copyright'>
-      <div>
-        <ul>
-          <li>&copy; <a href='/'>convoke.io</a>, 2016 <abbr>{% revision true %}</abbr></li>
-          <li><a href='{% url "privacy_policy" %}'>Privacy</a></li>
-          <li><a href='/api/v1/'>API</a></li>
-        </ul>
-        <ul class='external'>
-          <li>
-            <a href='https://github.com/ClusterInnovationCentre'
-               title='GitHub' target='_blank' rel='noopener noreferrer'>
-              <i class='icon icon-github' aria-label='GitHub' aria-hidden='true'></i>
-            </a>
-          </li>
-          <li>
-            <a href='https://www.facebook.com/hashinclude.CIC'
-               title='Facebook' target='_blank' rel='noopener noreferrer'>
-              <i class='icon icon-facebook' aria-label='Facebook' aria-hidden='true'></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
+    <div>
+      <ul>
+        <li>&copy; <a href='/'>convoke.io</a>, 2016 <abbr>{% revision true %}</abbr></li>
+        <li><a href='{% url "privacy_policy" %}'>Privacy</a></li>
+        <li><a href='/api/v1/'>API</a></li>
+      </ul>
+      <ul class='external'>
+        <li>
+          <a href='https://github.com/ClusterInnovationCentre'
+             title='GitHub' target='_blank' rel='noopener noreferrer'>
+            <i class='icon icon-github' aria-label='GitHub' aria-hidden='true'></i>
+          </a>
+        </li>
+        <li>
+          <a href='https://www.facebook.com/hashinclude.CIC'
+             title='Facebook' target='_blank' rel='noopener noreferrer'>
+            <i class='icon icon-facebook' aria-label='Facebook' aria-hidden='true'></i>
+          </a>
+        </li>
+      </ul>
+    </div>
     <section class='terminal' id='term' rv-class-visible='visible' rv-on-click='onFocus'>
       <button type='button' rv-on-click='onToggle'>
         <span rv-hide='visible'>>_</span>

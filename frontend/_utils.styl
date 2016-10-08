@@ -36,3 +36,18 @@ reset-input(background = transparent)
     color inherit
     border inherit
     box-shadow inherit
+
+
+delimited-inline-ul(delimiter = '*', spacing = 15px)
+  margin 0
+  padding 0
+  display flex
+  list-style none
+
+  li
+    margin 0
+    &:not(:first-child):before
+      content delimiter
+      transition color .2s
+      margin 0 spacing
+      opacity .7

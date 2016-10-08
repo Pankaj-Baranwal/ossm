@@ -10,17 +10,18 @@ html
   @media (min-width 1200px)
     font-size 15px
 
-body
-  > footer
-    position fixed
-    bottom 0
-    left 0
-    right 0
-    color $primary-text
-    z-index 2
+footer.root
+  position fixed
+  bottom 0
+  left 0
+  right 0
+  z-index 2
+  background alpha($black, .4)
 
-    .terminal
-      display none
+  transition color .2s
+
+  .terminal
+    display none
 
 nav.root
   font-family type-fira
@@ -40,27 +41,13 @@ nav.root
 
   .page-navigation
     ul
-      display flex
-      list-style none
+      delimited-inline-ul('*', 15px)
       margin 12px 0
-      padding 0
-      z-index 20
       top 10px
-      font-family type-fira
 
-      li:not(:first-child)
-        list-style-type none
-        &:before
-          content '*'
-          transition color .2s
-          margin 0 15px
-          opacity .7
     a.active
       text-transform uppercase
       font-weight bold
-
-  a
-    color inherit
 
   .slide-navigation
     button
@@ -183,7 +170,7 @@ slide-count = 7
 
 body
   &[slide-active='home']
-    nav.root
+    nav.root, footer.root
       background transparent
       color #3A405A
 
@@ -231,6 +218,11 @@ body
           color #8DCEE2
         span.num
           color #5EBC4E
+
+  &[slide-active='debugging']
+    .slides
+      background #212412
+      color #3A405A
 
   &[slide-active='sponsors']
     .slides
