@@ -51,8 +51,8 @@
         {% if user.is_authenticated %}
           <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
           <li>
-            <a href='#' data-toggle='origin'>{{ user.username }} <i class='icon icon-angle-down'></i></a>
-            <ul data-toggle='target'>
+            <a href='#' data-toggle='#accountactions'>{{ user.username }} <i class='icon icon-angle-down'></i></a>
+            <ul data-toggle-target id='accountactions'>
               <li><a href='{% url "profile" %}'>Profile</a></li>
               <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
               <li><a href='{% url "account_logout" %}'>Logout</a></li>

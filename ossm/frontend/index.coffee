@@ -14,15 +14,16 @@ class Ossm
 
   attach_nav: ->
     cash('a[data-toggle]').on 'click', (e) ->
-      cash(@).next('[data-toggle="target"]').toggleClass('open')
+      elselect = @dataset.toggle
+      cash(elselect).toggleClass('open')
       false
 
     cash('body').on 'click', (e) ->
       el = cash(e.target)
       alpha = el.data('toggle')?
-      beta = !!(el.parents().filter (n) -> cash(n).data('toggle')).length
+      beta = !!(el.parents().filter (n) -> cash(n).data('toggleTarget')).length
       unless alpha or beta
-        cash('[data-toggle="target"]').removeClass('open')
+        cash('[data-toggle-target]').removeClass('open')
 
 
 module.exports = ->
