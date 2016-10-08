@@ -4,9 +4,8 @@
 
 html
   font-size 14px
-  @media (min-width 800px)
-    font-size 16px
-
+  @media (max-width 520px)
+    font-size 11px
   @media (min-width 1200px)
     font-size 15px
 
@@ -82,7 +81,7 @@ nav.root
   @media (max-width 520px)
     height 44px
     overflow hidden
-    transition height .5s easeInOut, background .8s
+    transition height .5s easeInOut, background .5s
 
     a.root-toggle
       display block
@@ -216,6 +215,11 @@ slide-count = 7
       position relative
       padding 0 20px
 
+      @media (max-width 520px)
+        margin auto
+        padding 0
+        width 80%
+
     h1
       margin 0
       position relative
@@ -243,9 +247,9 @@ slide-count = 7
       &:before
         content '‟'
         position absolute
-        left -30px
-        top 15px
-        font-size 60px
+        left -.4em
+        top .2em
+        font-size 3em
       cite
         display block
         font-style normal
@@ -273,18 +277,25 @@ slide-count = 7
 body
   &[slide-active='home']
     nav.root, footer.root
+      color #3A405A
+      background transparent
+
       .brand
         margin-top -44px
-        @media (max-width 520px)
-          margin-top 0
 
-      @media (min-width 521px)
-        color #3A405A
-        background transparent
+      a.root-toggle
+        &:before, &:after
+          background #3A405A
 
       @media (max-width 520px)
         &.open
+          color $white
           background $prussian-blue
+          a.root-toggle
+            &:before, &:after
+              background $white
+          .brand
+            margin-top 0
 
       button.left
         display none
