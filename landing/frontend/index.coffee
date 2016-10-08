@@ -131,12 +131,11 @@ module.exports = ->
       backdrop.reinit()
 
   slides.init()
-
   splash = cash('#splash')
-  window.setTimeout ->
+
+  document.addEventListener 'DOMContentLoaded', ->
     splash.addClass 'loaded'
     window.setTimeout ->
       splash.remove()
       slides.reinit()
-    , 300
-  , 300
+    , 400
