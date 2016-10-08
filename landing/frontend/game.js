@@ -4,7 +4,7 @@ module.exports = (context, width, height) => {
   let cells = []
   context.strokeStyle = '#21344F';
   context.fillStyle = '#5D8722';
-  context.lineWidth = 25;
+  context.lineWidth = 10;
 
   const cellSpacing = 20,
         cellWidth = ~~(1 + (width + cellSpacing) / (cellSpacing)),
@@ -96,14 +96,17 @@ module.exports = (context, width, height) => {
       context.clearRect(0, 0, width, height);
       cells.forEach(function(row, x) {
           row.forEach(function(cell, y) {
-              context.beginPath();
-              context.rect(x * cellSpacing, y * cellSpacing, cellSpacing, cellSpacing);
               if (cell) {
-                  context.fill();
+                context.beginPath();
+                context.rect(x * cellSpacing, y * cellSpacing, cellSpacing - 10, cellSpacing - 10);
+                if (Math.random() > .42) {
                   context.fillStyle = '#0A71B6'
-              } else {
-                  context.fillStyle = '#76A9A2'
-                  context.stroke();
+                } else if (Math.random() > .92) {
+                  context.fillStyle = '#F4CE4B'
+                } else {
+                  context.fillStyle = '#78A153'
+                }
+                context.fill();
               }
           });
       });
@@ -111,7 +114,7 @@ module.exports = (context, width, height) => {
 
   const timer = d3.timer(() => {
     update()
-  }, 300)
+  })
   init();
   return timer
 }
