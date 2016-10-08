@@ -1,6 +1,7 @@
 request = require 'mixins/request'
 mousetrap = require 'mousetrap'
 cash = require 'cash-dom'
+hammer = require 'hammerjs'
 d3 = require 'd3'
 
 isometric = require 'landing/isometric'
@@ -18,6 +19,7 @@ class Slides
   constructor: ->
     @slide_nb = null
     @container = cash('body > main > .slides')
+    @_vw = window.innerWidth
 
     @_init_refs_()
     @_init_nav_handlers_()
@@ -37,11 +39,10 @@ class Slides
 
     if nb < 0 or nb > 6 or @slide_nb is nb then return
     lt = @slide_nb > nb
-    margin = nb * window.innerWidth
+    margin = nb * @_vw
 
     @container
       .css('margin-left', "-#{margin}px")
-      .css('background-position', "-#{margin / 4}px 0")
       .attr('slide-active', ref)
 
     cash('body').attr('slide-active', ref)
@@ -65,7 +66,17 @@ class Slides
     cash('button.switch.left').on 'click', ltHandler
     cash('button.switch.right').on 'click', rtHandler
 
-    # cash('body').on 'touchend', (e) -> console.log e.pageX, e.pageY
+    hammertime = new hammer(cash('body').get(0))
+    hammertime.on 'panmove', (e) =>
+      margin = @slide_nb * @_vw - e.deltaX
+      @container.css('margin-left', "-#{margin}px")
+
+    hammertime.on 'panend', (e) =>
+      margin = @slide_nb * @_vw
+      @container.css('margin-left', "-#{margin}px")
+
+    hammertime.on 'swiperight', ltHandler
+    hammertime.on 'swipeleft', rtHandler
 
     mousetrap.bind ['left', 'a', 'h'], ltHandler
     mousetrap.bind ['right', 'd', 'l'], rtHandler
