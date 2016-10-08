@@ -15,6 +15,7 @@ class Ossm
   attach_nav: ->
     cash('a[data-toggle]').on 'click', (e) ->
       cash(@).next('[data-toggle="target"]').toggleClass('open')
+      false
 
     cash('body').on 'click', (e) ->
       el = cash(e.target)

@@ -76,14 +76,15 @@ body
 
             i.arrow.down
               icon-arrow(down, 12px, $primary-text, 2px)
+              border-color inherit
               margin-bottom -2px
               display inline-block
 
             > a
-              color $primary-text
+              color inherit
 
               &:hover, &:active
-                color $primary-text
+                color inherit
 
             > ul
               bubble(top, right, $triangle-size: 5px)
@@ -148,7 +149,7 @@ body
               a
                 border 0
               li:before
-                margin-right 0px
+                margin-right 0
 
 a
   link($celadon-blue)

@@ -6,18 +6,47 @@
 
 {% block root-title %}Convoke 1.0{% endblock %}
 
-{% block hero-content %}
-  <ul role='hamburger'>
-    <li>Ossome</li>
-    <li>Dataweave</li>
-    <li>Design</li>
-    <li>Programming</li>
-    <li>Sponsors</li>
-  </ul>
-  <div role='nav'>
+{% block header-content %}
+<nav class='root'>
+  <div>
+    <a href='#home' class='brand'>
+      <h1>
+        <span>convoke</span>
+        <img src='{% static "img/brand/logo-alt-1x.png" %}' alt='convoke.io homepage' title='Home'><abbr>{% revision %}</abbr>
+      </h1>
+    </a>
+    <ul class='site-navigation'>
+    {% if user.is_authenticated %}
+      <li><a href='{% url "dashboard" %}'>Dashboard</a></li>
+      <li>
+        <a href='#' onClick='return false;' data-toggle='origin'>{{ user.username }} <i class='icon icon-angle-down'></i></a>
+        <ul data-toggle='target'>
+          <li><a href='{% url "profile" %}'>Profile</a></li>
+          <li><a href='{% url "socialaccount_connections" %}'>Account</a></li>
+          <li><a href='{% url "account_logout" %}'>Logout</a></li>
+        </ul>
+      </li>
+    {% else %}
+      <li><a href='{% url "account_login" %}'>Login</a></li>
+      <li><a href='{% url "account_signup" %}'>Signup</a></li>
+    {% endif %}
+    </ul>
+  </div>
+  <div class='page-navigation'>
+    <ul>
+      <li><a href='#ossome' title='Ossome'>Ossome</a></li>
+      <li><a href='#dataweave' title='Dataweave'>Dataweave</a></li>
+      <li><a href='#design' title='Design'>Design</a></li>
+      <li><a href='#programming' title='Programming'>Programming</a></li>
+      <li><a href='#debugging' title='Debugging'>Debugging</a></li>
+      <li><a href='#sponsors' title='Sponsors'>Sponsors</a></li>
+    </ul>
+  </div>
+  <div class='slide-navigation'>
     <button class='switch right'><i class='icon icon-angle-right'></i></button>
     <button class='switch left'><i class='icon icon-angle-left'></i></button>
   </div>
+</nav>
 {% endblock %}
 
 
@@ -120,7 +149,7 @@
       </p>
     </article>
   </section>
-  <section ref='meh'>
+  <section ref='debugging'>
     <article>
       <h2 class='glitch' data-text='Debugging'>Debugging</h2>
       <blockquote>Debugging is twice as hard as writing a program in the first place. So if you're as clever as you can

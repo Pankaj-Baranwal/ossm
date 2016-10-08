@@ -11,11 +11,6 @@ html
     font-size 15px
 
 body
-  > header
-    > nav
-      box-shadow none
-      transition all .2s
-
   > footer
     position fixed
     bottom 0
@@ -27,14 +22,47 @@ body
     .terminal
       display none
 
-ul[role='hamburger']
-  reset-list()
-  position fixed
-  color #000
-  z-index 20
+nav.root
+  font-family type-fira
+  box-shadow none
+  transition background .2s
+  background alpha($black, .5)
 
-body > header
-  div[role='nav']
+  .brand
+    margin-top 0
+    transition margin .2s
+
+  .site-navigation
+    position absolute
+    z-index 1
+    right 0
+    top 10px
+
+  .page-navigation
+    ul
+      display flex
+      list-style none
+      margin 12px 0
+      padding 0
+      z-index 20
+      top 10px
+      font-family type-fira
+
+      li:not(:first-child)
+        list-style-type none
+        &:before
+          content '*'
+          transition color .2s
+          margin 0 15px
+          opacity .7
+    a.active
+      text-transform uppercase
+      font-weight bold
+
+  a
+    color inherit
+
+  .slide-navigation
     button
       position fixed
       top 50vh
@@ -50,6 +78,7 @@ body > header
       left 0
     button.right
       right 0
+
 
 body > main
   overflow hidden
@@ -154,14 +183,19 @@ slide-count = 7
 
 body
   &[slide-active='home']
+    nav.root
+      background transparent
+      color #3A405A
+
+      .brand
+        margin-top -44px
+
+      button.left
+        display none
+
     .slides
       background #EBEBEB
       color #3A405A
-
-    div[role='nav']
-      color #3A405A
-      button.left
-        display none
 
   &[slide-active='ossome']
     .slides

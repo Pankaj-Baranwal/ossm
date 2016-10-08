@@ -45,6 +45,10 @@ class Slides
       .attr('slide-active', ref)
 
     cash('body').attr('slide-active', ref)
+    cash('.page-navigation a').each (el) ->
+      is_active = el.attributes.href.value is "##{ref}"
+      el.className = if is_active then 'active' else ''
+
     @slide_nb = nb
 
     @container.children('section').removeClass('active')
@@ -60,6 +64,8 @@ class Slides
 
     cash('button.switch.left').on 'click', ltHandler
     cash('button.switch.right').on 'click', rtHandler
+
+    cash('body').on 'touchend', (e) -> console.log e.pageX, e.pageY
 
     mousetrap.bind ['left', 'a', 'h'], ltHandler
     mousetrap.bind ['right', 'd', 'l'], rtHandler
@@ -115,6 +121,8 @@ module.exports = ->
     design: ->
       backdrop.init balls
     programming: ->
+      backdrop.reinit()
+    debugging: ->
       backdrop.reinit()
     sponsors: ->
       backdrop.reinit()

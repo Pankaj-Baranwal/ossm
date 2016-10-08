@@ -38,6 +38,7 @@
 </head>
 <body class='{% block body-class %}{% endblock %}'>
   <header>
+  {% block header-content %}
     <nav>
       <div>
         <a href='/'>
@@ -66,6 +67,7 @@
     </nav>
     {% block hero-content %}
     {% endblock %}
+  {% endblock %}
   </header>
   <main>
   {% block main-content %}
