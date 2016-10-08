@@ -33,6 +33,22 @@ footer.root
     display none
 
 easeInOut = cubic-bezier(.645, .045, .355, 1)
+@keyframes bounce-left-scale
+  0%, 20%, 50%, 80%, 100%
+    transform translate(0, -50%) scale(1)
+  40%
+    transform translate(-30px, -50%) scale(1.5)
+  60%
+    transform translate(-15px, -50%) scale(1.5)
+
+@keyframes bounce-left
+  0%, 20%, 50%, 80%, 100%
+    transform translateX(0)
+  40%
+    transform translateX(-30px)
+  60%
+    transform translateX(-15px)
+
 
 nav.root
   font-family type-fira
@@ -88,6 +104,8 @@ nav.root
       left 0
     button.right
       right 0
+      animation bounce-left-scale 1s 2
+      animation-delay 2s
 
   @media (max-width breakpoint)
     height 44px
@@ -258,6 +276,8 @@ slide-count = 7
 
     @media (max-width breakpoint)
       padding-top 50px
+      animation bounce-left 1s 2
+      animation-delay 4s
 
     article
       margin auto
@@ -335,6 +355,10 @@ slide-count = 7
 
 
 body
+  &[has-loaded='true']
+    .slides section, nav.root button.left
+      animation-play-state paused
+
   &[slide-active='home']
     nav.root, footer.root
       color #3A405A

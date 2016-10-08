@@ -43,7 +43,7 @@ class Slides
       .css('margin-left', "-#{margin}px")
       .attr('slide-active', ref)
 
-    cash('body').attr('slide-active', ref)
+    cash('body').attr('slide-active', ref).attr('has-loaded', @_hasLoaded)
     cash('.page-navigation a').each (el) ->
       is_active = el.attributes.href.value is "##{ref}"
       el.className = if is_active then 'active' else ''
