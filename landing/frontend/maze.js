@@ -7,9 +7,9 @@ module.exports = (context, width, height) => {
         E = 1 << 3;
 
   const cellSize = 1.5,
-        cellSpacing = 70,
-        cellWidth = Math.floor((width + cellSpacing) / (cellSize + cellSpacing)),
-        cellHeight = Math.floor((height + cellSpacing) / (cellSize + cellSpacing));
+        cellSpacing = 80,
+        cellWidth = ~~(1 + (width + cellSpacing) / (cellSize + cellSpacing)),
+        cellHeight = ~~(1 + (height + cellSpacing) / (cellSize + cellSpacing));
 
   let cells = new Array(cellWidth * cellHeight), // each cell’s edge bits
       frontier = [];
@@ -17,9 +17,10 @@ module.exports = (context, width, height) => {
   context.clearRect(0, 0, width, height);
 
   context.fillStyle = "#843B62";
+  context.translate(-cellSpacing, -cellSpacing);
 
   // Add a random cell and two initial edges.
-  let start = ~~((cellHeight / 3) * (cellWidth / 1));
+  let start = 20
   cells[start] = 0;
   fillCell(start);
   frontier.push({index: start, direction: N});

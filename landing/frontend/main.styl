@@ -2,9 +2,11 @@
 @require 'frontend/animate/fading_entrances/fadeInDown'
 @require 'frontend/animate/fading_entrances/fadeInUp'
 
+breakpoint = 620px
+
 html
   font-size 14px
-  @media (max-width 520px)
+  @media (max-width breakpoint)
     font-size 11px
   @media (min-width 1200px)
     font-size 15px
@@ -19,7 +21,7 @@ footer.root
 
   transition color .2s
 
-  @media (max-width 520px)
+  @media (max-width breakpoint)
     z-index 11
     transition bottom .5s, background .8s
     bottom -100%
@@ -56,6 +58,15 @@ nav.root
       delimited-inline-ul('*', 15px)
       margin 12px 0
       top 10px
+      width 100%
+      padding-right 200px
+      @media (max-width 1000px)
+        flex-wrap wrap
+        li
+          margin-right 15px
+        li:not(:first-child)
+          &:before
+            display none
 
     a.active
       text-transform uppercase
@@ -78,7 +89,7 @@ nav.root
     button.right
       right 0
 
-  @media (max-width 520px)
+  @media (max-width breakpoint)
     height 44px
     overflow hidden
     transition height .5s easeInOut, background .5s
@@ -245,14 +256,17 @@ slide-count = 7
 
     z-index 1
 
+    @media (max-width breakpoint)
+      padding-top 50px
+
     article
       margin auto 30% auto 10%
       max-width 600px
       position relative
       padding 0 20px
 
-      @media (max-width 520px)
-        margin auto
+      @media (max-width breakpoint)
+        margin 0 auto
         padding 0
         width 80%
 
@@ -323,7 +337,7 @@ body
         &:before, &:after
           background #3A405A
 
-      @media (max-width 520px)
+      @media (max-width breakpoint)
         &.open
           color $white
           background $prussian-blue

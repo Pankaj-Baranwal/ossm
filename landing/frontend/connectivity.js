@@ -9,7 +9,7 @@ module.exports = (context, width, height) => {
         maxDistance2 = maxDistance * maxDistance
 
   const tau = 2 * Math.PI,
-        n = 200,
+        n = ~~(width * height * .00004),
         particles = new Array(n)
 
   for (let i = 0; i < n; ++i) {

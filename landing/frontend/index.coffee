@@ -117,6 +117,7 @@ class Backdrop
 
   reinit: ->
     @context.clearRect 0, 0, @width, @height
+    @context.setTransform 1, 0, 0, 1, 0, 0
     @timer?.stop?()
 
   init: (animation) ->
