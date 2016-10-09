@@ -187,16 +187,12 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': os.getenv('LOG_LEVEL', 'DEBUG'),
+        'level': os.getenv('ROOT_LOG_LEVEL', 'INFO'),
     },
     'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': os.getenv('LOG_LEVEL', 'INFO'),
-        },
         'django': {
             'handlers': ['console'],
-            'level': os.getenv('LOG_LEVEL', 'INFO'),
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': True,
         },
         'django.request': {
