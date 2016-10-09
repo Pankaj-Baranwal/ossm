@@ -39,6 +39,7 @@
 <body class='{% block body-class %}{% endblock %}'>
   <header>
   {% block header-content %}
+    <a href='#mainblock' class='skiptocontent' tabindex='1'>Skip to Content</a>
     <nav data-toggle-target class='root'>
       <div>
         <a href='/'>
@@ -82,9 +83,10 @@
   {% endblock %}
     <div>
       <ul>
-        <li>&copy; <a href='/'>convoke.io</a>, 2016 <abbr>{% revision true %}</abbr></li>
+        <li><span class='copyright'>&copy;</span> 2016 <a href='/'>convoke.io</a> <abbr>{% revision true %}</abbr></li>
         <li><a href='{% url "privacy_policy" %}'>Privacy</a></li>
         <li><a href='/api/v1/'>API</a></li>
+        <li><a href='#'>Contact</a></li>
       </ul>
       <ul class='external'>
         <li>

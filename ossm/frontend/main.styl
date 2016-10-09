@@ -127,6 +127,9 @@ footer.root
   padding 5px 0
   letter-spacing 1px
 
+  span.copyright
+    font-family $type-regular
+
   a
     color inherit
 
@@ -150,6 +153,21 @@ a
 
   &:hover, &:active
     color inherit
+
+  &.skiptocontent
+    position fixed
+    top -80px
+    z-index 1000
+    padding 8px 20px
+    background #F6FFFE
+    color #000000
+    border 1px solid
+    font-weight bold
+    font-family type-fira
+    margin 2px
+    border-radius 3px
+    &:focus
+      top 0
 
 form
   max-width 400px

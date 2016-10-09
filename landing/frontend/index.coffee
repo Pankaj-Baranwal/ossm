@@ -9,8 +9,7 @@ maze = require 'landing/maze'
 balls = require 'landing/balls'
 connectivity = require 'landing/connectivity'
 game = require 'landing/game'
-
-pixels = require 'landing/pixels'
+bsod = require 'landing/bsod'
 
 
 class Slides
@@ -117,6 +116,7 @@ class Backdrop
   reinit: ->
     @context.clearRect 0, 0, @width, @height
     @context.setTransform 1, 0, 0, 1, 0, 0
+    @context.globalAlpha = 1
     @timer?.stop?()
 
   init: (animation) ->
@@ -140,7 +140,7 @@ module.exports = ->
     programming: ->
       backdrop.init game
     debugging: ->
-      backdrop.reinit()
+      backdrop.init bsod
     sponsors: ->
       backdrop.reinit()
 
