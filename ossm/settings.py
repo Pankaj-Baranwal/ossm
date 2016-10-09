@@ -201,6 +201,6 @@ if PRODUCTION or STAGING:
     )
     STATIC_URL = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATIC_ROOT = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'ossm.storage.StaticS3Storage'
     # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
