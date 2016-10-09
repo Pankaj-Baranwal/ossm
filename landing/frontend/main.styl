@@ -3,6 +3,7 @@
 breakpoint = 620px
 
 footer.root
+  cursor default
   position fixed
   bottom 0
   left 0
@@ -18,6 +19,16 @@ footer.root
     bottom -100%
 
     &.open
+      div
+        display block
+      ul
+        justify-content stretch
+        li
+          flex-grow 1
+          text-align center
+          margin-right 5px
+        li:before
+          display none
       bottom 0
 
   .terminal
@@ -26,6 +37,7 @@ footer.root
 easeInOut = cubic-bezier(.645, .045, .355, 1)
 
 nav.root
+  cursor default
   font-family type-fira
   box-shadow none
   transition background .2s
@@ -46,6 +58,8 @@ nav.root
     top 10px
 
   .page-navigation
+    h4
+      display none
     ul
       delimited-inline-ul('*', 15px)
       margin 12px 0
@@ -74,6 +88,7 @@ nav.root
       transform translateY(-50%)
       transition opacity .2s, left .2s, right .2s
       fill inherit
+      margin 0 -1px
       opacity .4
       &:hover
         opacity .8
@@ -96,7 +111,17 @@ nav.root
   @media (max-width breakpoint)
     height 44px
     overflow hidden
-    transition height .5s easeInOut, background .5s
+    transition height .5s easeInOut, background .5s, padding .5s
+    padding 0
+
+    overflow scroll
+
+    .page-navigation h4
+      padding 10px 0 5px
+      font-size 1.2em
+      font-family inherit
+      margin 0
+      display block
 
     a.root-toggle
       display block
@@ -127,8 +152,9 @@ nav.root
         visibility hidden
 
     &.open
-      background $prussian-blue
-      height 100%
+      background alpha($prussian-blue, .98)
+      height 100vh
+      padding-bottom 100px
 
       a.root-toggle
         right -8px
@@ -141,18 +167,13 @@ nav.root
       display block
 
     .site-navigation
-      padding-top 30px
+      padding-top 50px
       position relative
 
     .slide-navigation
       display none
 
     .site-navigation, .page-navigation
-      ul
-        display block
-        position relative
-        background transparent
-
       li, ul
         display block
         &:before, &:after
@@ -160,7 +181,7 @@ nav.root
 
       a
         font-size 1.5em
-        margin 2px -10px
+        margin 0
         display block
         color $white
         padding 10px
@@ -171,11 +192,24 @@ nav.root
           text-transform uppercase
 
       ul.secondary
+        display block
+        position relative
         background transparent
         top 0
         padding 0 0 0 10px
         color inherit
-        box-shadow none
+
+    .site-navigation, .page-navigation ul
+      padding-right 0
+      li
+        margin 0 -20px 10px
+        padding 0 20px
+        background alpha($black, .1)
+        &:last-child
+          margin-right -20px
+
+        &:hover, &:focus
+          background alpha($black, .5)
 
     .brand
       top 0
@@ -193,6 +227,7 @@ nav.root
   top 0
   z-index 1000
   transition transform .4s, opacity .4s
+  cursor default
 
   &.loaded
     opacity 0
@@ -212,15 +247,15 @@ nav.root
 
 body
   > main
-    cursor -moz-grab
-    cursor -webkit-grab
-    cursor grab
     overflow hidden
     margin-top 0
-    &.panning
-      cursor -moz-grabbing
-      cursor -webkit-grabbing
-      cursor grabbing
+  cursor grab
+  cursor -moz-grab
+  cursor -webkit-grab
+  &.panning
+    cursor grabbing
+    cursor -moz-grabbing
+    cursor -webkit-grabbing
 
   canvas
     position fixed

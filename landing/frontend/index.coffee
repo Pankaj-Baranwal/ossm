@@ -24,7 +24,7 @@ class Slides
     @_hasLoaded = no
     @onActivate = {}
 
-  activate: (arg) ->
+  activate: (arg, reinit = no) ->
     try
       slide = @container.find("section[ref=#{arg}]")
       nb = @refs.indexOf(arg)
@@ -34,7 +34,7 @@ class Slides
       nb = arg
       ref = slide.attr('ref')
 
-    if nb < 0 or nb > 6 or @slide_nb is nb then return
+    if nb < 0 or nb > 6 or @slide_nb is nb and not reinit then return
     lt = @slide_nb > nb
     margin = nb * @_vw
 
@@ -55,7 +55,7 @@ class Slides
     window.location.hash = ref
 
     cash('[data-toggle-target]').removeClass('open')
-    @onActivate[ref]?(slide)
+    @_hasLoaded and @onActivate[ref]?(slide)
 
   _init_nav_handlers_: ->
     ltHandler = => @activate @slide_nb - 1
@@ -64,8 +64,12 @@ class Slides
     cash('button.switch.left').on 'click', ltHandler
     cash('button.switch.right').on 'click', rtHandler
 
-    body = cash('body > main')
+    body = cash('body')
     hammertime = new hammer(body.get(0))
+
+    hammertime.on 'panstart', (e) ->
+      body.addClass 'panning'
+
     hammertime.on 'panmove', (e) =>
       margin = @slide_nb * @_vw - e.deltaX
       body.addClass 'panning'
@@ -98,7 +102,7 @@ class Slides
     @_hasLoaded = yes
 
   reinit: ->
-    @activate @slide_nb
+    @activate @slide_nb, yes
 
 
 class Backdrop
@@ -117,6 +121,9 @@ class Backdrop
     @context.clearRect 0, 0, @width, @height
     @context.setTransform 1, 0, 0, 1, 0, 0
     @context.globalAlpha = 1
+    @timer?.stop?()
+
+  stop: ->
     @timer?.stop?()
 
   init: (animation) ->
@@ -145,11 +152,12 @@ module.exports = ->
       backdrop.reinit()
 
   slides.init()
+
   splash = cash('#splash')
 
   document.addEventListener 'DOMContentLoaded', ->
     splash.addClass 'loaded'
+    slides.reinit()
     window.setTimeout ->
       splash.remove()
-      slides.reinit()
     , 400

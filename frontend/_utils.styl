@@ -46,7 +46,7 @@ delimited-inline-ul(delimiter = '*', spacing = 15px)
 
   li
     margin 0
-    &:not(:first-child):before
+    &:not(:first-of-type):before
       content delimiter
       transition color .2s
       margin 0 spacing

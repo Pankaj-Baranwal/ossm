@@ -40,6 +40,7 @@ slide-count = 7
       padding-top 50px
       animation bounce-left 1s 2
       animation-delay 4s
+      min-height 100vh
 
     article
       margin auto
@@ -132,7 +133,7 @@ body
       @media (max-width breakpoint)
         &.open
           color $white
-          background $prussian-blue
+          background alpha($prussian-blue, .98)
           a.root-toggle
             &:before, &:after
               background $white
@@ -212,7 +213,8 @@ body
 
       @media (max-width 800px)
         position relative
-        margin-top 10px
+        margin-top 20px
+
   &[slide-active='ossome']
     .slides
       background #004E98
