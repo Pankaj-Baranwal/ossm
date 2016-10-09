@@ -79,8 +79,8 @@ class Slides
     hammertime.on 'swiperight', ltHandler
     hammertime.on 'swipeleft', rtHandler
 
-    mousetrap.bind ['left', 'a', 'h'], ltHandler
-    mousetrap.bind ['right', 'd', 'l'], rtHandler
+    mousetrap.bind ['left', 'a', 'h', 'shift+space'], ltHandler
+    mousetrap.bind ['right', 'd', 'l', 'space'], rtHandler
 
   _init_hash_handlers_: ->
     window.addEventListener('hashchange', =>

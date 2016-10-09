@@ -47,6 +47,18 @@
       "css": "angle-down",
       "code": 61703,
       "src": "fontawesome"
+    },
+    {
+      "uid": "4c2a3128819fef9548d6f0d38a5e291a",
+      "css": "calendar",
+      "code": 59392,
+      "src": "typicons"
+    },
+    {
+      "uid": "921e3974e54ff9e8b7cd906a3dc74636",
+      "css": "direction",
+      "code": 61732,
+      "src": "fontawesome"
     }
   ]
 }

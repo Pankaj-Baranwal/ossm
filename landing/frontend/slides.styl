@@ -10,20 +10,20 @@ slide-count = 7
   overflow hidden
 
   width slide-count * 100vw
-  height 100vh
   margin-left 0
+  flex-shrink 1
+  flex-grow 0
 
   transition all .5s, background .5s
 
   position relative
   display flex
 
-  @media (max-width breakpoint)
-    height auto
+  @media (min-width breakpoint)
+    height 100vh
 
   section
     width 100vw
-    height 100vh
     margin 0
 
     display flex
@@ -33,8 +33,10 @@ slide-count = 7
 
     z-index 1
 
+    @media (min-width breakpoint)
+      height 100vh
+
     @media (max-width breakpoint)
-      height auto
       padding-top 50px
       animation bounce-left 1s 2
       animation-delay 4s
@@ -144,6 +146,73 @@ body
       background #EBEBEB
       color #3A405A
 
+    aside
+      position absolute
+      right 0
+      top 0
+      p
+        font-family type-fira
+        font-weight 300
+        position relative
+        margin 0 5px 0 -10px
+        padding 5px 20px 5px 10px
+        font-size 1em
+        display inline-block
+        line-height 1em
+
+        &:before
+          content ' '
+          background transparent
+          position absolute
+          width 100%
+          height 100%
+          top 0
+          left 0
+          z-index -1
+          transform skew(20deg)
+
+        &:after
+          content attr(data-hover-text)
+          position absolute
+          background transparent
+          padding 6px 0 5px
+          color #fff
+          left 5px
+          width 0
+          top 0
+          overflow hidden
+          white-space nowrap
+          font-family type-fira
+          font-weight 300
+          transition width .2s, padding .2s, background .2s
+          z-index 1
+
+        &:hover:after
+          width auto
+          padding 6px 5px 5px
+
+        &.datetime
+          color #fff
+          &:before, &:after
+            background #16324F
+          &:hover:before, &:hover:after
+            background #13293D
+
+        &.location
+          color #fff
+          &:before, &:after
+            background #007EA7
+          &:hover:before, &:hover:after
+            background darken(#007EA7, 20%)
+        .icon
+          opacity .8
+
+        time, span
+          font-family type-sans-serif
+
+      @media (max-width 800px)
+        position relative
+        margin-top 10px
   &[slide-active='ossome']
     .slides
       background #004E98

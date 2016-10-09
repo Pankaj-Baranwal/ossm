@@ -21,6 +21,8 @@ def fontello():
       loc = zipfl.extract(fl, 'frontend')
 
   dirname = loc.split('/')[1]
+  shutil.rmtree('frontend/assets/css')
+  shutil.rmtree('frontend/assets/font')
   shutil.move('frontend/%s/css' % dirname, 'frontend/assets')
   shutil.move('frontend/%s/font' % dirname, 'frontend/assets')
   shutil.rmtree('frontend/%s' % dirname)
