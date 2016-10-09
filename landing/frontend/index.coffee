@@ -67,7 +67,7 @@ class Slides
     , 1
 
     cash('[data-toggle-target]').removeClass('open')
-    @_hasLoaded and @onActivate[ref]?(slide)
+    if @_hasLoaded or reinit then @onActivate[ref]?(slide)
 
   _init_nav_handlers_: ->
     ltHandler = => @activate @slide_nb - 1
@@ -108,13 +108,13 @@ class Slides
   _init_refs_: ->
     @refs = @container.find('section[ref]').map((el) -> cash(el).attr('ref'))
 
-  init: ->
+  preinit: ->
     initial_hash = window.location.hash?[1..]
     @activate if initial_hash in @refs then initial_hash else 'home'
-    @_hasLoaded = yes
 
-  reinit: ->
+  init: ->
     @activate @slide_nb, yes
+    @_hasLoaded = yes
 
 
 class Backdrop
@@ -163,13 +163,13 @@ module.exports = ->
     sponsors: ->
       backdrop.reinit()
 
-  slides.init()
+  slides.preinit()
 
   splash = cash('#splash')
 
   document.addEventListener 'DOMContentLoaded', ->
     splash.addClass 'loaded'
-    slides.reinit()
+    slides.init()
     window.setTimeout ->
       splash.remove()
     , 400
