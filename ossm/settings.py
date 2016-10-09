@@ -191,6 +191,14 @@ if PRODUCTION or STAGING:
         'Cache-Control': 'max-age=172800',
     }
     AWS_IS_GZIPPED = True
+    GZIP_CONTENT_TYPES = (
+        'text/css',
+        'text/javascript',
+        'application/javascript',
+        'application/x-javascript',
+        'image/svg+xml',
+        'application/octet-stream'
+    )
     STATIC_URL = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATIC_ROOT = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
