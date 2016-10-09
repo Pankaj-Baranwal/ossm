@@ -189,6 +189,14 @@ if PRODUCTION or STAGING:
         'Cache-Control': 'max-age=%d' % (60 * 60 * 24 * 15),    # NOTE (@prashnts): 15 days.
     }
     AWS_IS_GZIPPED = True
+    GZIP_CONTENT_TYPES = (
+        'text/css',
+        'text/javascript',
+        'application/javascript',
+        'application/x-javascript',
+        'image/svg+xml',
+        'application/octet-stream'
+    )
     STATIC_URL = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATIC_ROOT = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATICFILES_STORAGE = 'ossm.storage.StaticS3Storage'
