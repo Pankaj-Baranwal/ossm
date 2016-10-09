@@ -43,7 +43,7 @@ slide-count = 7
       min-height 100vh
 
     article
-      margin auto
+      margin 25vh auto
       position relative
       width 80%
 
@@ -56,7 +56,7 @@ slide-count = 7
         width 80%
 
       h1, p, blockquote, h2, h3, h4
-        max-width 600px
+        max-width 400px
 
     h1
       margin 0
@@ -65,6 +65,7 @@ slide-count = 7
     h2
       font-size 3rem
       font-weight 800
+      margin-top 0
       text-transform uppercase
     h3
       font-weight 600
@@ -72,6 +73,13 @@ slide-count = 7
       font-size 1.2rem
       font-weight 300
       line-height 1.5rem
+    q
+      font-size 1.4em
+      font-weight 300
+      margin-bottom 10px
+      display block
+      &:before, &:after
+        content ''
 
     blockquote
       margin 10px -15px
@@ -111,6 +119,169 @@ slide-count = 7
       article
         animation fadeInDown .5s
 
+    aside
+      position absolute
+      right 0
+      top 0
+      @media (max-width 800px)
+        position relative
+        margin-top 20px
+
+    ul.stats
+      reset-list()
+      display flex
+      justify-content space-around
+      max-width 400px
+      li
+        display block
+        margin-right 10px
+        text-align center
+        font-weight 300
+        text-transform uppercase
+        letter-spacing 1px
+        padding 5px
+        strong
+          display block
+          font-size 2em
+          margin-bottom 5px
+
+aside
+  img.logo
+    display block
+    max-height 80px
+    width 80px
+    margin 10px 0
+
+  ul.tags
+    reset-list()
+    font-family type-fira
+    li:before
+      content '#'
+      position absolute
+      left -15px
+  a.action
+    reset-link()
+    position relative
+    padding 5px 10px 5px 20px
+    margin 0 20px 5px -20px
+    display inline-block
+
+    span
+      transition margin .2s, padding .2s
+
+    &:before
+      content ' '
+      position absolute
+      left 0
+      top 0
+      width 100%
+      height 100%
+      transform skew(-20deg, 0)
+      z-index -1
+      transition background .2s, left .2s
+
+    &:hover
+      span
+        margin-right -5px
+        padding-left 5px
+
+    &.more:before
+      background #4CBED9
+    &.more:hover:before
+      background #009ADA
+      left 2px
+
+    &.register:before
+      background #F3CC4F
+    &.register:hover:before
+      background #E4930A
+      left 2px
+
+section[ref='home']
+  aside
+    p
+      font-family type-fira
+      font-weight 300
+      position relative
+      margin 0 5px 0 -10px
+      padding 5px 20px 5px 10px
+      font-size 1em
+      display inline-block
+      line-height 1em
+
+      &:before
+        content ' '
+        background transparent
+        position absolute
+        width 100%
+        height 100%
+        top 0
+        left 0
+        z-index -1
+        transform skew(-20deg)
+
+      &:after
+        content attr(data-hover-text)
+        position absolute
+        background transparent
+        padding 6px 0 5px
+        color #fff
+        left 5px
+        width 0
+        top 0
+        overflow hidden
+        white-space nowrap
+        font-family type-fira
+        font-weight 300
+        opacity 0
+        transition padding .2s, background .2s, opacity .2s
+        z-index 1
+
+      &:hover:after
+        opacity 1
+        width auto
+        padding 6px 5px 5px
+
+      &.datetime
+        color #fff
+        &:before, &:after
+          background #16324F
+        &:hover:before, &:hover:after
+          background #13293D
+
+      &.location
+        color #fff
+        &:before, &:after
+          background #007EA7
+        &:hover:before, &:hover:after
+          background darken(#007EA7, 20%)
+      .icon
+        opacity .8
+
+      time, span
+        font-family type-sans-serif
+
+    .stack
+      margin-top 20px
+  h2
+    margin-top 20px
+
+section[ref='design']
+  h2
+    color #F4CE4B
+
+section[ref='programming']
+  p
+    font-family type-fira
+
+    span.op
+      color #EB5432
+    span.kw
+      color #FED43F
+    span.tag
+      color #8DCEE2
+    span.num
+      color #5EBC4E
 
 body
   &[has-loaded='true']
@@ -147,74 +318,6 @@ body
       background #EBEBEB
       color #3A405A
 
-    aside
-      position absolute
-      right 0
-      top 0
-      p
-        font-family type-fira
-        font-weight 300
-        position relative
-        margin 0 5px 0 -10px
-        padding 5px 20px 5px 10px
-        font-size 1em
-        display inline-block
-        line-height 1em
-
-        &:before
-          content ' '
-          background transparent
-          position absolute
-          width 100%
-          height 100%
-          top 0
-          left 0
-          z-index -1
-          transform skew(20deg)
-
-        &:after
-          content attr(data-hover-text)
-          position absolute
-          background transparent
-          padding 6px 0 5px
-          color #fff
-          left 5px
-          width 0
-          top 0
-          overflow hidden
-          white-space nowrap
-          font-family type-fira
-          font-weight 300
-          transition width .2s, padding .2s, background .2s
-          z-index 1
-
-        &:hover:after
-          width auto
-          padding 6px 5px 5px
-
-        &.datetime
-          color #fff
-          &:before, &:after
-            background #16324F
-          &:hover:before, &:hover:after
-            background #13293D
-
-        &.location
-          color #fff
-          &:before, &:after
-            background #007EA7
-          &:hover:before, &:hover:after
-            background darken(#007EA7, 20%)
-        .icon
-          opacity .8
-
-        time, span
-          font-family type-sans-serif
-
-      @media (max-width 800px)
-        position relative
-        margin-top 20px
-
   &[slide-active='ossome']
     .slides
       background #004E98
@@ -232,25 +335,10 @@ body
       background #1d2b64
       color #C8CCC6
 
-      h2
-        color #F4CE4B
-
   &[slide-active='programming']
     .slides
       background #21344F
       color #EBEBEB
-
-      p
-        font-family type-fira
-
-        span.op
-          color #EB5432
-        span.kw
-          color #FED43F
-        span.tag
-          color #8DCEE2
-        span.num
-          color #5EBC4E
 
   &[slide-active='debugging']
     .slides
