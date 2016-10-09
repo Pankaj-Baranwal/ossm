@@ -167,6 +167,46 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/dashboard/'
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'verbose_console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': os.getenv('LOG_LEVEL', 'DEBUG'),
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': os.getenv('LOG_LEVEL', 'INFO'),
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['verbose_console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
+
 if PRODUCTION or STAGING:
     DEBUG = False
     CSRF_COOKIE_HTTPONLY = True
