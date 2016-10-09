@@ -1,5 +1,6 @@
 @require 'frontend'
 @require 'frontend/animate/fading_entrances/fadeInDown'
+@require 'frontend/animate/attention_seekers/tada'
 
 breakpoint = 620px
 slide-count = 7
@@ -149,9 +150,9 @@ slide-count = 7
 aside
   img.logo
     display block
-    max-height 80px
-    width 80px
-    margin 10px 0
+    max-height 120px
+    width 120px
+    margin 20px 0
 
   ul.tags
     reset-list()
@@ -348,6 +349,10 @@ body
     .slides
       background #212412
       color #EBEBEB
+
+    img.logo
+      animation tada 1s 1
+      animation-delay 2s
 
   &[slide-active='sponsors']
     color = #2C458D
