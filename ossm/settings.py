@@ -187,7 +187,11 @@ if PRODUCTION or STAGING:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = r'%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_HEADERS = {
+        'Cache-Control': 'max-age=172800',
+    }
     STATIC_URL = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATIC_ROOT = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
