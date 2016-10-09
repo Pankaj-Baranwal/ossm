@@ -225,23 +225,26 @@ section[ref='home']
         content attr(data-hover-text)
         position absolute
         background transparent
-        padding 6px 0 5px
+        padding 5px 0
         color #fff
         left 5px
-        width 0
+        max-width 0
         top 0
+        bottom 0
+        border-radius 2px
         overflow hidden
         white-space nowrap
         font-family type-fira
         font-weight 300
         opacity 0
-        transition padding .2s, background .2s, opacity .2s
+        transition padding .2s, background .2s, opacity .2s, max-width .2s
+        line-height 1em
         z-index 1
 
       &:hover:after
         opacity 1
-        width auto
-        padding 6px 5px 5px
+        max-width 400px
+        padding 5px
 
       &.datetime
         color #fff
