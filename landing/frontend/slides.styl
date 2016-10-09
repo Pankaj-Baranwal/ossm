@@ -1,0 +1,198 @@
+@require 'frontend'
+@require 'frontend/animate/fading_entrances/fadeInDown'
+
+breakpoint = 620px
+slide-count = 7
+
+.slides
+  background #EBEBEB
+  font-family type-sans-serif
+  overflow hidden
+
+  width slide-count * 100vw
+  height 100vh
+  margin-left 0
+
+  transition all .5s, background .5s
+
+  position relative
+  display flex
+
+  @media (max-width breakpoint)
+    height auto
+
+  section
+    width 100vw
+    height 100vh
+    margin 0
+
+    display flex
+    flex-grow 0
+    flex-shrink 0
+    position relative
+
+    z-index 1
+
+    @media (max-width breakpoint)
+      height auto
+      padding-top 50px
+      animation bounce-left 1s 2
+      animation-delay 4s
+
+    article
+      margin auto
+      position relative
+      width 80%
+
+      @media (min-width: 1280px)
+        width 1024px
+
+      @media (max-width breakpoint)
+        margin 0 auto
+        padding 0
+        width 80%
+
+      h1, p, blockquote, h2, h3, h4
+        max-width 600px
+
+    h1
+      margin 0
+      position relative
+      display inline
+    h2
+      font-size 3rem
+      font-weight 800
+      text-transform uppercase
+    h3
+      font-weight 600
+    p
+      font-size 1.2rem
+      font-weight 300
+      line-height 1.5rem
+
+    blockquote
+      margin 10px -15px
+      padding 0 15px
+
+      font-weight 600
+      line-height 1.5em
+      font-size 1.2em
+      position relative
+
+      &:before
+        content '‟'
+        position absolute
+        left -.4em
+        top .2em
+        font-size 3em
+      cite
+        display block
+        font-style normal
+        font-size 1em
+        font-weight 300
+
+    abbr
+      font-family $type-mono
+      font-size .8em
+      font-weight 300
+
+      @media(max-width 768px)
+        top 100%
+        left 0
+
+    img
+      max-height 40px
+      max-width 100%
+
+    &.active
+      article
+        animation fadeInDown .5s
+
+
+body
+  &[has-loaded='true']
+    .slides section, nav.root button.right
+      animation-play-state paused
+
+  &[slide-active='home']
+    nav.root, footer.root
+      color #3A405A
+      background transparent
+      fill @color
+
+      .brand
+        margin-top -44px
+
+      a.root-toggle
+        &:before, &:after
+          background #3A405A
+
+      @media (max-width breakpoint)
+        &.open
+          color $white
+          background $prussian-blue
+          a.root-toggle
+            &:before, &:after
+              background $white
+          .brand
+            margin-top 0
+
+      button.left
+        display none
+
+    .slides
+      background #EBEBEB
+      color #3A405A
+
+  &[slide-active='ossome']
+    .slides
+      background #004E98
+      color #EBEBEB
+
+  &[slide-active='dataweave']
+    nav.root
+      fill #EBEBEB
+    .slides
+      background #0E122D
+      color #EBEBEB
+
+  &[slide-active='design']
+    .slides
+      background #1d2b64
+      color #C8CCC6
+
+      h2
+        color #F4CE4B
+
+  &[slide-active='programming']
+    .slides
+      background #21344F
+      color #EBEBEB
+
+      p
+        font-family type-fira
+
+        span.op
+          color #EB5432
+        span.kw
+          color #FED43F
+        span.tag
+          color #8DCEE2
+        span.num
+          color #5EBC4E
+
+  &[slide-active='debugging']
+    .slides
+      background #212412
+      color #EBEBEB
+
+  &[slide-active='sponsors']
+    color = #2C458D
+    nav.root, footer.root
+      background alpha(color, 1)
+      fill color
+    .switch.right
+      display none
+    .slides
+      background #FFFFFF
+      color color
