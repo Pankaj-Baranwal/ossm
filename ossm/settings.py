@@ -78,7 +78,7 @@ JWT_AUTH = {
 }
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.MailgunBackend'
-DEFAULT_FROM_EMAIL = 'postmaster@mail.convoke.io'
+DEFAULT_FROM_EMAIL = 'noobz@convoke.io'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -172,9 +172,7 @@ if PRODUCTION or STAGING:
     CSRF_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
-    # SECURE_CONTENT_TYPE_NOSNIFF = False
     SESSION_COOKIE_SECURE = True
-    # X_FRAME_OPTIONS = 'DENY'
 
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -188,11 +186,9 @@ if PRODUCTION or STAGING:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = r'%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     AWS_HEADERS = {
-        'Cache-Control': 'max-age=172800',
+        'Cache-Control': 'max-age=%d' % (60 * 60 * 24 * 15),    # NOTE (@prashnts): 15 days.
     }
     AWS_IS_GZIPPED = True
     STATIC_URL = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATIC_ROOT = r"https://%s/" % AWS_S3_CUSTOM_DOMAIN
     STATICFILES_STORAGE = 'ossm.storage.StaticS3Storage'
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
