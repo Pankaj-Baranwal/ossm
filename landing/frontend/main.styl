@@ -262,6 +262,9 @@ slide-count = 7
   position relative
   display flex
 
+  @media (max-width breakpoint)
+    height auto
+
   section
     width 100vw
     height 100vh
@@ -275,6 +278,7 @@ slide-count = 7
     z-index 1
 
     @media (max-width breakpoint)
+      height auto
       padding-top 50px
       animation bounce-left 1s 2
       animation-delay 4s
