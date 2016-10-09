@@ -42,10 +42,15 @@ class Slides
       .css('margin-left', "-#{margin}px")
       .attr('slide-active', ref)
 
-    cash('body').attr('slide-active', ref).attr('has-loaded', @_hasLoaded)
+    cash('body')
+      .attr('slide-active', ref)
+      .attr('has-loaded', @_hasLoaded)
+
     cash('.page-navigation a').each (el) ->
       is_active = el.attributes.href.value is "##{ref}"
       el.className = if is_active then 'active' else ''
+
+    cash('nav.root').prop 'scrollTop', 0
 
     @slide_nb = nb
 
@@ -53,6 +58,13 @@ class Slides
     slide.addClass('active')
 
     window.location.hash = ref
+
+    timer_id = window.setInterval ->
+      scrollY = window.scrollY - 10
+      if scrollY <= 0
+        clearInterval timer_id
+      else window.scrollTo(0, scrollY)
+    , 1
 
     cash('[data-toggle-target]').removeClass('open')
     @_hasLoaded and @onActivate[ref]?(slide)
