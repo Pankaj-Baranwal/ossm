@@ -15,6 +15,9 @@ urlpatterns = [
     url(r'^dashboard/', include('people.urls')),
     url(r'^events/', include('events.urls')),
 
+    # Meta routes:
+    url(r'^contact/', views.ContactView.as_view()),
+
     # Static routes:
     url(r'^privacy-policy/$',
         TemplateView.as_view(template_name='privacy_policy.html'),

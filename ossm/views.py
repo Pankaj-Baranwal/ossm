@@ -3,16 +3,27 @@ import time
 from django.core.validators import validate_email
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render
+from django.views.generic.edit import FormView
 from rest_framework.renderers import JSONRenderer
-from rest_framework.response import Response
 
 from people.models import Subscription, EmailRead
+from .forms import TeamForm
 
 
 def home(request):
     return render(request, 'base.html', {
         'user': request.user
     })
+
+
+class ContactView(FormView):
+    template_name = 'contact_us.html'
+    form_class = TeamForm
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 def subscribe(request):

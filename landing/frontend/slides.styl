@@ -271,6 +271,36 @@ section[ref='home']
   h2
     margin-top 20px
 
+  .phonetic
+    font-weight 400
+    font-size 1.4em
+    letter-spacing 1px
+    margin-left -.4em
+    &:before, &:after
+      content '/'
+      font-size 1.2rem
+      vertical-align bottom
+  h3.pos
+    text-transform lowercase
+    font-style italic
+    font-weight 400
+    margin-bottom 0
+
+  ul.defn, p.definition
+    padding 0
+    list-style none
+    margin 5px 0
+    font-size 1.2em
+    font-weight 300
+    li
+      text-transform lowercase
+    li:before
+      content ':'
+      margin-right 10px
+      font-family type-fira
+  div.description
+    margin 0 0 30px
+
 section[ref='design']
   h2
     color #F4CE4B
@@ -318,6 +348,9 @@ body
 
       button.left
         display none
+
+    footer.root
+      background alpha($white, .4)
 
     .slides
       background #EBEBEB
