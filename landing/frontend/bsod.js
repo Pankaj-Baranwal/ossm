@@ -4,7 +4,7 @@ const d3 = require('d3')
 module.exports = (context, width, height) => {
   context.globalAlpha = .2
   context.fillStyle = '#333333'
-  let i, counts = 0, offX, offY, offYB = height / 2
+  let counts = 0, offX, offY, offYB = height / 2
 
   const timer = d3.timer(el => {
     if (el < 1000 || el - counts < 100) {
