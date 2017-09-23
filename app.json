@@ -1,6 +1,6 @@
 {
   "name": "Convoke.io",
-  "description": "Web portal for Convoke 1.0",
+  "description": "Web portal for Convoke 2.0",
   "success_url": "/",
   "addons": [
     "heroku-postgresql:hobby-dev"
@@ -13,7 +13,7 @@
     },
     "HEROKU_URL": {
       "description": "Public URL to this app",
-      "value": "staging.convoke.io"
+      "value": "http://convoke-staging.herokuapp.com"
     },
     "PRODUCTION": "true"
   },

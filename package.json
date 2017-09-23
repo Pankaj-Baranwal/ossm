@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/clusterinnovationcentre/ossm.git"
   },
-  "author": "@prashnts, @devkhan",
+  "author": "@prashnts, @devkhan, @pankaj-baranwal",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/clusterinnovationcentre/ossm/issues"
